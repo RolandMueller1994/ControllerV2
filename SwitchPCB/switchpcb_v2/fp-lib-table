@@ -1,0 +1,5 @@
+(fp_lib_table
+  (lib (name "KiCad_Libs")(type "KiCad")(uri "D:/Privat/Circuit_Design/KiCad_Libs.pretty")(options "")(descr ""))
+  (lib (name "Panelization")(type "KiCad")(uri "D:/Privat/Circuit_Design/KiCad_Libs/Panelization.pretty")(options "")(descr ""))
+  (lib (name "SamacSys_Parts")(type "KiCad")(uri "D:/Privat/Circuit_Design/KiCad_Libs/SamacSys_Parts.pretty")(options "")(descr ""))
+)

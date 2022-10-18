@@ -1,0 +1,5 @@
+(sym_lib_table
+  (lib (name "arduino")(type "KiCad")(uri "D:/Privat/Circuit_Design/KiCad_Libs/arduino.kicad_sym")(options "")(descr ""))
+  (lib (name "SamacSys_Parts")(type "Legacy")(uri "D:/Privat/Circuit_Design/KiCad_Libs/SamacSys_Parts.lib")(options "")(descr ""))
+  (lib (name "FRam")(type "KiCad")(uri "D:/Privat/Circuit_Design/KiCad_Libs/FRam.kicad_sym")(options "")(descr ""))
+)

@@ -1,0 +1,228 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Device:LED D1
+U 1 1 62609AC2
+P 1850 5250
+F 0 "D1" V 1889 5132 50  0000 R CNN
+F 1 "LED" V 1798 5132 50  0000 R CNN
+F 2 "LED_THT:LED_D3.0mm" H 1850 5250 50  0001 C CNN
+F 3 "~" H 1850 5250 50  0001 C CNN
+	1    1850 5250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:LED D2
+U 1 1 6260B355
+P 2950 5250
+F 0 "D2" V 2989 5132 50  0000 R CNN
+F 1 "LED" V 2898 5132 50  0000 R CNN
+F 2 "LED_THT:LED_D3.0mm" H 2950 5250 50  0001 C CNN
+F 3 "~" H 2950 5250 50  0001 C CNN
+	1    2950 5250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 6260C4FD
+P 1850 4750
+F 0 "R1" H 1920 4796 50  0000 L CNN
+F 1 "R" H 1920 4705 50  0000 L CNN
+F 2 "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" V 1780 4750 50  0001 C CNN
+F 3 "~" H 1850 4750 50  0001 C CNN
+	1    1850 4750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 6260D72E
+P 2950 4750
+F 0 "R2" H 3020 4796 50  0000 L CNN
+F 1 "R" H 3020 4705 50  0000 L CNN
+F 2 "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" V 2880 4750 50  0001 C CNN
+F 3 "~" H 2950 4750 50  0001 C CNN
+	1    2950 4750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x02 J2
+U 1 1 6260DEFF
+P 3850 5200
+F 0 "J2" H 3930 5192 50  0000 L CNN
+F 1 "Conn_01x02" H 3930 5101 50  0000 L CNN
+F 2 "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical" H 3850 5200 50  0001 C CNN
+F 3 "~" H 3850 5200 50  0001 C CNN
+	1    3850 5200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R3
+U 1 1 6260E8C2
+P 3550 4750
+F 0 "R3" H 3620 4796 50  0000 L CNN
+F 1 "R" H 3620 4705 50  0000 L CNN
+F 2 "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" V 3480 4750 50  0001 C CNN
+F 3 "~" H 3550 4750 50  0001 C CNN
+	1    3550 4750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x05 J1
+U 1 1 6260EFC2
+P 650 5050
+F 0 "J1" H 568 5467 50  0000 C CNN
+F 1 "Conn_01x05" H 568 5376 50  0000 C CNN
+F 2 "Connector_JST:JST_XH_B5B-XH-A_1x05_P2.50mm_Vertical" H 650 5050 50  0001 C CNN
+F 3 "~" H 650 5050 50  0001 C CNN
+	1    650  5050
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	850  4850 1450 4850
+Wire Wire Line
+	1450 4850 1450 4500
+Wire Wire Line
+	1450 4500 1850 4500
+Wire Wire Line
+	3550 4500 3550 4600
+Wire Wire Line
+	2950 4600 2950 4500
+Connection ~ 2950 4500
+Wire Wire Line
+	2950 4500 3550 4500
+Wire Wire Line
+	1850 4600 1850 4500
+Wire Wire Line
+	1850 5100 1850 4900
+Wire Wire Line
+	2950 5100 2950 4900
+Wire Wire Line
+	3550 4900 3550 5200
+Wire Wire Line
+	3550 5200 3650 5200
+Wire Wire Line
+	3650 5300 3550 5300
+Wire Wire Line
+	3550 6050 2950 6050
+Wire Wire Line
+	900  5250 850  5250
+$Comp
+L Transistor_FET:2N7002 Q1
+U 1 1 626139B5
+P 1750 5700
+F 0 "Q1" H 1954 5746 50  0000 L CNN
+F 1 "2N7002" H 1954 5655 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 1950 5625 50  0001 L CIN
+F 3 "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF" H 1750 5700 50  0001 L CNN
+	1    1750 5700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3550 5300 3550 6050
+Wire Wire Line
+	900  5250 900  6050
+Wire Wire Line
+	1850 5900 1850 6050
+Wire Wire Line
+	1850 6050 900  6050
+$Comp
+L Transistor_FET:2N7002 Q2
+U 1 1 62616951
+P 2850 5700
+F 0 "Q2" H 3054 5746 50  0000 L CNN
+F 1 "2N7002" H 3054 5655 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 3050 5625 50  0001 L CIN
+F 3 "https://www.onsemi.com/pub/Collateral/NDS7002A-D.PDF" H 2850 5700 50  0001 L CNN
+	1    2850 5700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2950 5400 2950 5500
+Wire Wire Line
+	2950 5900 2950 6050
+Connection ~ 2950 6050
+Wire Wire Line
+	1850 6050 2950 6050
+Connection ~ 1850 6050
+Wire Wire Line
+	1850 5400 1850 5500
+Wire Wire Line
+	1550 5700 1200 5700
+Wire Wire Line
+	1200 5700 1200 5050
+Wire Wire Line
+	1200 5050 850  5050
+Wire Wire Line
+	2650 5700 2550 5700
+Wire Wire Line
+	2550 6200 1100 6200
+Wire Wire Line
+	1100 5150 850  5150
+Wire Wire Line
+	2550 5700 2550 6200
+Wire Wire Line
+	1850 4500 2950 4500
+Connection ~ 1850 4500
+Wire Wire Line
+	3550 5200 3400 5200
+Wire Wire Line
+	3400 5200 3400 6300
+Wire Wire Line
+	3400 6300 1300 6300
+Wire Wire Line
+	1300 4950 850  4950
+Connection ~ 3550 5200
+Text Label 3100 4500 0    50   ~ 0
+VDD0V33
+$Comp
+L power:+3V3 #PWR0101
+U 1 1 6262151C
+P 1450 4450
+F 0 "#PWR0101" H 1450 4300 50  0001 C CNN
+F 1 "+3V3" H 1465 4623 50  0000 C CNN
+F 2 "" H 1450 4450 50  0001 C CNN
+F 3 "" H 1450 4450 50  0001 C CNN
+	1    1450 4450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1450 4450 1450 4500
+Connection ~ 1450 4500
+$Comp
+L power:GND #PWR0102
+U 1 1 62622F96
+P 900 6100
+F 0 "#PWR0102" H 900 5850 50  0001 C CNN
+F 1 "GND" H 905 5927 50  0000 C CNN
+F 2 "" H 900 6100 50  0001 C CNN
+F 3 "" H 900 6100 50  0001 C CNN
+	1    900  6100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	900  6100 900  6050
+Connection ~ 900  6050
+Wire Wire Line
+	1100 6200 1100 5150
+Wire Wire Line
+	1300 6300 1300 4950
+Text Label 1100 4950 0    50   ~ 0
+SW
+Text Label 1050 5050 0    50   ~ 0
+On
+Text Label 950  5150 0    50   ~ 0
+StompMode
+$EndSCHEMATC

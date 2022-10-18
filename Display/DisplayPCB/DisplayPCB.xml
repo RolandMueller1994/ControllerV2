@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>D:\Privat\Circuit_Design\ControllerV2\Display\DisplayPCB\DisplayPCB.kicad_sch</source>
+    <date>26/09/2022 10:38:20</date>
+    <tool>Eeschema (6.0.4)</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>DisplayPCB.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="C1">
+      <value>2.2u</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</footprint>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="DisplayPCB.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c547830f-daf7-4082-9845-603c71876e1e</tstamps>
+    </comp>
+    <comp ref="C2">
+      <value>100n</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</footprint>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="DisplayPCB.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8bafc1e3-789f-4e51-997e-8b06dc623c08</tstamps>
+    </comp>
+    <comp ref="C3">
+      <value>100n</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</footprint>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="DisplayPCB.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>491fc969-c526-4f1c-969c-a1ac35b8469e</tstamps>
+    </comp>
+    <comp ref="C5">
+      <value>100n</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</footprint>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="DisplayPCB.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ccf8c192-23fc-4583-bbb2-6ca5bfc1807c</tstamps>
+    </comp>
+    <comp ref="C6">
+      <value>100n</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</footprint>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="DisplayPCB.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>79f4a231-1359-4a7f-b2a1-56b232b60181</tstamps>
+    </comp>
+    <comp ref="DS1">
+      <value>NHD-C12864A1Z-FSB-FBW-HTT</value>
+      <footprint>SamacSys_Parts:NHDC12864A1ZFSBFBWHTT</footprint>
+      <datasheet>http://www.newhavendisplay.com/specs/NHD-C12864A1Z-FSB-FBW-HTT.pdf</datasheet>
+      <fields>
+        <field name="Description">LCD Graphic Display Modules &amp; Accessories COG FSTN(+) 128x64 Blue w/Heater</field>
+        <field name="Height">10</field>
+        <field name="Manufacturer_Name">Newhaven Display</field>
+        <field name="Manufacturer_Part_Number">NHD-C12864A1Z-FSB-FBW-HTT</field>
+        <field name="Mouser Part Number">763-C12864A1ZFSBFBWH</field>
+        <field name="Mouser Price/Stock">https://www.mouser.co.uk/ProductDetail/Newhaven-Display/NHD-C12864A1Z-FSB-FBW-HTT?qs=krDt2o00aZeTqEjRoSuO%2FQ%3D%3D</field>
+      </fields>
+      <libsource lib="SamacSys_Parts" part="NHD-C12864A1Z-FSB-FBW-HTT" description="LCD Graphic Display Modules &amp; Accessories COG FSTN(+) 128x64 Blue w/Heater"/>
+      <property name="Description" value="LCD Graphic Display Modules &amp; Accessories COG FSTN(+) 128x64 Blue w/Heater"/>
+      <property name="Height" value="10"/>
+      <property name="Manufacturer_Name" value="Newhaven Display"/>
+      <property name="Manufacturer_Part_Number" value="NHD-C12864A1Z-FSB-FBW-HTT"/>
+      <property name="Mouser Part Number" value="763-C12864A1ZFSBFBWH"/>
+      <property name="Mouser Price/Stock" value="https://www.mouser.co.uk/ProductDetail/Newhaven-Display/NHD-C12864A1Z-FSB-FBW-HTT?qs=krDt2o00aZeTqEjRoSuO%2FQ%3D%3D"/>
+      <property name="Arrow Part Number" value=""/>
+      <property name="Arrow Price/Stock" value=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="DisplayPCB.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>218b5701-3cd9-4b21-ba96-0c823f3cc461</tstamps>
+    </comp>
+    <comp ref="H1">
+      <value>MountingHole</value>
+      <footprint>MountingHole:MountingHole_3.2mm_M3</footprint>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="DisplayPCB.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>36446634-6cd7-40b4-9439-bd414698119f</tstamps>
+    </comp>
+    <comp ref="H2">
+      <value>MountingHole</value>
+      <footprint>MountingHole:MountingHole_3.2mm_M3</footprint>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="DisplayPCB.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8afb1c66-ec66-43bb-ba36-94791faf5c18</tstamps>
+    </comp>
+    <comp ref="H3">
+      <value>MountingHole</value>
+      <footprint>MountingHole:MountingHole_3.2mm_M3</footprint>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="DisplayPCB.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4a2a33cc-3b8b-4a1e-be18-67a88e663c73</tstamps>
+    </comp>
+    <comp ref="H4">
+      <value>MountingHole</value>
+      <footprint>MountingHole:MountingHole_3.2mm_M3</footprint>
+      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="DisplayPCB.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>94be977f-ff92-4eb4-ab6b-a07a86f886e4</tstamps>
+    </comp>
+    <comp ref="IC1">
+      <value>MIC3490-3.0YM5-TR</value>
+      <footprint>SamacSys_Parts:SOT95P280X145-5N</footprint>
+      <datasheet>https://mouser.componentsearchengine.com/Datasheets/1/MIC3490-3.0YM5-TR.pdf</datasheet>
+      <fields>
+        <field name="Arrow Part Number">MIC3490-3.0YM5-TR</field>
+        <field name="Arrow Price/Stock">https://www.arrow.com/en/products/mic3490-3.0ym5-tr/microchip-technology?region=nac</field>
+        <field name="Description">LDO Voltage Regulators High Vin, Low Iq Regulator</field>
+        <field name="Height">1.45</field>
+        <field name="Manufacturer_Name">Microchip</field>
+        <field name="Manufacturer_Part_Number">MIC3490-3.0YM5-TR</field>
+        <field name="Mouser Part Number">579-MIC349030YM5TR</field>
+        <field name="Mouser Price/Stock">https://www.mouser.co.uk/ProductDetail/Microchip-Technology/MIC3490-30YM5-TR?qs=3HJ2avRr9PJXEC5NCna6KQ%3D%3D</field>
+      </fields>
+      <libsource lib="SamacSys_Parts" part="MIC3490-3.0YM5-TR" description="LDO Voltage Regulators High Vin, Low Iq Regulator"/>
+      <property name="Description" value="LDO Voltage Regulators High Vin, Low Iq Regulator"/>
+      <property name="Height" value="1.45"/>
+      <property name="Manufacturer_Name" value="Microchip"/>
+      <property name="Manufacturer_Part_Number" value="MIC3490-3.0YM5-TR"/>
+      <property name="Mouser Part Number" value="579-MIC349030YM5TR"/>
+      <property name="Mouser Price/Stock" value="https://www.mouser.co.uk/ProductDetail/Microchip-Technology/MIC3490-30YM5-TR?qs=3HJ2avRr9PJXEC5NCna6KQ%3D%3D"/>
+      <property name="Arrow Part Number" value="MIC3490-3.0YM5-TR"/>
+      <property name="Arrow Price/Stock" value="https://www.arrow.com/en/products/mic3490-3.0ym5-tr/microchip-technology?region=nac"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="DisplayPCB.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>2f7fa086-38fb-4b3d-bf22-24de1a67090f</tstamps>
+    </comp>
+    <comp ref="IC2">
+      <value>TXU0104PWR</value>
+      <footprint>SamacSys_Parts:SOP65P640X120-14N</footprint>
+      <datasheet>https://www.ti.com/lit/ds/symlink/txu0104.pdf?ts=1625451640473&amp;ref_url=https%253A%252F%252Fwww.ti.com%252Fsitesearch%252Fdocs%252Funiversalsearch.tsp%253FlangPref%253Den-US%2526searchTerm%253DTXU0104PWR%2526nr%253D4</datasheet>
+      <fields>
+        <field name="Arrow Part Number">TXU0104PWR</field>
+        <field name="Arrow Price/Stock">https://www.arrow.com/en/products/txu0104pwr/texas-instruments?region=nac</field>
+        <field name="Description">Translation - Voltage Levels Four channel unidirectional level shifter</field>
+        <field name="Height">1.2</field>
+        <field name="Manufacturer_Name">Texas Instruments</field>
+        <field name="Manufacturer_Part_Number">TXU0104PWR</field>
+        <field name="Mouser Part Number">595-TXU0104PWR</field>
+        <field name="Mouser Price/Stock">https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TXU0104PWR?qs=QNEnbhJQKvYcSGbLlthvAQ%3D%3D</field>
+      </fields>
+      <libsource lib="SamacSys_Parts" part="TXU0104PWR" description="Translation - Voltage Levels Four channel unidirectional level shifter"/>
+      <property name="Description" value="Translation - Voltage Levels Four channel unidirectional level shifter"/>
+      <property name="Height" value="1.2"/>
+      <property name="Manufacturer_Name" value="Texas Instruments"/>
+      <property name="Manufacturer_Part_Number" value="TXU0104PWR"/>
+      <property name="Mouser Part Number" value="595-TXU0104PWR"/>
+      <property name="Mouser Price/Stock" value="https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TXU0104PWR?qs=QNEnbhJQKvYcSGbLlthvAQ%3D%3D"/>
+      <property name="Arrow Part Number" value="TXU0104PWR"/>
+      <property name="Arrow Price/Stock" value="https://www.arrow.com/en/products/txu0104pwr/texas-instruments?region=nac"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="DisplayPCB.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>443706de-7df0-4554-a843-9008cf84b927</tstamps>
+    </comp>
+    <comp ref="IC3">
+      <value>TXU0104PWR</value>
+      <footprint>SamacSys_Parts:SOP65P640X120-14N</footprint>
+      <datasheet>https://www.ti.com/lit/ds/symlink/txu0104.pdf?ts=1625451640473&amp;ref_url=https%253A%252F%252Fwww.ti.com%252Fsitesearch%252Fdocs%252Funiversalsearch.tsp%253FlangPref%253Den-US%2526searchTerm%253DTXU0104PWR%2526nr%253D4</datasheet>
+      <fields>
+        <field name="Arrow Part Number">TXU0104PWR</field>
+        <field name="Arrow Price/Stock">https://www.arrow.com/en/products/txu0104pwr/texas-instruments?region=nac</field>
+        <field name="Description">Translation - Voltage Levels Four channel unidirectional level shifter</field>
+        <field name="Height">1.2</field>
+        <field name="Manufacturer_Name">Texas Instruments</field>
+        <field name="Manufacturer_Part_Number">TXU0104PWR</field>
+        <field name="Mouser Part Number">595-TXU0104PWR</field>
+        <field name="Mouser Price/Stock">https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TXU0104PWR?qs=QNEnbhJQKvYcSGbLlthvAQ%3D%3D</field>
+      </fields>
+      <libsource lib="SamacSys_Parts" part="TXU0104PWR" description="Translation - Voltage Levels Four channel unidirectional level shifter"/>
+      <property name="Description" value="Translation - Voltage Levels Four channel unidirectional level shifter"/>
+      <property name="Height" value="1.2"/>
+      <property name="Manufacturer_Name" value="Texas Instruments"/>
+      <property name="Manufacturer_Part_Number" value="TXU0104PWR"/>
+      <property name="Mouser Part Number" value="595-TXU0104PWR"/>
+      <property name="Mouser Price/Stock" value="https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TXU0104PWR?qs=QNEnbhJQKvYcSGbLlthvAQ%3D%3D"/>
+      <property name="Arrow Part Number" value="TXU0104PWR"/>
+      <property name="Arrow Price/Stock" value="https://www.arrow.com/en/products/txu0104pwr/texas-instruments?region=nac"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="DisplayPCB.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f5b914b6-1826-42e6-aa54-b0c79fec9b3e</tstamps>
+    </comp>
+    <comp ref="J1">
+      <value>Conn_01x08</value>
+      <footprint>Connector_JST:JST_PH_B8B-PH-K_1x08_P2.00mm_Vertical</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x08" description="Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="DisplayPCB.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7bcb44b2-af8a-42cd-acb5-37ecb032a9ce</tstamps>
+    </comp>
+    <comp ref="J2">
+      <value>Conn_01x06_Female</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical</footprint>
+      <libsource lib="Connector" part="Conn_01x06_Female" description="Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="DisplayPCB.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>fe0ab07c-090e-439f-9884-ebe934636fc1</tstamps>
+    </comp>
+    <comp ref="J3">
+      <value>Conn_01x06_Female</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical</footprint>
+      <libsource lib="Connector" part="Conn_01x06_Female" description="Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="DisplayPCB.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e64d2c6a-5093-4208-b28b-fc1205e9e67a</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Connector" part="Conn_01x06_Female">
+      <description>Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x06_Female</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic" part="Conn_01x08">
+      <description>Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x08</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+        <pin num="7" name="Pin_7" type="passive"/>
+        <pin num="8" name="Pin_8" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C">
+      <description>Unpolarized capacitor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Mechanical" part="MountingHole">
+      <description>Mounting Hole without connection</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>MountingHole*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">H</field>
+        <field name="Value">MountingHole</field>
+        <field name="Datasheet">~</field>
+      </fields>
+    </libpart>
+    <libpart lib="SamacSys_Parts" part="MIC3490-3.0YM5-TR">
+      <description>LDO Voltage Regulators High Vin, Low Iq Regulator</description>
+      <docs>https://mouser.componentsearchengine.com/Datasheets/1/MIC3490-3.0YM5-TR.pdf</docs>
+      <fields>
+        <field name="Reference">IC</field>
+        <field name="Value">MIC3490-3.0YM5-TR</field>
+        <field name="Footprint">SOT95P280X145-5N</field>
+        <field name="Datasheet">https://mouser.componentsearchengine.com/Datasheets/1/MIC3490-3.0YM5-TR.pdf</field>
+        <field name="Description">LDO Voltage Regulators High Vin, Low Iq Regulator</field>
+        <field name="Height">1.45</field>
+        <field name="Manufacturer_Name">Microchip</field>
+        <field name="Manufacturer_Part_Number">MIC3490-3.0YM5-TR</field>
+        <field name="Mouser Part Number">579-MIC349030YM5TR</field>
+        <field name="Mouser Price/Stock">https://www.mouser.co.uk/ProductDetail/Microchip-Technology/MIC3490-30YM5-TR?qs=3HJ2avRr9PJXEC5NCna6KQ%3D%3D</field>
+        <field name="Arrow Part Number">MIC3490-3.0YM5-TR</field>
+        <field name="Arrow Price/Stock">https://www.arrow.com/en/products/mic3490-3.0ym5-tr/microchip-technology?region=nac</field>
+      </fields>
+      <pins>
+        <pin num="1" name="NC" type="no_connect"/>
+        <pin num="2" name="GND" type="power_in"/>
+        <pin num="3" name="EN" type="input"/>
+        <pin num="4" name="IN" type="input"/>
+        <pin num="5" name="OUT" type="output"/>
+      </pins>
+    </libpart>
+    <libpart lib="SamacSys_Parts" part="NHD-C12864A1Z-FSB-FBW-HTT">
+      <description>LCD Graphic Display Modules &amp; Accessories COG FSTN(+) 128x64 Blue w/Heater</description>
+      <docs>http://www.newhavendisplay.com/specs/NHD-C12864A1Z-FSB-FBW-HTT.pdf</docs>
+      <fields>
+        <field name="Reference">DS</field>
+        <field name="Value">NHD-C12864A1Z-FSB-FBW-HTT</field>
+        <field name="Footprint">NHDC12864A1ZFSBFBWHTT</field>
+        <field name="Datasheet">http://www.newhavendisplay.com/specs/NHD-C12864A1Z-FSB-FBW-HTT.pdf</field>
+        <field name="Description">LCD Graphic Display Modules &amp; Accessories COG FSTN(+) 128x64 Blue w/Heater</field>
+        <field name="Height">10</field>
+        <field name="Manufacturer_Name">Newhaven Display</field>
+        <field name="Manufacturer_Part_Number">NHD-C12864A1Z-FSB-FBW-HTT</field>
+        <field name="Mouser Part Number">763-C12864A1ZFSBFBWH</field>
+        <field name="Mouser Price/Stock">https://www.mouser.co.uk/ProductDetail/Newhaven-Display/NHD-C12864A1Z-FSB-FBW-HTT?qs=krDt2o00aZeTqEjRoSuO%2FQ%3D%3D</field>
+      </fields>
+      <pins>
+        <pin num="1" name="SCL" type="passive"/>
+        <pin num="2" name="SI" type="passive"/>
+        <pin num="3" name="VDD" type="passive"/>
+        <pin num="4" name="A0" type="passive"/>
+        <pin num="5" name="~{RESET}" type="passive"/>
+        <pin num="6" name="~{CS}" type="passive"/>
+        <pin num="7" name="VSS" type="passive"/>
+        <pin num="8" name="H-" type="passive"/>
+        <pin num="9" name="H+" type="passive"/>
+        <pin num="10" name="LED-" type="passive"/>
+        <pin num="11" name="LED+" type="passive"/>
+        <pin num="12" name="NC" type="no_connect"/>
+      </pins>
+    </libpart>
+    <libpart lib="SamacSys_Parts" part="TXU0104PWR">
+      <description>Translation - Voltage Levels Four channel unidirectional level shifter</description>
+      <docs>https://www.ti.com/lit/ds/symlink/txu0104.pdf?ts=1625451640473&amp;ref_url=https%253A%252F%252Fwww.ti.com%252Fsitesearch%252Fdocs%252Funiversalsearch.tsp%253FlangPref%253Den-US%2526searchTerm%253DTXU0104PWR%2526nr%253D4</docs>
+      <fields>
+        <field name="Reference">IC</field>
+        <field name="Value">TXU0104PWR</field>
+        <field name="Footprint">SOP65P640X120-14N</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/txu0104.pdf?ts=1625451640473&amp;ref_url=https%253A%252F%252Fwww.ti.com%252Fsitesearch%252Fdocs%252Funiversalsearch.tsp%253FlangPref%253Den-US%2526searchTerm%253DTXU0104PWR%2526nr%253D4</field>
+        <field name="Description">Translation - Voltage Levels Four channel unidirectional level shifter</field>
+        <field name="Height">1.2</field>
+        <field name="Manufacturer_Name">Texas Instruments</field>
+        <field name="Manufacturer_Part_Number">TXU0104PWR</field>
+        <field name="Mouser Part Number">595-TXU0104PWR</field>
+        <field name="Mouser Price/Stock">https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TXU0104PWR?qs=QNEnbhJQKvYcSGbLlthvAQ%3D%3D</field>
+        <field name="Arrow Part Number">TXU0104PWR</field>
+        <field name="Arrow Price/Stock">https://www.arrow.com/en/products/txu0104pwr/texas-instruments?region=nac</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VCCA" type="passive"/>
+        <pin num="2" name="A1" type="passive"/>
+        <pin num="3" name="A2" type="passive"/>
+        <pin num="4" name="A3" type="passive"/>
+        <pin num="5" name="A4" type="passive"/>
+        <pin num="6" name="NC_1" type="passive"/>
+        <pin num="7" name="GND" type="passive"/>
+        <pin num="8" name="OE" type="passive"/>
+        <pin num="9" name="NC_2" type="passive"/>
+        <pin num="10" name="B4Y" type="passive"/>
+        <pin num="11" name="B3Y" type="passive"/>
+        <pin num="12" name="B2Y" type="passive"/>
+        <pin num="13" name="B1Y" type="passive"/>
+        <pin num="14" name="VCCB" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Connector">
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Connector.kicad_sym</uri>
+    </library>
+    <library logical="Connector_Generic">
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Connector_Generic.kicad_sym</uri>
+    </library>
+    <library logical="Device">
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Device.kicad_sym</uri>
+    </library>
+    <library logical="Mechanical">
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Mechanical.kicad_sym</uri>
+    </library>
+    <library logical="SamacSys_Parts">
+      <uri>D:/Privat/Circuit_Design/KiCad_Libs/SamacSys_Parts.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="/A0">
+      <node ref="IC2" pin="4" pinfunction="A3" pintype="passive"/>
+      <node ref="J1" pin="5" pinfunction="Pin_5" pintype="passive"/>
+    </net>
+    <net code="2" name="/CS">
+      <node ref="IC3" pin="2" pinfunction="A1" pintype="passive"/>
+      <node ref="J1" pin="7" pinfunction="Pin_7" pintype="passive"/>
+    </net>
+    <net code="3" name="/MOSI">
+      <node ref="IC2" pin="3" pinfunction="A2" pintype="passive"/>
+      <node ref="J1" pin="4" pinfunction="Pin_4" pintype="passive"/>
+    </net>
+    <net code="4" name="/Reset">
+      <node ref="IC2" pin="5" pinfunction="A4" pintype="passive"/>
+      <node ref="J1" pin="6" pinfunction="Pin_6" pintype="passive"/>
+    </net>
+    <net code="5" name="/SCLK">
+      <node ref="IC2" pin="2" pinfunction="A1" pintype="passive"/>
+      <node ref="J1" pin="3" pinfunction="Pin_3" pintype="passive"/>
+    </net>
+    <net code="6" name="/VDD3V0">
+      <node ref="C1" pin="1" pintype="passive"/>
+      <node ref="C2" pin="1" pintype="passive"/>
+      <node ref="C3" pin="1" pintype="passive"/>
+      <node ref="DS1" pin="3" pinfunction="VDD" pintype="passive"/>
+      <node ref="IC1" pin="5" pinfunction="OUT" pintype="output"/>
+      <node ref="IC2" pin="14" pinfunction="VCCB" pintype="passive"/>
+      <node ref="IC2" pin="8" pinfunction="OE" pintype="passive"/>
+      <node ref="IC3" pin="14" pinfunction="VCCB" pintype="passive"/>
+      <node ref="IC3" pin="8" pinfunction="OE" pintype="passive"/>
+      <node ref="J2" pin="3" pinfunction="Pin_3" pintype="passive"/>
+    </net>
+    <net code="7" name="/VDD3V3">
+      <node ref="C5" pin="1" pintype="passive"/>
+      <node ref="C6" pin="1" pintype="passive"/>
+      <node ref="DS1" pin="11" pinfunction="LED+" pintype="passive"/>
+      <node ref="IC2" pin="1" pinfunction="VCCA" pintype="passive"/>
+      <node ref="IC3" pin="1" pinfunction="VCCA" pintype="passive"/>
+      <node ref="J1" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="J3" pin="5" pinfunction="Pin_5" pintype="passive"/>
+    </net>
+    <net code="8" name="/VDD9V0">
+      <node ref="IC1" pin="3" pinfunction="EN" pintype="input"/>
+      <node ref="IC1" pin="4" pinfunction="IN" pintype="input"/>
+      <node ref="J1" pin="1" pinfunction="Pin_1" pintype="passive"/>
+    </net>
+    <net code="9" name="GND">
+      <node ref="C1" pin="2" pintype="passive"/>
+      <node ref="C2" pin="2" pintype="passive"/>
+      <node ref="C3" pin="2" pintype="passive"/>
+      <node ref="C5" pin="2" pintype="passive"/>
+      <node ref="C6" pin="2" pintype="passive"/>
+      <node ref="DS1" pin="10" pinfunction="LED-" pintype="passive"/>
+      <node ref="DS1" pin="7" pinfunction="VSS" pintype="passive"/>
+      <node ref="IC1" pin="2" pinfunction="GND" pintype="power_in"/>
+      <node ref="IC2" pin="7" pinfunction="GND" pintype="passive"/>
+      <node ref="IC3" pin="3" pinfunction="A2" pintype="passive"/>
+      <node ref="IC3" pin="4" pinfunction="A3" pintype="passive"/>
+      <node ref="IC3" pin="5" pinfunction="A4" pintype="passive"/>
+      <node ref="IC3" pin="7" pinfunction="GND" pintype="passive"/>
+      <node ref="J1" pin="8" pinfunction="Pin_8" pintype="passive"/>
+      <node ref="J3" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="J3" pin="4" pinfunction="Pin_4" pintype="passive"/>
+    </net>
+    <net code="10" name="Net-(DS1-Pad1)">
+      <node ref="DS1" pin="1" pinfunction="SCL" pintype="passive"/>
+      <node ref="IC2" pin="13" pinfunction="B1Y" pintype="passive"/>
+      <node ref="J2" pin="1" pinfunction="Pin_1" pintype="passive"/>
+    </net>
+    <net code="11" name="Net-(DS1-Pad2)">
+      <node ref="DS1" pin="2" pinfunction="SI" pintype="passive"/>
+      <node ref="IC2" pin="12" pinfunction="B2Y" pintype="passive"/>
+      <node ref="J2" pin="2" pinfunction="Pin_2" pintype="passive"/>
+    </net>
+    <net code="12" name="Net-(DS1-Pad4)">
+      <node ref="DS1" pin="4" pinfunction="A0" pintype="passive"/>
+      <node ref="IC2" pin="11" pinfunction="B3Y" pintype="passive"/>
+      <node ref="J2" pin="4" pinfunction="Pin_4" pintype="passive"/>
+    </net>
+    <net code="13" name="Net-(DS1-Pad5)">
+      <node ref="DS1" pin="5" pinfunction="~{RESET}" pintype="passive"/>
+      <node ref="IC2" pin="10" pinfunction="B4Y" pintype="passive"/>
+      <node ref="J2" pin="5" pinfunction="Pin_5" pintype="passive"/>
+    </net>
+    <net code="14" name="Net-(DS1-Pad6)">
+      <node ref="DS1" pin="6" pinfunction="~{CS}" pintype="passive"/>
+      <node ref="IC3" pin="13" pinfunction="B1Y" pintype="passive"/>
+      <node ref="J2" pin="6" pinfunction="Pin_6" pintype="passive"/>
+    </net>
+    <net code="15" name="unconnected-(DS1-Pad8)">
+      <node ref="DS1" pin="8" pinfunction="H-" pintype="passive+no_connect"/>
+    </net>
+    <net code="16" name="unconnected-(DS1-Pad9)">
+      <node ref="DS1" pin="9" pinfunction="H+" pintype="passive+no_connect"/>
+    </net>
+    <net code="17" name="unconnected-(DS1-Pad12)">
+      <node ref="DS1" pin="12" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="18" name="unconnected-(IC1-Pad1)">
+      <node ref="IC1" pin="1" pinfunction="NC" pintype="no_connect"/>
+    </net>
+    <net code="19" name="unconnected-(IC2-Pad6)">
+      <node ref="IC2" pin="6" pinfunction="NC_1" pintype="passive+no_connect"/>
+    </net>
+    <net code="20" name="unconnected-(IC2-Pad9)">
+      <node ref="IC2" pin="9" pinfunction="NC_2" pintype="passive+no_connect"/>
+    </net>
+    <net code="21" name="unconnected-(IC3-Pad6)">
+      <node ref="IC3" pin="6" pinfunction="NC_1" pintype="passive+no_connect"/>
+    </net>
+    <net code="22" name="unconnected-(IC3-Pad9)">
+      <node ref="IC3" pin="9" pinfunction="NC_2" pintype="passive+no_connect"/>
+    </net>
+    <net code="23" name="unconnected-(IC3-Pad10)">
+      <node ref="IC3" pin="10" pinfunction="B4Y" pintype="passive+no_connect"/>
+    </net>
+    <net code="24" name="unconnected-(IC3-Pad11)">
+      <node ref="IC3" pin="11" pinfunction="B3Y" pintype="passive+no_connect"/>
+    </net>
+    <net code="25" name="unconnected-(IC3-Pad12)">
+      <node ref="IC3" pin="12" pinfunction="B2Y" pintype="passive+no_connect"/>
+    </net>
+    <net code="26" name="unconnected-(J3-Pad2)">
+      <node ref="J3" pin="2" pinfunction="Pin_2" pintype="passive+no_connect"/>
+    </net>
+    <net code="27" name="unconnected-(J3-Pad3)">
+      <node ref="J3" pin="3" pinfunction="Pin_3" pintype="passive+no_connect"/>
+    </net>
+    <net code="28" name="unconnected-(J3-Pad6)">
+      <node ref="J3" pin="6" pinfunction="Pin_6" pintype="passive+no_connect"/>
+    </net>
+  </nets>
+</export>

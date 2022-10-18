@@ -1,0 +1,1001 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A3 16535 11693
+encoding utf-8
+Sheet 3 4
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Amplifier_Operational:TL074 U9
+U 1 1 618CD33E
+P 4300 2400
+F 0 "U9" H 4300 2767 50  0000 C CNN
+F 1 "TL074" H 4300 2676 50  0000 C CNN
+F 2 "" H 4250 2500 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 4350 2600 50  0001 C CNN
+	1    4300 2400
+	1    0    0    -1  
+$EndComp
+Text HLabel 1950 850  0    50   Input ~ 0
+VDD_15V0
+Text HLabel 1950 1800 0    50   Input ~ 0
+VSS_15V0
+Wire Wire Line
+	4000 2300 3150 2300
+Wire Wire Line
+	4700 2900 4700 2400
+Wire Wire Line
+	4700 2400 4600 2400
+Text HLabel 3150 2300 0    50   Input ~ 0
+In_Mixer1_a
+$Comp
+L Amplifier_Operational:TL074 U9
+U 2 1 618CFB88
+P 4350 3550
+F 0 "U9" H 4350 3917 50  0000 C CNN
+F 1 "TL074" H 4350 3826 50  0000 C CNN
+F 2 "" H 4300 3650 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 4400 3750 50  0001 C CNN
+	2    4350 3550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4050 3450 3150 3450
+Wire Wire Line
+	4050 3650 3850 3650
+Wire Wire Line
+	3850 4050 4700 4050
+Wire Wire Line
+	4700 4050 4700 3550
+Wire Wire Line
+	4700 3550 4650 3550
+Text HLabel 3150 3450 0    50   Input ~ 0
+In_Mixer1_b
+$Comp
+L Amplifier_Operational:TL072 U10
+U 1 1 618D1E6B
+P 7500 3150
+F 0 "U10" H 7500 3517 50  0000 C CNN
+F 1 "TL072" H 7500 3426 50  0000 C CNN
+F 2 "" H 7500 3150 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 7500 3150 50  0001 C CNN
+	1    7500 3150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R19
+U 1 1 618D416A
+P 7450 2550
+F 0 "R19" V 7243 2550 50  0000 C CNN
+F 1 "100k" V 7334 2550 50  0000 C CNN
+F 2 "" V 7380 2550 50  0001 C CNN
+F 3 "~" H 7450 2550 50  0001 C CNN
+	1    7450 2550
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	7800 3150 7950 3150
+Wire Wire Line
+	7950 3150 7950 2550
+Wire Wire Line
+	7950 2550 7600 2550
+Wire Wire Line
+	7300 2550 7000 2550
+Wire Wire Line
+	7000 3250 7200 3250
+Text HLabel 8150 3150 2    50   Output ~ 0
+Out_Mixer1
+Wire Wire Line
+	8150 3150 7950 3150
+Connection ~ 7950 3150
+$Comp
+L Amplifier_Operational:TL072 U10
+U 3 1 618D70E4
+P 3100 1300
+F 0 "U10" H 3058 1346 50  0000 L CNN
+F 1 "TL072" H 3058 1255 50  0000 L CNN
+F 2 "" H 3100 1300 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 3100 1300 50  0001 C CNN
+	3    3100 1300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U9
+U 5 1 618D9EA9
+P 2350 1300
+F 0 "U9" H 2308 1346 50  0000 L CNN
+F 1 "TL074" H 2308 1255 50  0000 L CNN
+F 2 "" H 2300 1400 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 2400 1500 50  0001 C CNN
+	5    2350 1300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C3
+U 1 1 618DDBE1
+P 3300 1100
+F 0 "C3" H 3415 1146 50  0000 L CNN
+F 1 "100n" H 3415 1055 50  0000 L CNN
+F 2 "" H 3338 950 50  0001 C CNN
+F 3 "~" H 3300 1100 50  0001 C CNN
+	1    3300 1100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C4
+U 1 1 618DE7AB
+P 3300 1550
+F 0 "C4" H 3415 1596 50  0000 L CNN
+F 1 "100n" H 3415 1505 50  0000 L CNN
+F 2 "" H 3338 1400 50  0001 C CNN
+F 3 "~" H 3300 1550 50  0001 C CNN
+	1    3300 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR04
+U 1 1 618DEAC8
+P 3600 1400
+F 0 "#PWR04" H 3600 1150 50  0001 C CNN
+F 1 "GND" H 3605 1227 50  0000 C CNN
+F 2 "" H 3600 1400 50  0001 C CNN
+F 3 "" H 3600 1400 50  0001 C CNN
+	1    3600 1400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3300 1400 3300 1350
+Wire Wire Line
+	3300 1350 3600 1350
+Wire Wire Line
+	3600 1350 3600 1400
+Connection ~ 3300 1350
+Wire Wire Line
+	3300 1350 3300 1250
+Wire Wire Line
+	3300 1700 3300 1800
+Wire Wire Line
+	3300 950  3300 850 
+Wire Wire Line
+	3300 850  3000 850 
+Wire Wire Line
+	3000 850  3000 1000
+Wire Wire Line
+	3300 1800 3000 1800
+Wire Wire Line
+	3000 1800 3000 1600
+$Comp
+L Device:C C1
+U 1 1 618E69D6
+P 2550 1100
+F 0 "C1" H 2665 1146 50  0000 L CNN
+F 1 "100n" H 2665 1055 50  0000 L CNN
+F 2 "" H 2588 950 50  0001 C CNN
+F 3 "~" H 2550 1100 50  0001 C CNN
+	1    2550 1100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C2
+U 1 1 618E69DC
+P 2550 1550
+F 0 "C2" H 2665 1596 50  0000 L CNN
+F 1 "100n" H 2665 1505 50  0000 L CNN
+F 2 "" H 2588 1400 50  0001 C CNN
+F 3 "~" H 2550 1550 50  0001 C CNN
+	1    2550 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR02
+U 1 1 618E69E2
+P 2850 1400
+F 0 "#PWR02" H 2850 1150 50  0001 C CNN
+F 1 "GND" H 2855 1227 50  0000 C CNN
+F 2 "" H 2850 1400 50  0001 C CNN
+F 3 "" H 2850 1400 50  0001 C CNN
+	1    2850 1400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2550 1400 2550 1350
+Wire Wire Line
+	2550 1350 2850 1350
+Wire Wire Line
+	2850 1350 2850 1400
+Connection ~ 2550 1350
+Wire Wire Line
+	2550 1350 2550 1250
+Wire Wire Line
+	2550 1700 2550 1800
+Wire Wire Line
+	2550 950  2550 850 
+Wire Wire Line
+	2550 850  2250 850 
+Wire Wire Line
+	2550 1800 2250 1800
+Wire Wire Line
+	2250 1800 2250 1600
+Wire Wire Line
+	2250 1000 2250 850 
+Wire Wire Line
+	2550 850  3000 850 
+Connection ~ 2550 850 
+Connection ~ 3000 850 
+Wire Wire Line
+	2550 1800 3000 1800
+Connection ~ 2550 1800
+Connection ~ 3000 1800
+Wire Wire Line
+	1950 1800 2250 1800
+Connection ~ 2250 1800
+Wire Wire Line
+	1950 850  2250 850 
+Connection ~ 2250 850 
+$Comp
+L Device:R R15
+U 1 1 618EECCA
+P 6500 3550
+F 0 "R15" H 6430 3504 50  0000 R CNN
+F 1 "100k" H 6430 3595 50  0000 R CNN
+F 2 "" V 6430 3550 50  0001 C CNN
+F 3 "~" H 6500 3550 50  0001 C CNN
+	1    6500 3550
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR07
+U 1 1 618EECD0
+P 6500 3900
+F 0 "#PWR07" H 6500 3650 50  0001 C CNN
+F 1 "GND" H 6505 3727 50  0000 C CNN
+F 2 "" H 6500 3900 50  0001 C CNN
+F 3 "" H 6500 3900 50  0001 C CNN
+	1    6500 3900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6500 3900 6500 3700
+$Comp
+L Device:R R9
+U 1 1 618F14A7
+P 6100 2400
+F 0 "R9" V 6307 2400 50  0000 C CNN
+F 1 "200k" V 6216 2400 50  0000 C CNN
+F 2 "" V 6030 2400 50  0001 C CNN
+F 3 "~" H 6100 2400 50  0001 C CNN
+	1    6100 2400
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	6500 2400 6250 2400
+$Comp
+L SamacSys_Parts:TMUX6136PWR IC17
+U 1 1 618F40A3
+P 4750 4600
+F 0 "IC17" H 5400 4865 50  0000 C CNN
+F 1 "TMUX6136PWR" H 5400 4774 50  0000 C CNN
+F 2 "SOP65P640X120-16N" H 5900 4700 50  0001 L CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tmux6136.pdf" H 5900 4600 50  0001 L CNN
+F 4 "+/-16.5-V, low capacitance, low-leakage-current, precision, dual SPDT switch" H 5900 4500 50  0001 L CNN "Description"
+F 5 "1.2" H 5900 4400 50  0001 L CNN "Height"
+F 6 "Texas Instruments" H 5900 4300 50  0001 L CNN "Manufacturer_Name"
+F 7 "TMUX6136PWR" H 5900 4200 50  0001 L CNN "Manufacturer_Part_Number"
+F 8 "595-TMUX6136PWR" H 5900 4100 50  0001 L CNN "Mouser Part Number"
+F 9 "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TMUX6136PWR?qs=0lSvoLzn4L%2FXuVQ2cKiHHw%3D%3D" H 5900 4000 50  0001 L CNN "Mouser Price/Stock"
+F 10 "TMUX6136PWR" H 5900 3900 50  0001 L CNN "Arrow Part Number"
+F 11 "https://www.arrow.com/en/products/tmux6136pwr/texas-instruments" H 5900 3800 50  0001 L CNN "Arrow Price/Stock"
+	1    4750 4600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6050 4900 6200 4900
+Wire Wire Line
+	4750 5000 4500 5000
+Text Label 6200 4900 0    50   ~ 0
+VDD_15V0
+Text Label 4500 5000 2    50   ~ 0
+VSS_15V0
+Wire Wire Line
+	4750 5100 4550 5100
+Wire Wire Line
+	4550 5100 4550 5450
+$Comp
+L power:GND #PWR05
+U 1 1 618F871A
+P 4550 5450
+F 0 "#PWR05" H 4550 5200 50  0001 C CNN
+F 1 "GND" H 4555 5277 50  0000 C CNN
+F 2 "" H 4550 5450 50  0001 C CNN
+F 3 "" H 4550 5450 50  0001 C CNN
+	1    4550 5450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4700 2400 5950 2400
+Connection ~ 4700 2400
+$Comp
+L Device:R R10
+U 1 1 619009C0
+P 6100 2900
+F 0 "R10" V 6307 2900 50  0000 C CNN
+F 1 "200k" V 6216 2900 50  0000 C CNN
+F 2 "" V 6030 2900 50  0001 C CNN
+F 3 "~" H 6100 2900 50  0001 C CNN
+	1    6100 2900
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R11
+U 1 1 61901491
+P 6100 3250
+F 0 "R11" V 6307 3250 50  0000 C CNN
+F 1 "200k" V 6216 3250 50  0000 C CNN
+F 2 "" V 6030 3250 50  0001 C CNN
+F 3 "~" H 6100 3250 50  0001 C CNN
+	1    6100 3250
+	0    -1   -1   0   
+$EndComp
+Connection ~ 7000 3250
+Wire Wire Line
+	5950 3250 5850 3250
+Wire Wire Line
+	5850 3250 5850 4350
+Wire Wire Line
+	5850 4350 6700 4350
+Wire Wire Line
+	6700 4350 6700 5100
+Wire Wire Line
+	6700 5100 6050 5100
+Wire Wire Line
+	4700 3550 5800 3550
+Wire Wire Line
+	5800 3550 5800 4400
+Wire Wire Line
+	5800 4400 6650 4400
+Wire Wire Line
+	6650 4400 6650 5000
+Wire Wire Line
+	6650 5000 6050 5000
+Connection ~ 4700 3550
+Wire Wire Line
+	6050 5200 6700 5200
+Wire Wire Line
+	6700 5200 6700 5450
+$Comp
+L power:GND #PWR09
+U 1 1 619093EE
+P 6700 5450
+F 0 "#PWR09" H 6700 5200 50  0001 C CNN
+F 1 "GND" H 6705 5277 50  0000 C CNN
+F 2 "" H 6700 5450 50  0001 C CNN
+F 3 "" H 6700 5450 50  0001 C CNN
+	1    6700 5450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5950 2900 5750 2900
+Wire Wire Line
+	5750 2900 5750 4200
+Wire Wire Line
+	5750 4200 4550 4200
+Wire Wire Line
+	4550 4200 4550 4800
+Wire Wire Line
+	4550 4800 4750 4800
+Wire Wire Line
+	4700 4700 4750 4700
+Connection ~ 4700 4050
+Wire Wire Line
+	4750 4900 4550 4900
+Wire Wire Line
+	4550 4900 4550 5100
+Connection ~ 4550 5100
+Wire Wire Line
+	4750 4600 4050 4600
+Wire Wire Line
+	4050 4600 4050 5250
+Wire Wire Line
+	4050 5750 6150 5750
+Wire Wire Line
+	6150 5750 6150 5300
+Wire Wire Line
+	6150 5300 6050 5300
+NoConn ~ 4750 5300
+NoConn ~ 4750 5200
+NoConn ~ 6050 4800
+NoConn ~ 6050 4700
+NoConn ~ 6050 4600
+Wire Wire Line
+	4050 5250 3800 5250
+Connection ~ 4050 5250
+Wire Wire Line
+	4050 5250 4050 5750
+Text HLabel 3800 5250 0    50   Input ~ 0
+d_Mixer1_phi
+Wire Wire Line
+	6500 2400 6500 2900
+Wire Wire Line
+	6500 3050 7200 3050
+Connection ~ 6500 3050
+Wire Wire Line
+	6250 3250 7000 3250
+$Comp
+L SamacSys_Parts:TMUX6136PWR IC18
+U 1 1 61942780
+P 1900 5800
+F 0 "IC18" H 2550 6065 50  0000 C CNN
+F 1 "TMUX6136PWR" H 2550 5974 50  0000 C CNN
+F 2 "SOP65P640X120-16N" H 3050 5900 50  0001 L CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tmux6136.pdf" H 3050 5800 50  0001 L CNN
+F 4 "+/-16.5-V, low capacitance, low-leakage-current, precision, dual SPDT switch" H 3050 5700 50  0001 L CNN "Description"
+F 5 "1.2" H 3050 5600 50  0001 L CNN "Height"
+F 6 "Texas Instruments" H 3050 5500 50  0001 L CNN "Manufacturer_Name"
+F 7 "TMUX6136PWR" H 3050 5400 50  0001 L CNN "Manufacturer_Part_Number"
+F 8 "595-TMUX6136PWR" H 3050 5300 50  0001 L CNN "Mouser Part Number"
+F 9 "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TMUX6136PWR?qs=0lSvoLzn4L%2FXuVQ2cKiHHw%3D%3D" H 3050 5200 50  0001 L CNN "Mouser Price/Stock"
+F 10 "TMUX6136PWR" H 3050 5100 50  0001 L CNN "Arrow Part Number"
+F 11 "https://www.arrow.com/en/products/tmux6136pwr/texas-instruments" H 3050 5000 50  0001 L CNN "Arrow Price/Stock"
+	1    1900 5800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3200 6100 3350 6100
+Wire Wire Line
+	1900 6200 1650 6200
+Text Label 3350 6100 0    50   ~ 0
+VDD_15V0
+Text Label 1650 6200 2    50   ~ 0
+VSS_15V0
+Wire Wire Line
+	1900 6300 1700 6300
+Wire Wire Line
+	1700 6300 1700 6650
+$Comp
+L power:GND #PWR01
+U 1 1 6194278C
+P 1700 6650
+F 0 "#PWR01" H 1700 6400 50  0001 C CNN
+F 1 "GND" H 1705 6477 50  0000 C CNN
+F 2 "" H 1700 6650 50  0001 C CNN
+F 3 "" H 1700 6650 50  0001 C CNN
+	1    1700 6650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1700 6000 1900 6000
+Wire Wire Line
+	1750 5900 1900 5900
+Wire Wire Line
+	1900 5800 1700 5800
+NoConn ~ 1900 6500
+NoConn ~ 1900 6400
+NoConn ~ 3200 6000
+NoConn ~ 3200 5900
+NoConn ~ 3200 5800
+Wire Wire Line
+	6250 2900 6500 2900
+Connection ~ 6500 2900
+Wire Wire Line
+	6500 2900 6500 3050
+Wire Wire Line
+	6500 3050 6500 3400
+$Comp
+L Device:R R17
+U 1 1 6195646F
+P 7000 3550
+F 0 "R17" H 6930 3504 50  0000 R CNN
+F 1 "200k" H 6930 3595 50  0000 R CNN
+F 2 "" V 6930 3550 50  0001 C CNN
+F 3 "~" H 7000 3550 50  0001 C CNN
+	1    7000 3550
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR011
+U 1 1 61956475
+P 7000 3900
+F 0 "#PWR011" H 7000 3650 50  0001 C CNN
+F 1 "GND" H 7005 3727 50  0000 C CNN
+F 2 "" H 7000 3900 50  0001 C CNN
+F 3 "" H 7000 3900 50  0001 C CNN
+	1    7000 3900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7000 3900 7000 3700
+Wire Wire Line
+	7000 3250 7000 3400
+Wire Wire Line
+	7000 3250 7000 2550
+$Comp
+L Device:R R1
+U 1 1 6195E42D
+P 3750 2700
+F 0 "R1" H 3820 2746 50  0000 L CNN
+F 1 "100k" H 3820 2655 50  0000 L CNN
+F 2 "" V 3680 2700 50  0001 C CNN
+F 3 "~" H 3750 2700 50  0001 C CNN
+	1    3750 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 6195EA27
+P 3750 3100
+F 0 "R2" H 3820 3146 50  0000 L CNN
+F 1 "100k" H 3820 3055 50  0000 L CNN
+F 2 "" V 3680 3100 50  0001 C CNN
+F 3 "~" H 3750 3100 50  0001 C CNN
+	1    3750 3100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3750 2950 3750 2900
+Wire Wire Line
+	3750 2850 3750 2900
+Connection ~ 3750 2900
+Wire Wire Line
+	3750 2550 3750 2500
+$Comp
+L Device:R R3
+U 1 1 6196C2E0
+P 3850 3850
+F 0 "R3" H 3920 3896 50  0000 L CNN
+F 1 "100k" H 3920 3805 50  0000 L CNN
+F 2 "" V 3780 3850 50  0001 C CNN
+F 3 "~" H 3850 3850 50  0001 C CNN
+	1    3850 3850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R4
+U 1 1 6196F10B
+P 3850 4250
+F 0 "R4" H 3920 4296 50  0000 L CNN
+F 1 "100k" H 3920 4205 50  0000 L CNN
+F 2 "" V 3780 4250 50  0001 C CNN
+F 3 "~" H 3850 4250 50  0001 C CNN
+	1    3850 4250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3850 3650 3850 3700
+Wire Wire Line
+	3850 4000 3850 4050
+Wire Wire Line
+	3850 4100 3850 4050
+Connection ~ 3850 4050
+Wire Wire Line
+	3750 4500 3850 4500
+Wire Wire Line
+	3850 4500 3850 4400
+Wire Wire Line
+	1750 5900 1750 4500
+Wire Wire Line
+	1750 4500 3750 4500
+Connection ~ 3750 4500
+Wire Wire Line
+	1700 6000 1700 6300
+Connection ~ 1700 6300
+NoConn ~ 1900 6100
+Text HLabel 1700 5800 0    50   Input ~ 0
+d_Mixer1_gain
+Wire Wire Line
+	4000 7050 3150 7050
+Wire Wire Line
+	4000 7250 3850 7250
+Wire Wire Line
+	3850 7650 4700 7650
+Wire Wire Line
+	4700 7650 4700 7150
+Wire Wire Line
+	4700 7150 4600 7150
+Wire Wire Line
+	4050 8200 3150 8200
+Wire Wire Line
+	4050 8400 3850 8400
+Wire Wire Line
+	3850 8800 4700 8800
+Wire Wire Line
+	4700 8800 4700 8300
+Wire Wire Line
+	4700 8300 4650 8300
+$Comp
+L Device:R R20
+U 1 1 619B539A
+P 7450 7300
+F 0 "R20" V 7243 7300 50  0000 C CNN
+F 1 "100k" V 7334 7300 50  0000 C CNN
+F 2 "" V 7380 7300 50  0001 C CNN
+F 3 "~" H 7450 7300 50  0001 C CNN
+	1    7450 7300
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	7800 7900 7950 7900
+Wire Wire Line
+	7950 7900 7950 7300
+Wire Wire Line
+	7950 7300 7600 7300
+Wire Wire Line
+	7300 7300 7000 7300
+Wire Wire Line
+	7000 8000 7200 8000
+Text HLabel 8150 7900 2    50   Output ~ 0
+Out_Mixer2
+Wire Wire Line
+	8150 7900 7950 7900
+Connection ~ 7950 7900
+$Comp
+L Device:R R16
+U 1 1 619B53A8
+P 6500 8300
+F 0 "R16" H 6430 8254 50  0000 R CNN
+F 1 "100k" H 6430 8345 50  0000 R CNN
+F 2 "" V 6430 8300 50  0001 C CNN
+F 3 "~" H 6500 8300 50  0001 C CNN
+	1    6500 8300
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR08
+U 1 1 619B53AE
+P 6500 8650
+F 0 "#PWR08" H 6500 8400 50  0001 C CNN
+F 1 "GND" H 6505 8477 50  0000 C CNN
+F 2 "" H 6500 8650 50  0001 C CNN
+F 3 "" H 6500 8650 50  0001 C CNN
+	1    6500 8650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6500 8650 6500 8450
+$Comp
+L Device:R R12
+U 1 1 619B53B5
+P 6100 7150
+F 0 "R12" V 6307 7150 50  0000 C CNN
+F 1 "200k" V 6216 7150 50  0000 C CNN
+F 2 "" V 6030 7150 50  0001 C CNN
+F 3 "~" H 6100 7150 50  0001 C CNN
+	1    6100 7150
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	6500 7150 6250 7150
+$Comp
+L SamacSys_Parts:TMUX6136PWR IC19
+U 1 1 619B53C4
+P 4750 9350
+F 0 "IC19" H 5400 9615 50  0000 C CNN
+F 1 "TMUX6136PWR" H 5400 9524 50  0000 C CNN
+F 2 "SOP65P640X120-16N" H 5900 9450 50  0001 L CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tmux6136.pdf" H 5900 9350 50  0001 L CNN
+F 4 "+/-16.5-V, low capacitance, low-leakage-current, precision, dual SPDT switch" H 5900 9250 50  0001 L CNN "Description"
+F 5 "1.2" H 5900 9150 50  0001 L CNN "Height"
+F 6 "Texas Instruments" H 5900 9050 50  0001 L CNN "Manufacturer_Name"
+F 7 "TMUX6136PWR" H 5900 8950 50  0001 L CNN "Manufacturer_Part_Number"
+F 8 "595-TMUX6136PWR" H 5900 8850 50  0001 L CNN "Mouser Part Number"
+F 9 "https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TMUX6136PWR?qs=0lSvoLzn4L%2FXuVQ2cKiHHw%3D%3D" H 5900 8750 50  0001 L CNN "Mouser Price/Stock"
+F 10 "TMUX6136PWR" H 5900 8650 50  0001 L CNN "Arrow Part Number"
+F 11 "https://www.arrow.com/en/products/tmux6136pwr/texas-instruments" H 5900 8550 50  0001 L CNN "Arrow Price/Stock"
+	1    4750 9350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6050 9650 6200 9650
+Wire Wire Line
+	4750 9750 4500 9750
+Text Label 6200 9650 0    50   ~ 0
+VDD_15V0
+Text Label 4500 9750 2    50   ~ 0
+VSS_15V0
+Wire Wire Line
+	4750 9850 4550 9850
+Wire Wire Line
+	4550 9850 4550 10200
+$Comp
+L power:GND #PWR06
+U 1 1 619B53D0
+P 4550 10200
+F 0 "#PWR06" H 4550 9950 50  0001 C CNN
+F 1 "GND" H 4555 10027 50  0000 C CNN
+F 2 "" H 4550 10200 50  0001 C CNN
+F 3 "" H 4550 10200 50  0001 C CNN
+	1    4550 10200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4700 7150 5950 7150
+Connection ~ 4700 7150
+$Comp
+L Device:R R13
+U 1 1 619B53D8
+P 6100 7650
+F 0 "R13" V 6307 7650 50  0000 C CNN
+F 1 "200k" V 6216 7650 50  0000 C CNN
+F 2 "" V 6030 7650 50  0001 C CNN
+F 3 "~" H 6100 7650 50  0001 C CNN
+	1    6100 7650
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R14
+U 1 1 619B53DE
+P 6100 8000
+F 0 "R14" V 6307 8000 50  0000 C CNN
+F 1 "200k" V 6216 8000 50  0000 C CNN
+F 2 "" V 6030 8000 50  0001 C CNN
+F 3 "~" H 6100 8000 50  0001 C CNN
+	1    6100 8000
+	0    -1   -1   0   
+$EndComp
+Connection ~ 7000 8000
+Wire Wire Line
+	5950 8000 5850 8000
+Wire Wire Line
+	5850 8000 5850 9100
+Wire Wire Line
+	5850 9100 6700 9100
+Wire Wire Line
+	6700 9100 6700 9850
+Wire Wire Line
+	6700 9850 6050 9850
+Wire Wire Line
+	4700 8300 5800 8300
+Wire Wire Line
+	5800 8300 5800 9150
+Wire Wire Line
+	5800 9150 6650 9150
+Wire Wire Line
+	6650 9150 6650 9750
+Wire Wire Line
+	6650 9750 6050 9750
+Connection ~ 4700 8300
+Wire Wire Line
+	6050 9950 6700 9950
+Wire Wire Line
+	6700 9950 6700 10200
+$Comp
+L power:GND #PWR010
+U 1 1 619B53F2
+P 6700 10200
+F 0 "#PWR010" H 6700 9950 50  0001 C CNN
+F 1 "GND" H 6705 10027 50  0000 C CNN
+F 2 "" H 6700 10200 50  0001 C CNN
+F 3 "" H 6700 10200 50  0001 C CNN
+	1    6700 10200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5950 7650 5750 7650
+Wire Wire Line
+	5750 7650 5750 8950
+Wire Wire Line
+	5750 8950 4550 8950
+Wire Wire Line
+	4550 8950 4550 9550
+Wire Wire Line
+	4550 9550 4750 9550
+Wire Wire Line
+	4700 9450 4750 9450
+Connection ~ 4700 8800
+Wire Wire Line
+	4750 9650 4550 9650
+Wire Wire Line
+	4550 9650 4550 9850
+Connection ~ 4550 9850
+Wire Wire Line
+	4750 9350 4050 9350
+Wire Wire Line
+	4050 9350 4050 10000
+Wire Wire Line
+	4050 10500 6150 10500
+Wire Wire Line
+	6150 10500 6150 10050
+Wire Wire Line
+	6150 10050 6050 10050
+NoConn ~ 4750 10050
+NoConn ~ 4750 9950
+NoConn ~ 6050 9550
+NoConn ~ 6050 9450
+NoConn ~ 6050 9350
+Wire Wire Line
+	4050 10000 3800 10000
+Connection ~ 4050 10000
+Wire Wire Line
+	4050 10000 4050 10500
+Text HLabel 3800 10000 0    50   Input ~ 0
+d_Mixer2_phi
+Wire Wire Line
+	6500 7150 6500 7650
+Wire Wire Line
+	6500 7800 7200 7800
+Connection ~ 6500 7800
+Wire Wire Line
+	6250 8000 7000 8000
+Wire Wire Line
+	6250 7650 6500 7650
+Connection ~ 6500 7650
+Wire Wire Line
+	6500 7650 6500 7800
+Wire Wire Line
+	6500 7800 6500 8150
+$Comp
+L Device:R R18
+U 1 1 619B541B
+P 7000 8300
+F 0 "R18" H 6930 8254 50  0000 R CNN
+F 1 "200k" H 6930 8345 50  0000 R CNN
+F 2 "" V 6930 8300 50  0001 C CNN
+F 3 "~" H 7000 8300 50  0001 C CNN
+	1    7000 8300
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR012
+U 1 1 619B5421
+P 7000 8650
+F 0 "#PWR012" H 7000 8400 50  0001 C CNN
+F 1 "GND" H 7005 8477 50  0000 C CNN
+F 2 "" H 7000 8650 50  0001 C CNN
+F 3 "" H 7000 8650 50  0001 C CNN
+	1    7000 8650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7000 8650 7000 8450
+Wire Wire Line
+	7000 8000 7000 8150
+Wire Wire Line
+	7000 8000 7000 7300
+$Comp
+L Device:R R5
+U 1 1 619B542A
+P 3850 7450
+F 0 "R5" H 3920 7496 50  0000 L CNN
+F 1 "100k" H 3920 7405 50  0000 L CNN
+F 2 "" V 3780 7450 50  0001 C CNN
+F 3 "~" H 3850 7450 50  0001 C CNN
+	1    3850 7450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R6
+U 1 1 619B5430
+P 3850 7850
+F 0 "R6" H 3920 7896 50  0000 L CNN
+F 1 "100k" H 3920 7805 50  0000 L CNN
+F 2 "" V 3780 7850 50  0001 C CNN
+F 3 "~" H 3850 7850 50  0001 C CNN
+	1    3850 7850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3850 7700 3850 7650
+Wire Wire Line
+	3850 7600 3850 7650
+Connection ~ 3850 7650
+Wire Wire Line
+	3850 7300 3850 7250
+$Comp
+L Device:R R7
+U 1 1 619B543A
+P 3850 8600
+F 0 "R7" H 3920 8646 50  0000 L CNN
+F 1 "100k" H 3920 8555 50  0000 L CNN
+F 2 "" V 3780 8600 50  0001 C CNN
+F 3 "~" H 3850 8600 50  0001 C CNN
+	1    3850 8600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R8
+U 1 1 619B5440
+P 3850 9000
+F 0 "R8" H 3920 9046 50  0000 L CNN
+F 1 "100k" H 3920 8955 50  0000 L CNN
+F 2 "" V 3780 9000 50  0001 C CNN
+F 3 "~" H 3850 9000 50  0001 C CNN
+	1    3850 9000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3850 8400 3850 8450
+Wire Wire Line
+	3850 8750 3850 8800
+Wire Wire Line
+	3850 8850 3850 8800
+Connection ~ 3850 8800
+Wire Wire Line
+	3850 8150 3750 8150
+Wire Wire Line
+	3750 8150 3750 9250
+Wire Wire Line
+	3750 9250 3850 9250
+Wire Wire Line
+	3850 9250 3850 9150
+Wire Wire Line
+	3850 8000 3850 8150
+Text HLabel 3150 7050 0    50   Input ~ 0
+In_Mixer2_a
+Text HLabel 3150 8200 0    50   Input ~ 0
+In_Mixer2_b
+Connection ~ 3750 8150
+Wire Wire Line
+	3200 6500 3850 6500
+Text HLabel 3850 6500 2    50   Input ~ 0
+d_Mixer2_gain
+Wire Wire Line
+	3200 6300 3400 6300
+Wire Wire Line
+	3400 6300 3400 6650
+$Comp
+L power:GND #PWR03
+U 1 1 619EF33E
+P 3400 6650
+F 0 "#PWR03" H 3400 6400 50  0001 C CNN
+F 1 "GND" H 3405 6477 50  0000 C CNN
+F 2 "" H 3400 6650 50  0001 C CNN
+F 3 "" H 3400 6650 50  0001 C CNN
+	1    3400 6650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3200 6400 3750 6400
+Wire Wire Line
+	3750 6400 3750 8150
+NoConn ~ 3200 6200
+$Comp
+L Amplifier_Operational:TL074 U9
+U 3 1 61A034D7
+P 4300 7150
+F 0 "U9" H 4300 7517 50  0000 C CNN
+F 1 "TL074" H 4300 7426 50  0000 C CNN
+F 2 "" H 4250 7250 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 4350 7350 50  0001 C CNN
+	3    4300 7150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U9
+U 4 1 61A05207
+P 4350 8300
+F 0 "U9" H 4350 8667 50  0000 C CNN
+F 1 "TL074" H 4350 8576 50  0000 C CNN
+F 2 "" H 4300 8400 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 4400 8500 50  0001 C CNN
+	4    4350 8300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL072 U10
+U 2 1 61A06A4F
+P 7500 7900
+F 0 "U10" H 7500 8267 50  0000 C CNN
+F 1 "TL072" H 7500 8176 50  0000 C CNN
+F 2 "" H 7500 7900 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 7500 7900 50  0001 C CNN
+	2    7500 7900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3750 3250 3750 4500
+Wire Wire Line
+	3750 2900 4700 2900
+Wire Wire Line
+	3750 2500 4000 2500
+Wire Wire Line
+	4700 4050 4700 4700
+Wire Wire Line
+	4700 8800 4700 9450
+$EndSCHEMATC
