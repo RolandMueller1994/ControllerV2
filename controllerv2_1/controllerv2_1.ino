@@ -3166,20 +3166,20 @@ void setupMCP() {
   for(int i = 0; i < 3*8; i++) {
     if(i == 0) {
       curMcp = &mcp_status1;
-      curMcp->setupInterrupts(true, true, CHANGE);
+      curMcp->setupInterrupts(true, true, LOW);
     } else if(i == 8) {
       curMcp = &mcp_status2;
-      curMcp->setupInterrupts(true, true, CHANGE);
+      curMcp->setupInterrupts(true, true, LOW);
     } else if(i == 16) {
       curMcp = &mcp_status3;
-      curMcp->setupInterrupts(true, true, CHANGE);
+      curMcp->setupInterrupts(true, true, LOW);
     }
 
     if(i < 18) {
       curMcp->pinMode(i%8, OUTPUT);
     } else {
       curMcp->pinMode(i%8, INPUT_PULLUP);
-      curMcp->setupInterruptPin(i%8, LOW);
+      curMcp->setupInterruptPin(i%8, CHANGE);
     }
   }
 }
@@ -3248,6 +3248,7 @@ void setup() {
 void loop() {
   display();
   if(!digitalRead(INT_STATUS)) {
+    SerialMuted("Interrupt\n");
     for(int i = 0; i < noMenuPins; i++) {
       menuMcpVals[i] = mcp_status3.digitalRead(menuPins[i]);
     }
