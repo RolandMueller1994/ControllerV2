@@ -5,11 +5,24 @@
 
 #include <Adafruit_MCP23X08.h>
 
+#include <ShiftRegister74HC595.h>
+
 #define REF_BLUE 6
 #define REF_GREEN 7
 #define REF_STATUS 8
 
 #define I2C_RESET 12
+
+#define EN_MATRIX 33
+#define OE_MATRIX 34
+#define SER_MATRIX 35
+#define SRCLK_MATRIX 36
+#define SRCLR_MATRIX 37
+#define RCLK_MATRIX 38
+
+
+ShiftRegister74HC595<10> regMatrix(SER_MATRIX, SRCLK_MATRIX, RCLK_MATRIX);
+uint8_t regMatrixValues[10];
 
 Adafruit_MCP23X08 mcp_matrix1;
 Adafruit_MCP23X08 mcp_matrix2;
@@ -68,9 +81,9 @@ int freeMemory() {
 }
 
 void printFreeMemory() {
-  SerialMuted("Memory: ");
+  /*SerialMuted("Memory: ");
   SerialMuted(freeMemory());
-  SerialMuted("\n");
+  SerialMuted("\n");*/
 }
 
 U8G2_ST7565_NHD_C12864_F_4W_HW_SPI u8g2(U8G2_R2, /* cs=*/ 4, /* dc=*/ 3, /* reset=*/ 2);
@@ -78,6 +91,7 @@ Adafruit_FRAM_SPI fram = Adafruit_FRAM_SPI(10);
 uint8_t addrSizeInBytes = 3;
 
 int loopDelay = 1;
+int loopOrderDelay = 400 / loopDelay;
 int debounceDelay = 10;
 int tapTempoDelay = 4;
 int longPressDelay = 1000 / loopDelay;
@@ -109,9 +123,9 @@ linkedList * presetList = newList();
 
 const int noMidiMsg = 16;
 const int noTapTempo = 3;
-const int noLoops = 12;
-const int noOuts = 3;
-const int noMixers = 3;
+const int noLoops = 10;
+const int noOuts = 2;
+const int noMixers = 2;
 const int noCtrl = 4;
 const int noExpr = 2;
 
@@ -254,8 +268,8 @@ bool outConns[] = {false, false};
 bool exprConns[] = {false, false};
 
 
-const uint8_t outIds[] = {20, 21, 22};
-const uint8_t mixerIds[] = {30, 31, 32};
+const uint8_t outIds[] = {20, 21};
+const uint8_t mixerIds[] = {30, 31};
 
 enum midiTypes {midiPC = 0, midiCC = 1, expr1 = 2, expr2 = 3};
 enum tapTypes {tapCC = 0, tapRemote1 = 1, tapRemote2 = 2, tapRemote3 = 3, tapRemote4 = 4};
@@ -271,7 +285,7 @@ struct preset_t {
   bool outsOn[noOuts];
   bool outPhaseReverse[noOuts-1];
   bool tunerOn;
-  uint8_t loopOrder[noLoops + noOuts + noMixers][noOuts];
+  uint8_t loopOrder[noLoops + noMixers][noOuts];
 
   bool ctrlOn[noCtrl];
 
@@ -290,7 +304,8 @@ struct preset_t {
   uint8_t tapCCOff[noTapTempo];
 
   stompModes stompMode;
-  
+
+  uint8_t mixerUsed;
 };
 
 const uint32_t noActivatedPresetAddr = presetStartAddr + noBanks * noPresets * sizeof(preset_t);
@@ -584,13 +599,9 @@ preset_t* createDefaultPreset() {
       defaultPreset->loopOrder[i][j] = 0;
     }
   }
-  for(uint8_t i = 0; i<noOuts; i++) {
-    defaultPreset->loopOrder[noLoops][i] = outIds[i];
-  }
-  for(uint8_t i = noLoops+1; i < noLoops + noOuts + noMixers; i++) {
-    for(uint8_t j = 1; j < noOuts; j++) {
-      defaultPreset->loopOrder[i][j] = 0;
-    }
+  for(uint8_t j = 0; j < noMixers; j++) {
+    defaultPreset->loopOrder[noLoops+j][0] = mixerIds[j];
+    defaultPreset->loopOrder[noLoops+j][1] = mixerIds[j];
   }
   for(uint8_t i = 0; i < noCtrl; i++) {
     defaultPreset->ctrlOn[i] = false;
@@ -613,6 +624,7 @@ preset_t* createDefaultPreset() {
     defaultPreset->tapCCOff[i] = 0;
   }
   defaultPreset->stompMode = offStomp;
+  defaultPreset->mixerUsed = 0;
   strcpy(defaultPreset->presetName, "");
   return defaultPreset;
 }
@@ -735,6 +747,100 @@ void factoryReset() {
     }
   }
   delete defaultPreset;
+  activatePreset(1, 1);
+}
+
+void updateForStereo() {
+  for(uint8_t bankNo = 0; bankNo < noBanks; bankNo++) {
+    for(uint8_t presetNo=0; presetNo < noPresets; presetNo++) {
+      preset_t* curPreset = new preset_t;
+      readPresetFncBankNPreset(curPreset, bankNo, presetNo);
+      for(int stereoNo = 0; stereoNo < noLoops/2; stereoNo++) {
+        if(stereoLoops[stereoNo]) {
+          uint8_t prm = 1 + 2*stereoNo;
+          uint8_t snd = 2 + 2*stereoNo;
+          uint8_t loops[noLoops + noMixers][noOuts];
+          int sltWrite = 0;
+          for(int slotNo = 0; slotNo < noLoops + noMixers; slotNo++) {
+            for(int outNo = 0; outNo < noOuts; outNo++) {
+              if(curPreset->loopOrder[slotNo][outNo] == prm) {
+                if(outNo == 0) {
+                  loops[sltWrite][0] = prm;
+                  loops[sltWrite][1] = snd;
+                  sltWrite++;
+                  if(curPreset->loopOrder[slotNo][1] == snd) {
+                    break;
+                  } else if(curPreset->loopOrder[slotNo][1] == 0) {
+                    break;
+                  } else {
+                    loops[sltWrite][1] = curPreset->loopOrder[slotNo][1];
+                    if(curPreset->loopOrder[slotNo+1][1] == 0 && slotNo < noLoops + noMixers - 1) {
+                      loops[sltWrite][0] = curPreset->loopOrder[slotNo][0];
+                      slotNo++;
+                    }
+                    sltWrite++;
+                  }
+                } else {
+                  loops[sltWrite][1] = 0;
+                  sltWrite++;
+                  loops[sltWrite][0] = prm;
+                  loops[sltWrite][1] = snd;
+                  sltWrite++;
+                  break;
+                }
+              } else if (curPreset->loopOrder[slotNo][outNo] == snd) {
+                if(outNo == 0) {
+                  if(curPreset->loopOrder[slotNo][1] == 0) {
+                    break;
+                  } else {
+                    loops[sltWrite][1] = curPreset->loopOrder[slotNo][1];
+                    if(curPreset->loopOrder[slotNo+1][0] > 0 && curPreset->loopOrder[slotNo+1][0] <= noLoops && curPreset->loopOrder[slotNo+1][1] == 0) {
+                      loops[sltWrite][0] = curPreset->loopOrder[slotNo+1][0];
+                      sltWrite++;
+                      break;
+                    } else {
+                      loops[sltWrite][0] = 0;
+                      sltWrite++;
+                      break;
+                    }
+                  }
+                } else {
+                  if(curPreset->loopOrder[slotNo][0] == 0) {
+                    break;
+                  } else {
+                    loops[sltWrite][0] = curPreset->loopOrder[slotNo][0];
+                    if(curPreset->loopOrder[slotNo+1][1] > 0 && curPreset->loopOrder[slotNo+1][1] <= noLoops && curPreset->loopOrder[slotNo+1][0] == 0) {
+                      loops[sltWrite][1] = curPreset->loopOrder[slotNo+1][1];
+                      sltWrite++;
+                      break;
+                    } else {
+                      loops[sltWrite][1] = 0;
+                      sltWrite++;
+                      break;
+                    }
+                  }
+                }
+              } else {
+                loops[sltWrite][outNo] = curPreset->loopOrder[slotNo][outNo];
+                if(outNo == 1) {
+                  sltWrite++;
+                }
+              }
+            }
+          }
+          for(int i=0; i<noLoops + noMixers; i++) {
+            for(int j=0; j<noOuts; j++) {
+              curPreset->loopOrder[i][j] = loops[i][j];
+            }
+          }
+        }
+      }
+      uint32_t presetAddr = presetStartAddr + ((bankNo - 1) * noPresets + (presetNo-1)) * sizeof(preset_t);
+      savePresetFnc(curPreset, presetAddr);
+      delete(curPreset);
+    }
+  }
+  clearList(presetList);
   activatePreset(1, 1);
 }
 
@@ -886,6 +992,7 @@ int menuDisplay = 7;
 int factoryResetDisplay = 8;
 int startupPresetDisplay = 9;
 int configDisplay = 10;
+int loopOrderDisplay = 11;
 
 int displayPage = startupDisplay;
 int lastDisplayPage = -1;
@@ -969,12 +1076,182 @@ struct state {
   int configIdx;
 };
 
-const int noStates = 24;
+const int noStates = 25;
 state* states[noStates];
 state* curState;
 int menuStart = 0;
 
 char* returnState = NULL;
+
+int loopSlot = 0;
+int loopCh = 0;
+bool loopMove = false;
+bool loopAllowed = false;
+bool loopMoveFlag = true;
+
+void loopOrderDisplayFnc(int offset) {
+  u8g2.setFont(u8g2_font_6x10_tf);
+
+  if(!loopAllowed) {
+    int width = u8g2.getStrWidth("Not Allowed in");
+    int pos = (128-width)/2;
+    offset += 12;
+    u8g2.drawStr(pos, offset, "Not Allowed in");
+    width = u8g2.getStrWidth("Stomp Box mode");
+    pos = (128-width)/2;
+    offset += 12;
+    u8g2.drawStr(pos, offset, "Stomp Box mode");
+  } else {
+    preset_t* curPreset = (preset_t*) presetList->last->item;
+    
+    int loopOnHeight = 11;
+    int frameLeft = 1;
+    int frameRight = 1;
+    int delta = 1;
+    int rowPos = 127 - delta;
+    int row = 1;
+    int totalHeight = noOuts * (loopOnHeight+1 + delta);
+    int yStart = 63 - (64 - offset - totalHeight)/2;
+  
+    /*for(int j=0; j<noOuts; j++) {
+      for(int i=0; i<noLoops + noMixers; i++) {
+        
+        SerialMuted(curPreset->loopOrder[i][j]);
+        SerialMuted(" ");
+      }
+      SerialMuted("\n");
+    }*/
+  
+    bool allLoops = false;
+    bool parallel = false;
+    int loopCount = 0;
+    bool selected = false;
+    uint8_t mixerUsed = 0;
+    for(int i=0; i<noLoops + noMixers; i++) { 
+      //SerialMuted(i);
+      //SerialMuted("\n");
+      int maxWidth = 0;
+      int maxChars = 1;
+      for(int j=0; j<noOuts; j++) {
+        uint8_t id = curPreset->loopOrder[i][j];
+        int width = 0;
+        if(id <= noLoops && id > 0) {
+          char disp[3];
+          sprintf(disp, "%d", id);
+          width = u8g2.getStrWidth(disp);
+          if(id >= 10) {
+            maxChars = 2;
+          }
+          if(j != 0) {
+            parallel = true;
+          }
+        } else if(id > 0) {
+          char disp[2];
+          sprintf(disp, "%c", 'M');
+          width = u8g2.getStrWidth(disp);
+          parallel = false;
+        }
+        maxWidth = width > maxWidth ? width : maxWidth;
+      }
+  
+      bool increment = false;
+      bool stereo = false;
+      for(int j=0; j<noOuts; j++) {
+        uint8_t id = curPreset->loopOrder[i][j];
+        if(id <= noLoops) {
+          //SerialMuted("Print Loop\n");
+          char disp[3];
+          bool draw = false;
+          if(id != 0) {
+            sprintf(disp, "%d", id);
+            draw = true;
+          } else if (parallel) {
+            if(maxChars == 2) {
+              sprintf(disp, "%s", "--");
+            } else {
+              sprintf(disp, "%c", '-');
+            }
+            draw = true;
+          }
+          if(draw) {
+            if(id != 0) {
+              if((j == 0 && !stereoLoops[(id-1)/2]) || j != 0 && !stereo) {   
+                if(j == loopCh && i == loopSlot && loopMoveFlag) {
+                  u8g2.setDrawColor(1);
+                  u8g2.drawBox(rowPos - (maxWidth + frameLeft + frameRight), yStart - (j + 1) * (loopOnHeight+1) - delta, maxWidth + frameLeft + frameRight, loopOnHeight);
+                  u8g2.setDrawColor(2);
+                  u8g2.setFontMode(1);
+                  selected = true;
+                } else {
+                  u8g2.drawFrame(rowPos - (maxWidth + frameLeft + frameRight), yStart - (j + 1) * (loopOnHeight+1) - delta, maxWidth + frameLeft + frameRight, loopOnHeight);  
+                }
+              } else if (j == 0) {
+                stereo = true;
+                if(j == loopCh && i == loopSlot)
+                  selected = true;
+                else if(j==0 && j+1 == loopCh && i == loopSlot)
+                  selected = true;
+                if(selected && loopMoveFlag) {
+                  u8g2.setDrawColor(1);
+                  u8g2.drawBox(rowPos - (maxWidth + frameLeft + frameRight), yStart - noOuts * (loopOnHeight+1) - delta, maxWidth + frameLeft + frameRight, noOuts * loopOnHeight + (noOuts - 1) * delta);
+                  u8g2.setDrawColor(2);
+                  u8g2.setFontMode(1);
+                } else
+                  u8g2.drawFrame(rowPos - (maxWidth + frameLeft + frameRight), yStart - noOuts * (loopOnHeight+1) - delta, maxWidth + frameLeft + frameRight, noOuts * loopOnHeight + (noOuts - 1) * delta);
+              }
+              loopCount += 1;
+            }
+            u8g2.drawStr(rowPos + frameLeft - (maxWidth + frameLeft + frameRight), yStart - (j + 1) * (loopOnHeight+1) - delta + 1, disp);
+            increment = true;
+            if(!stereo && selected)
+              selected = false;
+            if(!selected && loopMoveFlag) {
+              u8g2.setDrawColor(1);
+              u8g2.setFontMode(0);
+            }
+          }
+        } else if(j == noOuts-1 && id > 0) {
+          //SerialMuted("Print Mixer\n");
+          char disp[2];
+          sprintf(disp, "%c", 'M');
+          if(i == loopSlot && loopMoveFlag) {
+            u8g2.setDrawColor(1);
+            u8g2.drawBox(rowPos - (maxWidth + frameLeft + frameRight), yStart - (j + 1) * (loopOnHeight+1) - delta, maxWidth + frameLeft + frameRight, noOuts * loopOnHeight + (noOuts - 1) * delta);
+            u8g2.setDrawColor(2);
+            u8g2.setFontMode(1);
+            u8g2.drawStr(rowPos + frameLeft - (maxWidth + frameLeft + frameRight), yStart - (j + 1) * (loopOnHeight+1) - delta + 1, disp);
+            u8g2.setDrawColor(1);
+            u8g2.setFontMode(0);
+          } else {
+            u8g2.drawStr(rowPos + frameLeft - (maxWidth + frameLeft + frameRight), yStart - (j + 1) * (loopOnHeight+1) - delta + 1, disp);
+            u8g2.drawFrame(rowPos - (maxWidth + frameLeft + frameRight), yStart - (j + 1) * (loopOnHeight+1) - delta, maxWidth + frameLeft + frameRight, noOuts * loopOnHeight + (noOuts - 1) * delta);
+          }
+          increment = true;
+          mixerUsed++;
+        }
+      }
+      if(loopCount == noLoops && mixerUsed == curPreset->mixerUsed)
+        allLoops = true;
+      
+      if(increment)
+        rowPos -= delta + maxWidth + frameLeft + frameRight;
+  
+      int width = 0;
+      if(allLoops) {
+        allLoops = false;
+        loopCount = 0;
+        for(int j=0; j<noOuts; j++) {
+          char disp[2];
+          sprintf(disp, "%c", 'A' + j);
+          width = u8g2.getStrWidth(disp);
+          u8g2.drawStr(rowPos + frameLeft - (width + frameLeft + frameRight), yStart - (j + 1) * (loopOnHeight+1) - delta + 1, disp);
+          u8g2.drawFrame(rowPos - (width + frameLeft + frameRight), yStart - (j + 1) * (loopOnHeight+1) - delta, width + frameLeft + frameRight, loopOnHeight);
+        }
+        rowPos -= delta + width + frameLeft + frameRight;
+      }
+    }
+  }
+}
 
 void display() {
   
@@ -1053,6 +1330,28 @@ void display() {
         }
         rowPos += delta + dispWidth + frameLeft + frameRight;
       }
+      for(int i=0; i<noCtrl; i++) {
+        char disp[5];
+        sprintf(disp, "Ctl%c", '1' + i);
+        int dispWidth = u8g2.getStrWidth(disp);
+        if(rowPos + dispWidth + frameRight + delta > 127) {
+          rowPos = delta;
+          row++;
+        }
+        if(curPreset->ctrlOn[i]) {
+          u8g2.setDrawColor(1);
+          u8g2.drawBox(rowPos, 63 - row * (loopOnHeight+1) - delta, dispWidth + frameLeft + frameRight, loopOnHeight);
+          u8g2.setDrawColor(2);
+          u8g2.setFontMode(1);
+          u8g2.drawStr(rowPos + frameLeft,63 - row * (loopOnHeight+1) - delta + 1, disp);
+          u8g2.setDrawColor(1);
+          u8g2.setFontMode(0);
+        } else {
+          u8g2.drawStr(rowPos + frameLeft,63 - row * (loopOnHeight+1) - delta + 1, disp);
+          u8g2.drawFrame(rowPos, 63 - row * (loopOnHeight+1) - delta, dispWidth + frameLeft + frameRight, loopOnHeight); 
+        }
+        rowPos += delta + dispWidth + frameLeft + frameRight;
+      }
       for(int i=0; i<noOuts; i++) {
         char disp[5];
         sprintf(disp, "Out%c", 'A' + i);
@@ -1097,28 +1396,9 @@ void display() {
         }
         rowPos += delta + dispWidth + frameLeft + frameRight;
       }
-      char disp[6];
-      sprintf(disp, "SB");
-      int dispWidth = u8g2.getStrWidth(disp);
-      if(rowPos + dispWidth + frameRight + delta > 127) {
-        rowPos = delta;
-        row++;
-      }
-      if(curPreset->stompMode != offStomp) {
-        u8g2.setDrawColor(1);
-        u8g2.drawBox(rowPos, 63 - row * (loopOnHeight+1) - delta, dispWidth + frameLeft + frameRight, loopOnHeight);
-        u8g2.setDrawColor(2);
-        u8g2.setFontMode(1);
-        u8g2.drawStr(rowPos + frameLeft,63 - row * (loopOnHeight+1) - delta + 1, disp);
-        u8g2.setDrawColor(1);
-        u8g2.setFontMode(0);
-      } else {
-        u8g2.drawStr(rowPos + frameLeft,63 - row * (loopOnHeight+1) - delta + 1, disp);
-        u8g2.drawFrame(rowPos, 63 - row * (loopOnHeight+1) - delta, dispWidth + frameLeft + frameRight, loopOnHeight); 
-      }
-      rowPos += delta + dispWidth + frameLeft + frameRight;
+      char disp[3];
       sprintf(disp, "Tu");
-      dispWidth = u8g2.getStrWidth(disp);
+      int dispWidth = u8g2.getStrWidth(disp);
       if(rowPos + dispWidth + frameRight + delta > 127) {
         rowPos = delta;
         row++;
@@ -1135,7 +1415,7 @@ void display() {
         u8g2.drawStr(rowPos + frameLeft,63 - row * (loopOnHeight+1) - delta + 1, disp);
         u8g2.drawFrame(rowPos, 63 - row * (loopOnHeight+1) - delta, dispWidth + frameLeft + frameRight, loopOnHeight); 
       }
-  } else if (displayPage == bankSelectDisplay) {
+    } else if (displayPage == bankSelectDisplay) {
       u8g2.setFont(u8g2_font_courB24_tf);
       int bankWidth = u8g2.getStrWidth("Bank");
       u8g2.drawStr((128 - bankWidth)/2 , 6, "Bank");
@@ -1284,10 +1564,18 @@ void display() {
         u8g2.drawStr(pos + headerOffset, titleY, curState->configTitles[i]);
         pos += width + delta;
         drawTriangleRight = i != curState->noConfig-1;
-      }
+      } 
       if(drawTriangleRight > 0) {
         u8g2.drawTriangle(127-1, valueY + 5, 127-6, valueY, 127-6, valueY + 10);
       } 
+    } else if (displayPage == loopOrderDisplay) {
+      u8g2.setFont(u8g2_font_6x10_tf);
+      int offset = 10;
+      int headerWidth = u8g2.getStrWidth("Loop Order");
+      u8g2.drawStr((128 - headerWidth)/2, 0, "Loop Order");
+      u8g2.drawLine(0, offset+1, 127, offset+1);
+      offset += 3;
+      loopOrderDisplayFnc(offset); 
     }
     
     lastDisplayPage = displayPage;
@@ -1455,41 +1743,21 @@ char * secondaryProgramTransitions() {
   }
   int outOffset = noLoops - noPresetPins;
   outOffset = outOffset < 0 ? 0 : outOffset;
-  for(int j = 0; j<noPresetPins; j++) {
+  for(int j = 2; j<noPresetPins; j++) {
     if(presetEdges[j]) {
-      if(j+noPresetPins < noLoops) {
-        int i = j+noPresetPins;
-        if(stereoLoops[i/2]) {
-          if(i%2 == 0) {
-            ((preset_t*) presetList->last->item)->loopsOn[i] ^= true;
-            ((preset_t*) presetList->last->item)->loopsOn[i+1] = ((preset_t*) presetList->last->item)->loopsOn[i];
-          } else {
-            ((preset_t*) presetList->last->item)->loopsOn[i] ^= true;
-            ((preset_t*) presetList->last->item)->loopsOn[i-1] = ((preset_t*) presetList->last->item)->loopsOn[i];
-          }
-          externalDisplayRefresh = true;
-        } else {
-          ((preset_t*) presetList->last->item)->loopsOn[i] ^= true;  
-          externalDisplayRefresh = true;
-        }
-      } else if(j-outOffset < noOuts) {
-        ((preset_t*) presetList->last->item)->outsOn[j-outOffset] ^= true;
+      if(j < 6) {
+        ((preset_t*) presetList->last->item)->ctrlOn[j-2] ^= true;
         externalDisplayRefresh = true;
-      } else if(j-outOffset-noOuts < noOuts-1) {
-        ((preset_t*) presetList->last->item)->outPhaseReverse[j-outOffset-noOuts] ^= true;
-        externalDisplayRefresh = true;
-      } else if(j-outOffset-noOuts-noOuts-1 == 0) {
-        if(((preset_t*) presetList->last->item)->stompMode == offStomp) {
-          ((preset_t*) presetList->last->item)->stompMode = normalStomp;
-          externalDisplayRefresh = true;
-        } else {
-          ((preset_t*) presetList->last->item)->stompMode = offStomp;
-          externalDisplayRefresh = true;
-        }
-      } else if(j-outOffset-noOuts-noOuts-1 == 1) {
+      } else if(j == 6) {
         ((preset_t*) presetList->last->item)->tunerOn ^= true;
+        externalDisplayRefresh = true;
+      } else if(j == 7) {
+        ((preset_t*) presetList->last->item)->outPhaseReverse[0] ^= true;
+        externalDisplayRefresh = true;
+      } else if(j < 10) {
+        ((preset_t*) presetList->last->item)->outsOn[j-8] ^= true;
+        externalDisplayRefresh = true;
       }
-      
       hardwareActivatePreset();
     }
   }
@@ -1560,21 +1828,21 @@ void bankSelectActivate() {
 }
 
 char * bankSelectTransitions() {
-  /*for(int i = 0; i< noPresetPins; i++) {
+  for(int i = 0; i< noPresetPins; i++) {
     if(presetEdges[i]) {
       bank = i + 1;
       saveBank();
       externalDisplayRefresh = true;
       return "run";
     }
-  }*/
-  for(int i = 0; i < noMenuPins; i++) {
+  }
+  /*for(int i = 0; i < noMenuPins; i++) {
     if(menuNegEdges[i]) {
       if(menuPins[i] == backPin) {
         return "run";
       }
     }
-  }
+  }*/
   return NULL;
 }
 
@@ -2458,6 +2726,7 @@ void stereoLoopOnOffActivate() {
 
 void stereoLoopOnOffDeactivate() {
   SerialMuted("Stereo Loop On Off Deactivate\n");
+  updateForStereo();
 }
 
 char * stereoLoopOnOffTransitions() {
@@ -2664,6 +2933,223 @@ char * stompBoxModeTransitions() {
         return "mainMenu";
       }
     } 
+  }
+  return NULL;
+}
+
+state loopOrderState;
+
+void loopOrderActivate() {
+  SerialMuted("Loop Order Activate\n");
+  displayPage = loopOrderDisplay;
+  preset_t* curPreset = (preset_t*) presetList->last->item;
+
+  bool found = false;
+  if(curPreset->stompMode == offStomp) {
+    loopAllowed = true;
+    for(int slotNo=0; slotNo < noLoops + noMixers; slotNo++) {
+      for(int outNo=0; outNo < noOuts; outNo++) {
+        if(curPreset->loopOrder[slotNo][outNo] > 0) {
+          loopSlot = slotNo;
+          loopCh = outNo;
+          found = true;
+          break;
+        }
+      }
+      if(found)
+        break;
+    }
+  }
+}
+
+void loopOrderDeactivate() {
+  SerialMuted("Loop Order Deactivate\n");
+  loopSlot = 0;
+  loopCh = 0;
+  loopMove = false;
+  loopAllowed = false;
+}
+
+char * loopOrderTransitions() {
+  if(loopAllowed) {
+    preset_t* curPreset = (preset_t*) presetList->last->item;
+    for(int i = 0; i < noMenuPins; i++) {
+      if(menuLongPress[i]) {
+        if(menuPins[i] == enterPin) {
+          returnState = "mainMenu";
+          return "save";
+        } else if(menuPins[i] == backPin) {
+          returnState = "mainMenu";
+          return "discard";
+        }
+      }
+    }
+    for(int i = 0; i < noMenuPins; i++) {
+      if(menuNegEdges[i]) {
+        if(menuPins[i] == enterPin) {
+          loopMove = !loopMove;
+        } else if((menuPins[i] == leftPin || menuPins[i] == rightPin) && !loopMove) {
+          int dir = 0;
+          int endPos = 0;
+          if(menuPins[i] == leftPin) {
+            dir = 1;
+            endPos = noLoops + curPreset->mixerUsed + 1;//noMixers;
+          } else {
+            dir = -1;
+            endPos = -1;
+          }
+          bool found = false;
+          for(int searchIdx = loopSlot + dir; true; searchIdx += dir) {
+            if(searchIdx == endPos) {
+              break;
+            }
+            if(curPreset->loopOrder[searchIdx][loopCh] != 0) {
+              loopSlot = searchIdx;
+              found = true;
+              break;
+            }
+          }
+          if(found)
+            externalDisplayRefresh = true;
+        } else if((menuPins[i] == upPin || menuPins[i] == downPin) && !loopMove) {
+          int dir = 0;
+          int endPos = 0;
+          if(menuPins[i] == upPin) {
+            dir = 1;
+            endPos = noOuts;
+          } else {
+            dir = -1;
+            endPos = -1;
+          }
+          bool found = false;
+          for(int searchIdx = loopCh + dir; true; searchIdx += dir) {
+            if(searchIdx == endPos) {
+              break;
+            }
+            if(curPreset->loopOrder[loopSlot][searchIdx] != 0) {
+              loopCh = searchIdx;
+              found = true;
+              break;
+            }
+          }
+          if(found)
+            externalDisplayRefresh = true;
+        } else {
+          int curLen = 0;
+          int loopCount = 0;
+          bool finished = false;
+          uint8_t mixerUsed = 0;
+          for(int slot=0; slot < noLoops + noMixers; slot++) {
+            bool found = false;
+            for(int ch=0; ch < 2; ch++) {
+              if(curPreset->loopOrder[slot][ch] > 0) {
+                if(curPreset->loopOrder[slot][ch] <= noLoops) {
+                  loopCount++;
+                } else if(curPreset->loopOrder[slot][ch] > noLoops && !found) {
+                  mixerUsed++;
+                }
+                if(!found && !finished) {
+                  curLen++;
+                  found = true;
+                }
+                if(loopCount == noLoops && mixerUsed == curPreset->mixerUsed) {
+                  finished = true;
+                }
+              }
+            }
+          }
+          //curLen += mixerUsed - 1;
+          bool leftRight = false;
+          bool update = true;
+          uint8_t tmp[noLoops+noMixers][noOuts];
+          for(int tmpNo=0; tmpNo < noLoops+noMixers; tmpNo++) {
+            tmp[tmpNo][0] = 0;
+            tmp[tmpNo][1] = 0;
+          }
+          int targetSlot = loopSlot;
+          int targetCh = loopCh;
+          int id = curPreset->loopOrder[loopSlot][loopCh];
+          int isStereo = stereoLoops[(id-1)/2] | id > noLoops;
+          if(menuPins[i] == leftPin || menuPins[i] == rightPin) {
+            if(menuPins[i] == leftPin)
+              targetSlot += 1;
+            else
+              targetSlot -= 1;
+
+            SerialMuted("TargetSlot: ");
+            SerialMuted(targetSlot);
+            SerialMuted(" TargetCh: ");
+            SerialMuted(targetCh);
+            SerialMuted(" CurLen: ");
+            SerialMuted(curLen);
+            SerialMuted("\n");
+            if(targetSlot < 0)
+              break;
+            if(targetSlot + 1 > curLen && id <= noLoops)
+              break;
+            if(targetSlot + 1 > curLen + noMixers && id > noLoops)
+              break;
+
+            if(id > noLoops) {
+              if(menuPins[i] == leftPin && targetSlot == curLen) {
+                
+                curPreset->mixerUsed -= 1;
+                externalDisplayRefresh = true;
+                SerialMuted("Exit Mixer ");
+                SerialMuted(curPreset->mixerUsed);
+                SerialMuted("\n");
+                break;
+              } else if(menuPins[i] == rightPin && loopSlot == curLen) {
+                curPreset->mixerUsed += 1;
+                externalDisplayRefresh = true;
+                SerialMuted("Insert Mixer ");
+                SerialMuted(curPreset->mixerUsed);
+                SerialMuted("\n");
+                break;
+              } else if(!(targetSlot <= curLen -1)) {
+                break;
+              }
+            }
+            
+            for(int slotNo=0; slotNo < noLoops + noMixers; slotNo++) {
+              tmp[slotNo][0] = curPreset->loopOrder[slotNo][0];
+              tmp[slotNo][1] = curPreset->loopOrder[slotNo][1];
+            }
+            bool curStereo = stereoLoops[(id-1)/2] | id > noLoops;
+            int targetId = curPreset->loopOrder[targetSlot][0];
+            bool targetStereo = stereoLoops[(targetId-1)/2] | targetId > noLoops;
+
+            if(curStereo || targetStereo) {
+              tmp[loopSlot][0] = curPreset->loopOrder[targetSlot][0];
+              tmp[loopSlot][1] = curPreset->loopOrder[targetSlot][1];
+              tmp[targetSlot][0] = curPreset->loopOrder[loopSlot][0];
+              tmp[targetSlot][1] = curPreset->loopOrder[loopSlot][1];
+            } else {
+              tmp[loopSlot][loopCh] = curPreset->loopOrder[targetSlot][targetCh];
+              tmp[targetSlot][targetCh] = curPreset->loopOrder[loopSlot][loopCh];
+            }
+            loopSlot = targetSlot;
+            loopCh = targetCh;
+            for(int slotNo=0; slotNo < noLoops + noMixers; slotNo++) {
+              curPreset->loopOrder[slotNo][0] = tmp[slotNo][0];
+              curPreset->loopOrder[slotNo][1] = tmp[slotNo][1];
+            }
+          } else if(menuPins[i] == upPin && !isStereo) {
+            targetCh += 1;
+          } else if(menuPins[i] == downPin && !isStereo) {
+            targetCh -= 1;
+          }
+        }
+      }
+    }
+  } else {
+    for(int i = 0; i < noMenuPins; i++) {
+      if(menuNegEdges[i]) {
+        if(menuPins[i] == enterPin || menuPins[i] == backPin) {
+          return "mainMenu";
+        }
+      }
+    }
   }
   return NULL;
 }
@@ -3041,6 +3527,17 @@ void setupFSM() {
   resetPresetState.menuHeader = "Reset";
   resetPresetState.currentItem = resetPresetItems[0];
   resetPresetState.isConfig = false;
+
+  loopOrderState.name = "loopOrder";
+  loopOrderState.activate = loopOrderActivate;
+  loopOrderState.deactivate = loopOrderDeactivate;
+  loopOrderState.transitions = loopOrderTransitions;
+  loopOrderState.isMenu = false;
+  loopOrderState.menuItems = NULL;
+  loopOrderState.menuDisp = NULL;
+  loopOrderState.currentItem = NULL;
+  loopOrderState.noItems = 0;
+  loopOrderState.isConfig = false;
   
   states[0] = &loadPresetState;
   states[1] = &runState;
@@ -3066,6 +3563,7 @@ void setupFSM() {
   states[21] = &midiConfigBoolState;
   states[22] = &midiInChannelState;
   states[23] = &midiBankCtrlState;
+  states[24] = &loopOrderState;
   
   curState = &loadPresetState;
 }
@@ -3101,10 +3599,6 @@ void controlChangeHandle(uint8_t channel, uint8_t controller, uint8_t data) {
   }
 }
 
-void matrixIsr() {
-  readMatrixFlag = true;
-}
-
 void readLoopConn() {
   Adafruit_MCP23X08 * curMcp = NULL;
   for(int i = 0; i < 3*8; i++) {
@@ -3128,6 +3622,47 @@ void readLoopConn() {
       exprConns[i-22] = state;
     }
   }
+
+  SerialMuted("SendConns: ");
+  for(int i=0; i<10; i++) {
+    if(loopConnsSend[i]) {
+      SerialMuted(i);
+      SerialMuted(": ");
+      SerialMuted(loopConnsSend[i]);
+      SerialMuted(" ");
+    }
+  }
+  SerialMuted("\n");
+  SerialMuted("ReturnConns: ");
+  for(int i=0; i<10; i++) {
+    if(loopConnsReturn[i]) {
+      SerialMuted(i);
+      SerialMuted(": ");
+      SerialMuted(loopConnsReturn[i]);
+      SerialMuted(" ");
+    }
+  }
+  SerialMuted("\n");
+  SerialMuted("OutConns: ");
+  for(int i=0; i<2; i++) {
+    if(outConns[i]) {
+      SerialMuted(i);
+      SerialMuted(": ");
+      SerialMuted(outConns[i]);
+      SerialMuted(" ");
+    }
+  }
+  SerialMuted("\n");
+  SerialMuted("ExprConns: ");
+  for(int i=0; i<2; i++) {
+    if(exprConns[i]) {
+      SerialMuted(i);
+      SerialMuted(": ");
+      SerialMuted(exprConns[i]);
+      SerialMuted(" ");
+    }
+  }
+  SerialMuted("\n");
 }
 
 void setupMCP() {
@@ -3151,16 +3686,19 @@ void setupMCP() {
   for(int i = 0; i < 3*8; i++) {
     if(i == 0) {
       curMcp = &mcp_matrix1;
-      curMcp->setupInterrupts(true, true, CHANGE);
+      curMcp->setupInterrupts(true, true, LOW);
     } else if(i == 8) {
       curMcp = &mcp_matrix2;
-      curMcp->setupInterrupts(true, true, CHANGE);
+      curMcp->setupInterrupts(true, true, LOW);
     } else if(i == 16) {
       curMcp = &mcp_matrix3;
-      curMcp->setupInterrupts(true, true, CHANGE);
+      curMcp->setupInterrupts(true, true, LOW);
     }
-    curMcp->pinMode(i%8, INPUT_PULLUP);
-    curMcp->setupInterruptPin(i%8, LOW);
+    if(i<22)
+      curMcp->pinMode(i%8, INPUT_PULLUP);
+    else
+      curMcp->pinMode(i%8, INPUT);
+    curMcp->setupInterruptPin(i%8, CHANGE);
   }
 
   for(int i = 0; i < 3*8; i++) {
@@ -3185,6 +3723,12 @@ void setupMCP() {
 }
 
 void setup() {
+
+  for(uint8_t i=0; i<8; i++)
+    regMatrixValues[i] = 0xCC;
+  regMatrixValues[8] = 0b01011011;
+  regMatrixValues[9] = 0x10;
+  
   // ToDO: Replace with PWM
   pinMode(REF_BLUE, OUTPUT);
   pinMode(REF_GREEN, OUTPUT);
@@ -3193,12 +3737,22 @@ void setup() {
   digitalWrite(REF_GREEN, HIGH);
   digitalWrite(REF_STATUS, HIGH);
 
+  pinMode(EN_MATRIX, OUTPUT);
+  digitalWrite(EN_MATRIX, LOW);
+  pinMode(OE_MATRIX, OUTPUT);
+  digitalWrite(OE_MATRIX, HIGH);
+  pinMode(SRCLR_MATRIX, OUTPUT);
+  digitalWrite(SRCLR_MATRIX, LOW);
+
   pinMode(I2C_RESET, OUTPUT);
   digitalWrite(I2C_RESET, LOW);
-  delay(200);
+  delay(1000);
   digitalWrite(I2C_RESET, HIGH);
+  digitalWrite(SRCLR_MATRIX, HIGH);
+  delay(1);
+  regMatrix.setAll(regMatrixValues);
+  digitalWrite(OE_MATRIX, LOW);
   
-  // put your setup code here, to run once:
   exprCount = 0;
   for(int i = 0; i < noExpr; i++) {
     exprVals[i] = 0;
@@ -3207,6 +3761,7 @@ void setup() {
   while (!Serial) delay(10);
 
   setupMCP();
+  readLoopConn();
   for(int i = 0; i < noPresetPins; i++) {
     pinMode(presetPins[i], INPUT);
   }
@@ -3229,7 +3784,7 @@ void setup() {
     midiInst.turnThruOff();
   display();
   delay(5000);
-  attachInterrupt(digitalPinToInterrupt(INT_MATRIX), matrixIsr, FALLING);
+  //attachInterrupt(digitalPinToInterrupt(INT_MATRIX), matrixIsr, FALLING);
   readLoopConn();
   //displayPage = mainDisplay;
   readBank();
@@ -3245,6 +3800,8 @@ void setup() {
   printFreeMemory();
 }
 
+int loopOrderCount = 0;
+
 void loop() {
   display();
   if(!digitalRead(INT_STATUS)) {
@@ -3253,6 +3810,8 @@ void loop() {
       menuMcpVals[i] = mcp_status3.digitalRead(menuPins[i]);
     }
   }
+  if(!digitalRead(INT_MATRIX))
+    readLoopConn();
   bool pressDetect = false;
   detectMenuEdges();
   for(int i = 0; i < noMenuPins; i++) {
@@ -3339,9 +3898,9 @@ void loop() {
       if(exprVal > exprVals[i] + exprDelta || exprVal < exprVals[i] - exprDelta) {
         exprVals[i] = exprVal;
         checkExpr(i);
-        SerialMuted("Expr. Value: ");
+        /*SerialMuted("Expr. Value: ");
         SerialMuted(exprVal);
-        SerialMuted("\n");
+        SerialMuted("\n");*/
       }
     }
   }
@@ -3374,5 +3933,19 @@ void loop() {
     readMatrixCount = 0;
     readLoopConn();  
   }
+
+  if(loopMove) {
+    loopOrderCount++;
+    if(loopOrderCount == loopOrderDelay) {
+      loopOrderCount = 0;
+      loopMoveFlag = !loopMoveFlag; 
+      externalDisplayRefresh = true;
+    }
+  } else {
+    if(!loopMoveFlag)
+      externalDisplayRefresh = true;
+    loopMoveFlag = true; 
+  }
+  
   delay(loopDelay);
 }
