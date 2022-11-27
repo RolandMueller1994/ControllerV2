@@ -43,7 +43,7 @@ Adafruit_MCP23X08 mcp_status3;
 #include <Wire.h>
 #endif
 
-bool serialOn = true;
+bool serialOn = false;
 
 MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, midiInst);
 
@@ -635,6 +635,25 @@ void resetPreset(uint8_t bank, uint8_t preset, preset_t* templ=NULL) {
     templ = createDefaultPreset();
     deletePreset = true;
   }
+  for(int stereoNo=0; stereoNo<noLoops/2; stereoNo++) {
+    if(stereoLoops[stereoNo]) {
+      int id = stereoNo * 2 + 1;
+      int readOffset = 0;
+      for(int slotNo=0; slotNo<noLoops + noMixers; slotNo++) {
+        if(slotNo + readOffset > noLoops + noMixers - 1) {
+          templ->loopOrder[noLoops + noMixers -1][0] = 0;
+          templ->loopOrder[noLoops + noMixers -1][1] = 0;
+          break;
+        }
+        templ->loopOrder[slotNo][0] = templ->loopOrder[slotNo+readOffset][0];
+        templ->loopOrder[slotNo][1] = templ->loopOrder[slotNo+readOffset][1];
+        if(templ->loopOrder[slotNo][0] == id) {
+          templ->loopOrder[slotNo][1] = id + 1;
+          readOffset++;
+        }
+      }
+    }
+  }
   templ->bankNo = bank;
   templ->presetNo = preset;
   uint32_t presetAddr = presetStartAddr + ((bank - 1) * noPresets + (preset-1)) * sizeof(preset_t);
@@ -995,10 +1014,10 @@ bool loopMove = false;
 bool loopAllowed = false;
 bool loopMoveFlag = true;
 
-void loopOrderDisplayFnc(int offset) {
+void loopOrderDisplayFnc(int offset, bool fromRun=false) {
   u8g2.setFont(u8g2_font_6x10_tf);
 
-  if(!loopAllowed) {
+  if(!loopAllowed && !fromRun) {
     int width = u8g2.getStrWidth("Not Allowed in");
     int pos = (128-width)/2;
     offset += 12;
@@ -1008,7 +1027,20 @@ void loopOrderDisplayFnc(int offset) {
     offset += 12;
     u8g2.drawStr(pos, offset, "Stomp Box mode");
   } else {
-    preset_t* curPreset = (preset_t*) presetList->last->item;
+    preset_t* curPreset = NULL;
+    if(fromRun) {
+      listItem* iter = presetList->first;
+      while(iter) {
+        preset_t* preset = (preset_t*) iter->item;
+        if(preset->stompMode == offStomp) {
+          curPreset = preset;
+          break;
+        }
+        iter = (listItem*) iter->next;
+      }
+    } else {
+      curPreset = (preset_t*) presetList->last->item;
+    }
     
     int loopOnHeight = 11;
     int frameLeft = 1;
@@ -1180,20 +1212,7 @@ void display() {
       u8g2.drawStr(bankLength + 9, 0, bankDisp);
       u8g2.setFont(u8g2_font_6x10_tf);
       presetBankDraw(0, 24, true, false);
-      int lengthOrder = u8g2.drawStr(1, 34, "Loop Order");
-      u8g2.drawStr(0, 44, "Test");
-      u8g2.setFont(u8g2_font_5x7_tf);
-      int pos = 0;
-      for(int i=12; i>0; i--) {
-        char disp[3];
-        sprintf(disp, "%d", i);
-        int strwidth = u8g2.drawStr(pos, 54, disp);
-        pos += strwidth;
-        u8g2.drawLine(pos, 57, pos+1, 57);
-        pos += 3;
-      }
-      u8g2.drawStr(pos, 54, "C");
-      u8g2.setFont(u8g2_font_6x10_tf);
+      loopOrderDisplayFnc(32, true);
     } else if (displayPage == presetProgDisplay || displayPage == presetSecProgDisplay) {
       u8g2.setFont(u8g2_font_6x10_tf);
       presetBankDraw(0, 1, true);
@@ -2875,23 +2894,74 @@ void loopOrderCalc(preset_t * curPreset, bool left, bool right, bool up, bool do
     bool overrideStereo = false;
     if(targetStereo && !curStereo) {
       if(left && curPreset->loopOrder[loopSlot][loopCh == 0 ? 1 : 0] != 0) {
-        if(loopSlot-1 < 0)
-          overrideStereo = true;
-        else if(curPreset->loopOrder[loopSlot-1][loopCh == 0 ? 1 : 0] == 0)
-          overrideStereo = true;
+        if(loopSlot-1 < 0) {
+          // overrideStereo = true;
+          ;
+        }
+        else if(curPreset->loopOrder[loopSlot-1][loopCh == 0 ? 1 : 0] == 0) {
+          // overrideStereo = true;
+          curPreset->loopOrder[loopSlot-1][loopCh == 0 ? 1 : 0] = curPreset->loopOrder[loopSlot][loopCh == 0 ? 1 : 0];
+          curPreset->loopOrder[loopSlot][loopCh == 0 ? 1 : 0] = 0;
+        }
+          
       } else if(curPreset->loopOrder[loopSlot][loopCh == 0 ? 1 : 0] != 0) {
         if(loopSlot+1 >= curLen)
-          overrideStereo = true;
-        else if(curPreset->loopOrder[loopSlot+1][loopCh == 0 ? 1 : 0] == 0) 
-          overrideStereo = true;
+          //overrideStereo = true;
+          ;
+        else if(curPreset->loopOrder[loopSlot+1][loopCh == 0 ? 1 : 0] == 0) {
+          // overrideStereo = true;
+          curPreset->loopOrder[loopSlot+1][loopCh == 0 ? 1 : 0] = curPreset->loopOrder[loopSlot][loopCh == 0 ? 1 : 0];
+          curPreset->loopOrder[loopSlot][loopCh == 0 ? 1 : 0] = 0;
+        }
       }
     }
     
     if(curStereo || overrideStereo) {
-      tmp[loopSlot][0] = curPreset->loopOrder[targetSlot][0];
-      tmp[loopSlot][1] = curPreset->loopOrder[targetSlot][1];
+      int offset1 = 0;
+      int offset2 = 0;
+      if(!targetStereo) {
+        if(left && loopSlot - 1 >= 0) {
+          if(curPreset->loopOrder[targetSlot][1] != 0 && curPreset->loopOrder[targetSlot][0] == 0 && curPreset->loopOrder[loopSlot-1][1] == 0) {
+            offset2 = -1;
+          } else if(curPreset->loopOrder[targetSlot][0] != 0 && curPreset->loopOrder[targetSlot][1] == 0 && curPreset->loopOrder[loopSlot-1][0] == 0) {
+            offset1 = -1;
+          }
+        } else if(right && loopSlot+1 <= curLen) {
+          if(curPreset->loopOrder[targetSlot][1] != 0 && curPreset->loopOrder[targetSlot][0] == 0 && curPreset->loopOrder[loopSlot+1][1] == 0) {
+            offset2 = +1;
+          } else if(curPreset->loopOrder[targetSlot][0] != 0 && curPreset->loopOrder[targetSlot][1] == 0 && curPreset->loopOrder[loopSlot+1][0] == 0) {
+            offset1 = +1;
+          }
+        }
+      }
+      tmp[loopSlot + offset1][0] = curPreset->loopOrder[targetSlot][0];
+      if(offset1 != 0)
+        tmp[loopSlot][0] = 0;
+      tmp[loopSlot + offset2][1] = curPreset->loopOrder[targetSlot][1];
+      if(offset2 != 0)
+        tmp[loopSlot][1] = 0;
       tmp[targetSlot][0] = curPreset->loopOrder[loopSlot][0];
       tmp[targetSlot][1] = curPreset->loopOrder[loopSlot][1];
+      uint8_t tmp2[noLoops+noMixers][2];
+      offset1 = 0;
+      offset2 = 0;
+      for(int slotNo=0; slotNo<noLoops + noMixers; slotNo++) {
+        tmp2[slotNo][0] = 0;
+        tmp2[slotNo][1] = 0; 
+      }
+      for(int slotNo=0; slotNo<noLoops + noMixers; slotNo++) {
+        if(tmp[slotNo][0] == 0 && tmp[slotNo][1] == 0) {
+          offset1--;
+          offset2--;
+          continue;
+        }
+        tmp2[slotNo + offset1][0] = tmp[slotNo][0];
+        tmp2[slotNo + offset1][1] = tmp[slotNo][1];
+      }
+      for(int slotNo=0; slotNo<noLoops + noMixers; slotNo++) {
+        tmp[slotNo][0] = tmp2[slotNo][0];
+        tmp[slotNo][1] = tmp2[slotNo][1]; 
+      }
     } else if(targetStereo) {
       if(left) {
         targetSlot++;
@@ -3278,16 +3348,53 @@ char * loopOrderTransitions() {
   return NULL;
 }
 
-void updateForStereo() {
-  for(uint8_t bankNo = 0; bankNo < noBanks; bankNo++) {
-    for(uint8_t presetNo=0; presetNo < noPresets; presetNo++) {
+void idPos(preset_t * curPreset, uint8_t id, int * slot, int * ch) {
+  for(int slotNo = 0; slotNo < noLoops + noMixers; slotNo++) {
+    for(int chNo = 0; chNo < 2; chNo ++) {
+      if(curPreset->loopOrder[slotNo][chNo] == id) {
+        *slot = slotNo;
+        *ch = chNo;
+        return;
+      }
+    }
+  }
+}
+
+void updateForStereo(int stereoNo) {
+  for(uint8_t bankNo = 1; bankNo < noBanks+1; bankNo++) {
+    for(uint8_t presetNo=1; presetNo < noPresets+1; presetNo++) {
       preset_t* curPreset = new preset_t;
       readPresetFncBankNPreset(curPreset, bankNo, presetNo);
-      for(int stereoNo = 0; stereoNo < noLoops/2; stereoNo++) {
-        if(stereoLoops[stereoNo]) {
-          
-        }
+      
+      int id = stereoNo * 2 + 1;
+      int slot = 0;
+      int ch = 0;
+      
+      idPos(curPreset, id, &slot, &ch);
+      if(ch != 0) {
+        loopSlot = slot;
+        loopCh = ch;
+        loopOrderCalc(curPreset, false, false, false, true);
       }
+      int sltTarget = slot;
+      int dummy = 0;
+      while(true) {
+        idPos(curPreset, id+1, &slot, &ch);
+        loopSlot = slot;
+        loopCh = ch;
+        if(ch != 1) {
+          loopOrderCalc(curPreset, false, false, true, false);
+          idPos(curPreset, id, &sltTarget, &dummy);
+        } else if(sltTarget != slot) {
+          if(slot > sltTarget)
+            loopOrderCalc(curPreset, false, true, false, false);
+          else
+            loopOrderCalc(curPreset, true, false, false, false);
+        }
+        if(ch == 1 && sltTarget == slot)
+          break;
+      }
+      
       uint32_t presetAddr = presetStartAddr + ((bankNo - 1) * noPresets + (presetNo-1)) * sizeof(preset_t);
       savePresetFnc(curPreset, presetAddr);
       delete(curPreset);
@@ -3295,6 +3402,8 @@ void updateForStereo() {
   }
   clearList(presetList);
   activatePreset(1, 1);
+  loopSlot = 0;
+  loopCh = 0;
 }
 
 state stereoLoopsState;
@@ -3371,7 +3480,6 @@ void stereoLoopOnOffActivate() {
 
 void stereoLoopOnOffDeactivate() {
   SerialMuted("Stereo Loop On Off Deactivate\n");
-  updateForStereo();
 }
 
 char * stereoLoopOnOffTransitions() {
@@ -3381,6 +3489,8 @@ char * stereoLoopOnOffTransitions() {
         for(int i=0; i<noLoops/2; i++) {
           if(strcmp(stereoLoopsState.currentItem, stereoLoopsItemsState[i]) == 0) {
             if(strcmp(stereoLoopOnOffState.currentItem, "On") == 0) {
+              if(!stereoLoops[i])
+                updateForStereo(i);
               stereoLoops[i] = true;
             } else {
               stereoLoops[i] = false;
