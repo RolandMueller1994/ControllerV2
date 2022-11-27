@@ -2970,6 +2970,19 @@ void loopOrderDeactivate() {
   loopAllowed = false;
 }
 
+void printArray(uint8_t data[][2], int noX, int noY) {
+
+  SerialMuted("Array Data\n");
+  for(int i=0; i<noY; i++) {
+    for(int j=0; j<noX; j++) {
+      SerialMuted(data[j][i]);
+      SerialMuted(", ");
+    }
+    SerialMuted("\n");
+  }
+  
+}
+
 char * loopOrderTransitions() {
   if(loopAllowed) {
     preset_t* curPreset = (preset_t*) presetList->last->item;
@@ -3134,10 +3147,168 @@ char * loopOrderTransitions() {
               curPreset->loopOrder[slotNo][0] = tmp[slotNo][0];
               curPreset->loopOrder[slotNo][1] = tmp[slotNo][1];
             }
-          } else if(menuPins[i] == upPin && !isStereo) {
-            targetCh += 1;
-          } else if(menuPins[i] == downPin && !isStereo) {
-            targetCh -= 1;
+          } else if((menuPins[i] == upPin || menuPins[i] == downPin) && !isStereo) {
+            printArray(curPreset->loopOrder, noLoops + noMixers, 2);
+            int syncSlot = 0;
+            uint8_t tmp[noLoops+noMixers + 2][noOuts];
+            for(int tmpNo=0; tmpNo < noLoops+noMixers + 2; tmpNo++) {
+              tmp[tmpNo][0] = 0;
+              tmp[tmpNo][1] = 0;
+            }
+            if(menuPins[i] == upPin) {
+              targetCh++;
+              if(targetCh > 1)
+                break;
+                   
+              tmp[loopSlot][targetCh] = curPreset->loopOrder[loopSlot][loopCh];
+  
+              int readOffset1 = 0;
+              int writeOffset1 = 0;
+              int readOffset2 = 0;
+              int writeOffset2 = 0;
+              int loopCount = 1;
+              for(int slotNo=0; slotNo < noLoops + noMixers + 2; slotNo++) {
+                if(slotNo == loopSlot) {
+                  writeOffset2 = 1;
+                  //readOffset2 = 1;
+                  readOffset1 = 1;
+                }
+  
+                bool stereo = stereoLoops[(curPreset->loopOrder[slotNo + readOffset1][0] - 1)/2] || curPreset->loopOrder[slotNo + readOffset1][0] > noLoops;
+                if(stereo && syncSlot == 0) {
+                  writeOffset1 += 2;
+                  tmp[slotNo + writeOffset2][1] = curPreset->loopOrder[slotNo + readOffset2][1];
+                  readOffset2++;
+                  writeOffset2++;
+                  syncSlot = slotNo + writeOffset1;
+                }
+  
+                if(stereo) {
+                  loopCount++;
+                  if(curPreset->loopOrder[slotNo + readOffset1][0] <= noLoops)
+                    loopCount++;
+                } else {
+                  if(curPreset->loopOrder[slotNo + readOffset1][0] > 0)
+                    loopCount++;
+                  if(curPreset->loopOrder[slotNo + readOffset2][1] > 0)
+                    loopCount++;
+                }
+  
+                tmp[slotNo + writeOffset1][0] = curPreset->loopOrder[slotNo + readOffset1][0];
+                tmp[slotNo + writeOffset2][1] = curPreset->loopOrder[slotNo + readOffset2][1];
+                
+                if(loopCount == noLoops + noMixers)
+                  break;
+              }
+            } else {
+              targetCh--;
+              if(targetCh < 0)
+                break;              
+              tmp[loopSlot][targetCh] = curPreset->loopOrder[loopSlot][loopCh];
+  
+              int readOffset1 = 0;
+              int writeOffset1 = 0;
+              int readOffset2 = 0;
+              int writeOffset2 = 0;
+              int loopCount = 1;
+              for(int slotNo=0; slotNo < noLoops + noMixers + 2; slotNo++) {
+                if(slotNo == loopSlot) {
+                  writeOffset1 = 1;
+                  //readOffset2 = 1;
+                  readOffset2 = 1;
+                }
+  
+                bool stereo = stereoLoops[(curPreset->loopOrder[slotNo + readOffset2][1] - 1)/2] || curPreset->loopOrder[slotNo + readOffset2][1] > noLoops;
+                if(stereo && syncSlot == 0) {
+                  writeOffset2 += 2;
+                  tmp[slotNo + writeOffset1][0] = curPreset->loopOrder[slotNo + readOffset1][0];
+                  readOffset1++;
+                  writeOffset1++;
+                  syncSlot = slotNo + writeOffset2;
+                }
+  
+                if(stereo) {
+                  loopCount++;
+                  if(curPreset->loopOrder[slotNo + readOffset2][1] <= noLoops)
+                    loopCount++;
+                } else {
+                  if(curPreset->loopOrder[slotNo + readOffset2][1] > 0)
+                    loopCount++;
+                  if(curPreset->loopOrder[slotNo + readOffset1][0] > 0)
+                    loopCount++;
+                }
+  
+                tmp[slotNo + writeOffset1][0] = curPreset->loopOrder[slotNo + readOffset1][0];
+                tmp[slotNo + writeOffset2][1] = curPreset->loopOrder[slotNo + readOffset2][1];
+                
+                if(loopCount == noLoops + noMixers)
+                  break;
+              }
+            }
+            printArray(tmp, noLoops + noMixers + 2, 2);
+            // Remove not needed zeros
+            int ch1 = 0;
+            int ch2 = 0;
+            for(int slotNo = loopSlot; slotNo < syncSlot; slotNo++) {
+              if(tmp[slotNo][0] == 0) {
+                ch1++;
+              }
+              if(tmp[slotNo][1] == 0) {
+                ch2++;
+              }
+            }
+            for(int tmpNo=0; tmpNo < noLoops+noMixers; tmpNo++) {
+              curPreset->loopOrder[tmpNo][0] = 0;
+              curPreset->loopOrder[tmpNo][1] = 0;
+            }
+            SerialMuted("SyncSlot: ");
+            SerialMuted(syncSlot);
+            int noZeros1 = ch1 < ch2 ? ch1 : ch2;
+            int noZeros2 = noZeros1;
+            SerialMuted(" ,NoZeros: ");
+            SerialMuted(noZeros1);
+            SerialMuted("\n");
+            int loopCount = 0;
+            int readOffset1 = 0;
+            int readOffset2 = 0;
+            for(int slotNo = 0; slotNo < noLoops + noMixers; slotNo++) {
+
+              if(slotNo >= loopSlot && slotNo < syncSlot + 1) {
+                while(noZeros1 > 0 && tmp[slotNo + readOffset1][0] == 0) {
+                  readOffset1++;
+                  noZeros1--;
+                }
+                while(noZeros2 > 0 && tmp[slotNo + readOffset2][1] == 0) {
+                  readOffset2++;
+                  noZeros2--;
+                }
+              }
+
+              bool stereo = stereoLoops[(tmp[slotNo + readOffset1][0] - 1)/2] || tmp[slotNo + readOffset1][0] > noLoops;
+              if(stereo) {
+                loopCount++;
+                if(tmp[slotNo + readOffset1][0] <= noLoops)
+                  loopCount++;
+              } else {
+                if(tmp[slotNo + readOffset1][0] > 0)
+                  loopCount++;
+                if(tmp[slotNo + readOffset2][1] > 0)
+                  loopCount++;
+              }
+
+              curPreset->loopOrder[slotNo][0] = tmp[slotNo + readOffset1][0];
+              curPreset->loopOrder[slotNo][1] = tmp[slotNo + readOffset2][1];
+              
+              if(loopCount == noLoops + noMixers)
+                break;
+            }
+            printArray(curPreset->loopOrder, noLoops + noMixers, 2);
+            /*for(int slotNo=0; slotNo < noLoops + noMixers; slotNo++) {
+              curPreset->loopOrder[slotNo][0] = tmp[slotNo][0];
+              curPreset->loopOrder[slotNo][1] = tmp[slotNo][1];
+            }*/
+            loopSlot = targetSlot;
+            loopCh = targetCh;
           }
         }
       }
