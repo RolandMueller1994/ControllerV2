@@ -750,100 +750,6 @@ void factoryReset() {
   activatePreset(1, 1);
 }
 
-void updateForStereo() {
-  for(uint8_t bankNo = 0; bankNo < noBanks; bankNo++) {
-    for(uint8_t presetNo=0; presetNo < noPresets; presetNo++) {
-      preset_t* curPreset = new preset_t;
-      readPresetFncBankNPreset(curPreset, bankNo, presetNo);
-      for(int stereoNo = 0; stereoNo < noLoops/2; stereoNo++) {
-        if(stereoLoops[stereoNo]) {
-          uint8_t prm = 1 + 2*stereoNo;
-          uint8_t snd = 2 + 2*stereoNo;
-          uint8_t loops[noLoops + noMixers][noOuts];
-          int sltWrite = 0;
-          for(int slotNo = 0; slotNo < noLoops + noMixers; slotNo++) {
-            for(int outNo = 0; outNo < noOuts; outNo++) {
-              if(curPreset->loopOrder[slotNo][outNo] == prm) {
-                if(outNo == 0) {
-                  loops[sltWrite][0] = prm;
-                  loops[sltWrite][1] = snd;
-                  sltWrite++;
-                  if(curPreset->loopOrder[slotNo][1] == snd) {
-                    break;
-                  } else if(curPreset->loopOrder[slotNo][1] == 0) {
-                    break;
-                  } else {
-                    loops[sltWrite][1] = curPreset->loopOrder[slotNo][1];
-                    if(curPreset->loopOrder[slotNo+1][1] == 0 && slotNo < noLoops + noMixers - 1) {
-                      loops[sltWrite][0] = curPreset->loopOrder[slotNo][0];
-                      slotNo++;
-                    }
-                    sltWrite++;
-                  }
-                } else {
-                  loops[sltWrite][1] = 0;
-                  sltWrite++;
-                  loops[sltWrite][0] = prm;
-                  loops[sltWrite][1] = snd;
-                  sltWrite++;
-                  break;
-                }
-              } else if (curPreset->loopOrder[slotNo][outNo] == snd) {
-                if(outNo == 0) {
-                  if(curPreset->loopOrder[slotNo][1] == 0) {
-                    break;
-                  } else {
-                    loops[sltWrite][1] = curPreset->loopOrder[slotNo][1];
-                    if(curPreset->loopOrder[slotNo+1][0] > 0 && curPreset->loopOrder[slotNo+1][0] <= noLoops && curPreset->loopOrder[slotNo+1][1] == 0) {
-                      loops[sltWrite][0] = curPreset->loopOrder[slotNo+1][0];
-                      sltWrite++;
-                      break;
-                    } else {
-                      loops[sltWrite][0] = 0;
-                      sltWrite++;
-                      break;
-                    }
-                  }
-                } else {
-                  if(curPreset->loopOrder[slotNo][0] == 0) {
-                    break;
-                  } else {
-                    loops[sltWrite][0] = curPreset->loopOrder[slotNo][0];
-                    if(curPreset->loopOrder[slotNo+1][1] > 0 && curPreset->loopOrder[slotNo+1][1] <= noLoops && curPreset->loopOrder[slotNo+1][0] == 0) {
-                      loops[sltWrite][1] = curPreset->loopOrder[slotNo+1][1];
-                      sltWrite++;
-                      break;
-                    } else {
-                      loops[sltWrite][1] = 0;
-                      sltWrite++;
-                      break;
-                    }
-                  }
-                }
-              } else {
-                loops[sltWrite][outNo] = curPreset->loopOrder[slotNo][outNo];
-                if(outNo == 1) {
-                  sltWrite++;
-                }
-              }
-            }
-          }
-          for(int i=0; i<noLoops + noMixers; i++) {
-            for(int j=0; j<noOuts; j++) {
-              curPreset->loopOrder[i][j] = loops[i][j];
-            }
-          }
-        }
-      }
-      uint32_t presetAddr = presetStartAddr + ((bankNo - 1) * noPresets + (presetNo-1)) * sizeof(preset_t);
-      savePresetFnc(curPreset, presetAddr);
-      delete(curPreset);
-    }
-  }
-  clearList(presetList);
-  activatePreset(1, 1);
-}
-
 void detectMenuEdges() {
   for(int i = 0; i < noMenuPins; i++) {
     if(menuDetect[i]) {
@@ -2652,108 +2558,6 @@ char* tapTempoConfigTransitions() {
   return NULL;
 }
 
-state stereoLoopsState;
-char stereoLoopsItems[noLoops/2][15];
-char* stereoLoopsItemsState[noLoops/2];
-
-state stereoLoopOnOffState;
-char * stereoLoopOnOffItems[2];
-
-void stereoLoopsActivate() {
-  SerialMuted("Stereo Loops Activate\n");
-  externalDisplayRefresh = true;
-}
-
-void stereoLoopsDeactivate() {
-  SerialMuted("Stereo Loops Deactivate\n");
-}
-
-char * stereoLoopsTransitions() {
-  for(int i = 0; i < noMenuPins; i++) {
-    if(menuNegEdges[i]) {
-      if(menuPins[i] == enterPin) {
-        for(int i=0; i<noLoops/2; i++) {
-          if(strcmp(stereoLoopsState.currentItem, stereoLoopsItemsState[i]) == 0) {
-            strcpy(header, "Stereo - ");
-            stereoLoopOnOffState.menuHeader = strcat(header, stereoLoopsState.currentItem);
-            if(stereoLoops[i]) {
-              stereoLoopOnOffState.currentItem = stereoLoopOnOffItems[1];
-            } else {
-              stereoLoopOnOffState.currentItem = stereoLoopOnOffItems[0];
-            }
-            break;
-          }
-        }
-        return "stereoLoopOnOff";
-      } else if(menuPins[i] == backPin) {
-        return "sysConfig";
-      }
-    }
-  }
-  return NULL;
-}
-
-void stereoLoopsDisplay(int y, char* item) {
-
-  SerialMuted("stereoLoopsDisplay\n");
-  SerialMuted(item);
-  SerialMuted("\n");
-
-  int xOffsetText = 10;
-  int xOffsetStatus = 100;
-  
-  char* stat;
-  for(int i=0; i<noLoops/2; i++) {
-    if(strcmp(item, stereoLoopsItemsState[i]) == 0) {
-      if(stereoLoops[i]) {
-        stat = "On";
-      } else {
-        stat = "Off";
-      }
-      break;
-    }
-  }
-  
-  u8g2.drawStr(xOffsetText, y + 2, item);
-  int statWidth = u8g2.drawStr(xOffsetStatus, y + 2, stat);
-  u8g2.drawFrame(xOffsetStatus - 2, y+1, statWidth+4, 11);
-}
-
-void stereoLoopOnOffActivate() {
-  SerialMuted("Stereo Loop On Off Activate\n");
-  externalDisplayRefresh = true;
-}
-
-void stereoLoopOnOffDeactivate() {
-  SerialMuted("Stereo Loop On Off Deactivate\n");
-  updateForStereo();
-}
-
-char * stereoLoopOnOffTransitions() {
-  for(int i = 0; i < noMenuPins; i++) {
-    if(menuNegEdges[i]) {
-      if(menuPins[i] == enterPin) {
-        for(int i=0; i<noLoops/2; i++) {
-          if(strcmp(stereoLoopsState.currentItem, stereoLoopsItemsState[i]) == 0) {
-            if(strcmp(stereoLoopOnOffState.currentItem, "On") == 0) {
-              stereoLoops[i] = true;
-            } else {
-              stereoLoops[i] = false;
-            }
-            saveStereoLoops();
-            break;
-          }
-        }
-        return "stereoLoops";        
-      } else if(menuPins[i] == backPin) {
-        return "stereoLoops";
-      }
-    }
-  }
-
-  return NULL;
-}
-
 state phaseReverseState;
 char phaseReverseItems[noLoops + noOuts - 1][15];
 char* phaseReverseItemsState[noLoops + noOuts - 1];
@@ -2983,6 +2787,409 @@ void printArray(uint8_t data[][2], int noX, int noY) {
   
 }
 
+void loopOrderCalc(preset_t * curPreset, bool left, bool right, bool up, bool down) {
+  int curLen = 0;
+  int loopCount = 0;
+  bool finished = false;
+  uint8_t mixerUsed = 0;
+  for(int slot=0; slot < noLoops + noMixers; slot++) {
+    bool found = false;
+    for(int ch=0; ch < 2; ch++) {
+      if(curPreset->loopOrder[slot][ch] > 0) {
+        if(curPreset->loopOrder[slot][ch] <= noLoops) {
+          loopCount++;
+        } else if(curPreset->loopOrder[slot][ch] > noLoops && !found) {
+          mixerUsed++;
+        }
+        if(!found && !finished) {
+          curLen++;
+          found = true;
+        }
+        if(loopCount == noLoops && mixerUsed == curPreset->mixerUsed) {
+          finished = true;
+        }
+      }
+    }
+  }
+  //curLen += mixerUsed - 1;
+  bool leftRight = false;
+  bool update = true;
+  uint8_t tmp[noLoops+noMixers][noOuts];
+  for(int tmpNo=0; tmpNo < noLoops+noMixers; tmpNo++) {
+    tmp[tmpNo][0] = 0;
+    tmp[tmpNo][1] = 0;
+  }
+  int targetSlot = loopSlot;
+  int targetCh = loopCh;
+  int id = curPreset->loopOrder[loopSlot][loopCh];
+  int isStereo = stereoLoops[(id-1)/2] | id > noLoops;
+  if(left || right) {
+    if(left)
+      targetSlot += 1;
+    else
+      targetSlot -= 1;
+
+    SerialMuted("TargetSlot: ");
+    SerialMuted(targetSlot);
+    SerialMuted(" TargetCh: ");
+    SerialMuted(targetCh);
+    SerialMuted(" CurLen: ");
+    SerialMuted(curLen);
+    SerialMuted("\n");
+    if(targetSlot < 0)
+      return;
+    if(targetSlot + 1 > curLen && id <= noLoops)
+      return;
+    if(targetSlot + 1 > curLen + noMixers && id > noLoops)
+      return;
+
+    if(id > noLoops) {
+      if(left && targetSlot == curLen) {
+        
+        curPreset->mixerUsed -= 1;
+        externalDisplayRefresh = true;
+        SerialMuted("Exit Mixer ");
+        SerialMuted(curPreset->mixerUsed);
+        SerialMuted("\n");
+        return;
+      } else if(right && loopSlot == curLen) {
+        curPreset->mixerUsed += 1;
+        externalDisplayRefresh = true;
+        SerialMuted("Insert Mixer ");
+        SerialMuted(curPreset->mixerUsed);
+        SerialMuted("\n");
+        return;
+      } else if(!(targetSlot <= curLen -1)) {
+        return;
+      }
+    }
+    
+    for(int slotNo=0; slotNo < noLoops + noMixers; slotNo++) {
+      tmp[slotNo][0] = curPreset->loopOrder[slotNo][0];
+      tmp[slotNo][1] = curPreset->loopOrder[slotNo][1];
+    }
+    bool curStereo = stereoLoops[(id-1)/2] | id > noLoops;
+    int targetId = curPreset->loopOrder[targetSlot][0];
+    bool targetStereo = stereoLoops[(targetId-1)/2] | targetId > noLoops;
+    int targetOffset = 0;
+    bool overrideStereo = false;
+    if(targetStereo && !curStereo) {
+      if(left && curPreset->loopOrder[loopSlot][loopCh == 0 ? 1 : 0] != 0) {
+        if(loopSlot-1 < 0)
+          overrideStereo = true;
+        else if(curPreset->loopOrder[loopSlot-1][loopCh == 0 ? 1 : 0] == 0)
+          overrideStereo = true;
+      } else if(curPreset->loopOrder[loopSlot][loopCh == 0 ? 1 : 0] != 0) {
+        if(loopSlot+1 >= curLen)
+          overrideStereo = true;
+        else if(curPreset->loopOrder[loopSlot+1][loopCh == 0 ? 1 : 0] == 0) 
+          overrideStereo = true;
+      }
+    }
+    
+    if(curStereo || overrideStereo) {
+      tmp[loopSlot][0] = curPreset->loopOrder[targetSlot][0];
+      tmp[loopSlot][1] = curPreset->loopOrder[targetSlot][1];
+      tmp[targetSlot][0] = curPreset->loopOrder[loopSlot][0];
+      tmp[targetSlot][1] = curPreset->loopOrder[loopSlot][1];
+    } else if(targetStereo) {
+      if(left) {
+        targetSlot++;
+      } else {
+        targetSlot--;
+      }
+      int copyStart = 0;
+      int copyOffset = 0;
+      for(int slotNo = 0; slotNo < noLoops + noMixers; slotNo++) {
+        tmp[slotNo][0] = 0;
+        tmp[slotNo][1] = 0;
+      }
+      if(targetSlot < 0) {
+        tmp[0][0] = curPreset->loopOrder[loopSlot][loopCh];
+        tmp[0][1] = 0;  
+        curPreset->loopOrder[loopSlot][loopCh] = 0;       
+        if(curPreset->loopOrder[0][0] == 0) {
+          curPreset->loopOrder[0][0] = curPreset->loopOrder[0][1];
+          curPreset->loopOrder[0][1] = 0;
+        }
+        targetSlot = 0;
+        targetCh = 0;
+        copyStart = 0;
+        copyOffset = 1;
+      } else if(curPreset->loopOrder[targetSlot][targetCh] == 0) {
+        curPreset->loopOrder[targetSlot][targetCh] = curPreset->loopOrder[loopSlot][loopCh];
+        curPreset->loopOrder[loopSlot][loopCh] = 0;
+        copyStart = 0;
+        copyOffset = 0;
+      } else {
+        if(right)
+          targetSlot++;
+        int offset = 0;
+        int curId = curPreset->loopOrder[loopSlot][loopCh];
+        curPreset->loopOrder[loopSlot][loopCh] = 0;
+        for(int slotNo = 0; slotNo < targetSlot; slotNo++) {
+          if(curPreset->loopOrder[slotNo][0] == 0 && curPreset->loopOrder[slotNo][1] == 0) {
+            offset--;
+            continue;
+          }
+          tmp[slotNo + offset][0] = curPreset->loopOrder[slotNo][0];
+          tmp[slotNo + offset][1] = curPreset->loopOrder[slotNo][1];
+        }
+        tmp[targetSlot+offset][targetCh] = curId;
+        tmp[targetSlot+offset][targetCh == 0 ? 1 : 0] = 0;
+        copyStart = targetSlot;
+        copyOffset = 1 + offset;
+        targetOffset = offset;
+      }
+ 
+      printArray(tmp, 12, 2);
+      printArray(curPreset->loopOrder, 12, 2);
+      for(int slotNo = copyStart; slotNo < noLoops + noMixers - 1; slotNo++) {
+        if(curPreset->loopOrder[slotNo][0] == 0 && curPreset->loopOrder[slotNo][1] == 0) {
+          copyOffset--;
+          continue;
+        }
+        tmp[slotNo+copyOffset][0] = curPreset->loopOrder[slotNo][0];
+        tmp[slotNo+copyOffset][1] = curPreset->loopOrder[slotNo][1];
+      }
+      printArray(tmp, 12, 2);
+    } else {
+      tmp[loopSlot][loopCh] = curPreset->loopOrder[targetSlot][targetCh];
+      tmp[targetSlot][targetCh] = curPreset->loopOrder[loopSlot][loopCh];
+    }
+    for(int slotNo=0; slotNo < noLoops + noMixers; slotNo++) {
+      curPreset->loopOrder[slotNo][0] = tmp[slotNo][0];
+      curPreset->loopOrder[slotNo][1] = tmp[slotNo][1];
+      if(tmp[slotNo][0] == id) {
+        loopSlot = slotNo;
+        loopCh = 0;
+      }
+      if(tmp[slotNo][1] == id) {
+        loopSlot = slotNo;
+        loopCh = 1;
+      }
+    }
+  } else if((up || down) && !isStereo) {
+    printArray(curPreset->loopOrder, noLoops + noMixers, 2);
+    int syncSlot = 0;
+    uint8_t tmp[noLoops+noMixers + 2][noOuts];
+    for(int tmpNo=0; tmpNo < noLoops+noMixers + 2; tmpNo++) {
+      tmp[tmpNo][0] = 0;
+      tmp[tmpNo][1] = 0;
+    }
+    if(up) {
+      
+      targetCh++;
+      if(targetCh > 1)
+        return;
+      SerialMuted("In Up\n");
+      tmp[loopSlot][targetCh] = curPreset->loopOrder[loopSlot][loopCh];
+
+      int readOffset1 = 0;
+      int writeOffset1 = 0;
+      int readOffset2 = 0;
+      int writeOffset2 = 0;
+      int loopCount = 1;
+      bool start = false;
+      for(int slotNo=0; slotNo < noLoops + noMixers + 2; slotNo++) {
+        if(slotNo == loopSlot) {
+          writeOffset2 = 1;
+          //readOffset2 = 1;
+          readOffset1 = 1;
+          start = true;
+        }
+
+        bool stereo = stereoLoops[(curPreset->loopOrder[slotNo + readOffset1][0] - 1)/2] || curPreset->loopOrder[slotNo + readOffset1][0] > noLoops;
+        if(stereo && start) {
+          start = false;
+          writeOffset1 += 2;
+          tmp[slotNo + writeOffset2][1] = curPreset->loopOrder[slotNo + readOffset2][1];
+          readOffset2++;
+          writeOffset2++;
+          syncSlot = slotNo + writeOffset1;
+        }
+
+        if(stereo) {
+          loopCount++;
+          if(curPreset->loopOrder[slotNo + readOffset1][0] <= noLoops)
+            loopCount++;
+        } else {
+          if(curPreset->loopOrder[slotNo + readOffset1][0] > 0)
+            loopCount++;
+          if(curPreset->loopOrder[slotNo + readOffset2][1] > 0)
+            loopCount++;
+        }
+
+        tmp[slotNo + writeOffset1][0] = curPreset->loopOrder[slotNo + readOffset1][0];
+        tmp[slotNo + writeOffset2][1] = curPreset->loopOrder[slotNo + readOffset2][1];
+        
+        if(loopCount == noLoops + noMixers)
+          break;
+      }
+    } else {
+      SerialMuted("In Down\n");
+      targetCh--;
+      if(targetCh < 0)
+        return;              
+      tmp[loopSlot][targetCh] = curPreset->loopOrder[loopSlot][loopCh];
+
+      int readOffset1 = 0;
+      int writeOffset1 = 0;
+      int readOffset2 = 0;
+      int writeOffset2 = 0;
+      int loopCount = 1;
+      bool start = false;
+      for(int slotNo=0; slotNo < noLoops + noMixers + 2; slotNo++) {
+        if(slotNo == loopSlot) {
+          writeOffset1 = 1;
+          //readOffset2 = 1;
+          readOffset2 = 1;
+          start = true;
+        }
+
+        bool stereo = stereoLoops[(curPreset->loopOrder[slotNo + readOffset2][1] - 1)/2] || curPreset->loopOrder[slotNo + readOffset2][1] > noLoops;
+        if(stereo && start) {
+          start = false;
+          writeOffset2 += 2;
+          tmp[slotNo + writeOffset1][0] = curPreset->loopOrder[slotNo + readOffset1][0];
+          readOffset1++;
+          writeOffset1++;
+          syncSlot = slotNo + writeOffset2;
+        }
+
+        if(stereo) {
+          loopCount++;
+          if(curPreset->loopOrder[slotNo + readOffset2][1] <= noLoops)
+            loopCount++;
+        } else {
+          if(curPreset->loopOrder[slotNo + readOffset2][1] > 0)
+            loopCount++;
+          if(curPreset->loopOrder[slotNo + readOffset1][0] > 0)
+            loopCount++;
+        }
+
+        tmp[slotNo + writeOffset1][0] = curPreset->loopOrder[slotNo + readOffset1][0];
+        tmp[slotNo + writeOffset2][1] = curPreset->loopOrder[slotNo + readOffset2][1];
+        
+        if(loopCount == noLoops + noMixers)
+          break;
+      }
+    }
+    printArray(tmp, noLoops + noMixers + 2, 2);
+    // Remove not needed zeros
+    
+    for(int tmpNo=0; tmpNo < noLoops+noMixers; tmpNo++) {
+      curPreset->loopOrder[tmpNo][0] = 0;
+      curPreset->loopOrder[tmpNo][1] = 0;
+    }
+
+    int syncStart = -1;
+    for(int slotNo = 0; slotNo < noLoops + noMixers + 2; slotNo++) {
+
+      if(slotNo == loopSlot) {
+        if(syncStart == -1)
+          syncStart = slotNo;
+        break;
+      }
+      
+      if(tmp[slotNo][0] > 0 && tmp[slotNo][1] > 0)
+        syncStart = slotNo;
+      if(tmp[slotNo][0] > noLoops)
+        syncStart = -1;
+    }
+    SerialMuted(" SyncStart: ");
+    SerialMuted(syncStart);
+    SerialMuted("\n");
+    int curSyncStart = loopSlot;
+    uint8_t tmp2[noLoops + noMixers + 2][2];
+    
+    for(int cnt=0; cnt<2; cnt++) {
+      for(int tmpNo=0; tmpNo < noLoops+noMixers + 2; tmpNo++) {
+        tmp2[tmpNo][0] = 0;
+        tmp2[tmpNo][1] = 0;
+      }
+      int loopCount = 0;
+      int readOffset1 = 0;
+      int readOffset2 = 0;
+      int ch1 = 0;
+      int ch2 = 0;
+      for(int slotNo = curSyncStart; slotNo < syncSlot; slotNo++) {
+        if(tmp[slotNo][0] == 0) {
+          ch1++;
+        }
+        if(tmp[slotNo][1] == 0) {
+          ch2++;
+        }
+      }
+      SerialMuted("SyncSlot: ");
+      SerialMuted(syncSlot);
+      int noZeros1 = ch1 < ch2 ? ch1 : ch2;
+      int noZeros2 = noZeros1;
+      SerialMuted(" ,NoZeros: ");
+      SerialMuted(noZeros1);
+      SerialMuted("\n");
+      SerialMuted(curSyncStart);
+      for(int slotNo = 0; slotNo < noLoops + noMixers; slotNo++) {
+  
+        if(slotNo >= curSyncStart && slotNo < syncSlot + 1) {
+          while(noZeros1 > 0 && tmp[slotNo + readOffset1][0] == 0) {
+            readOffset1++;
+            noZeros1--;
+          }
+          while(noZeros2 > 0 && tmp[slotNo + readOffset2][1] == 0) {
+            readOffset2++;
+            noZeros2--;
+          }
+        }
+  
+        bool stereo = stereoLoops[(tmp[slotNo + readOffset1][0] - 1)/2] || tmp[slotNo + readOffset1][0] > noLoops;
+        if(stereo) {
+          loopCount++;
+          if(tmp[slotNo + readOffset1][0] <= noLoops)
+            loopCount++;
+        } else {
+          if(tmp[slotNo + readOffset1][0] > 0)
+            loopCount++;
+          if(tmp[slotNo + readOffset2][1] > 0)
+            loopCount++;
+        }   
+  
+        tmp2[slotNo][0] = tmp[slotNo + readOffset1][0];
+        tmp2[slotNo][1] = tmp[slotNo + readOffset2][1];
+        
+        if(loopCount == noLoops + noMixers)
+          break;
+      }
+      for(int tmpNo=0; tmpNo < noLoops+noMixers + 2; tmpNo++) {
+        tmp[tmpNo][0] = 0;
+        tmp[tmpNo][1] = 0;
+      }
+      for(int tmpNo=0; tmpNo < noLoops+noMixers + 2; tmpNo++) {
+        tmp[tmpNo][0] = tmp2[tmpNo][0];
+        tmp[tmpNo][1] = tmp2[tmpNo][1];
+      }
+      curSyncStart = syncStart;
+    }
+    for(int slotNo=0; slotNo < noLoops + noMixers; slotNo++) {
+      curPreset->loopOrder[slotNo][0] = tmp2[slotNo][0];
+      curPreset->loopOrder[slotNo][1] = tmp2[slotNo][1];
+      if(tmp2[slotNo][0] == id) {
+        loopSlot = slotNo;
+        loopCh = 0;
+      }
+      if(tmp2[slotNo][1] == id) {
+        loopSlot = slotNo;
+        loopCh = 1;
+      }
+    }
+    printArray(curPreset->loopOrder, noLoops + noMixers, 2);
+    /*for(int slotNo=0; slotNo < noLoops + noMixers; slotNo++) {
+      curPreset->loopOrder[slotNo][0] = tmp[slotNo][0];
+      curPreset->loopOrder[slotNo][1] = tmp[slotNo][1];
+    }*/
+  }
+}
+
 char * loopOrderTransitions() {
   if(loopAllowed) {
     preset_t* curPreset = (preset_t*) presetList->last->item;
@@ -3048,268 +3255,14 @@ char * loopOrderTransitions() {
           if(found)
             externalDisplayRefresh = true;
         } else {
-          int curLen = 0;
-          int loopCount = 0;
-          bool finished = false;
-          uint8_t mixerUsed = 0;
-          for(int slot=0; slot < noLoops + noMixers; slot++) {
-            bool found = false;
-            for(int ch=0; ch < 2; ch++) {
-              if(curPreset->loopOrder[slot][ch] > 0) {
-                if(curPreset->loopOrder[slot][ch] <= noLoops) {
-                  loopCount++;
-                } else if(curPreset->loopOrder[slot][ch] > noLoops && !found) {
-                  mixerUsed++;
-                }
-                if(!found && !finished) {
-                  curLen++;
-                  found = true;
-                }
-                if(loopCount == noLoops && mixerUsed == curPreset->mixerUsed) {
-                  finished = true;
-                }
-              }
-            }
-          }
-          //curLen += mixerUsed - 1;
-          bool leftRight = false;
-          bool update = true;
-          uint8_t tmp[noLoops+noMixers][noOuts];
-          for(int tmpNo=0; tmpNo < noLoops+noMixers; tmpNo++) {
-            tmp[tmpNo][0] = 0;
-            tmp[tmpNo][1] = 0;
-          }
-          int targetSlot = loopSlot;
-          int targetCh = loopCh;
-          int id = curPreset->loopOrder[loopSlot][loopCh];
-          int isStereo = stereoLoops[(id-1)/2] | id > noLoops;
-          if(menuPins[i] == leftPin || menuPins[i] == rightPin) {
-            if(menuPins[i] == leftPin)
-              targetSlot += 1;
-            else
-              targetSlot -= 1;
-
-            SerialMuted("TargetSlot: ");
-            SerialMuted(targetSlot);
-            SerialMuted(" TargetCh: ");
-            SerialMuted(targetCh);
-            SerialMuted(" CurLen: ");
-            SerialMuted(curLen);
-            SerialMuted("\n");
-            if(targetSlot < 0)
-              break;
-            if(targetSlot + 1 > curLen && id <= noLoops)
-              break;
-            if(targetSlot + 1 > curLen + noMixers && id > noLoops)
-              break;
-
-            if(id > noLoops) {
-              if(menuPins[i] == leftPin && targetSlot == curLen) {
-                
-                curPreset->mixerUsed -= 1;
-                externalDisplayRefresh = true;
-                SerialMuted("Exit Mixer ");
-                SerialMuted(curPreset->mixerUsed);
-                SerialMuted("\n");
-                break;
-              } else if(menuPins[i] == rightPin && loopSlot == curLen) {
-                curPreset->mixerUsed += 1;
-                externalDisplayRefresh = true;
-                SerialMuted("Insert Mixer ");
-                SerialMuted(curPreset->mixerUsed);
-                SerialMuted("\n");
-                break;
-              } else if(!(targetSlot <= curLen -1)) {
-                break;
-              }
-            }
-            
-            for(int slotNo=0; slotNo < noLoops + noMixers; slotNo++) {
-              tmp[slotNo][0] = curPreset->loopOrder[slotNo][0];
-              tmp[slotNo][1] = curPreset->loopOrder[slotNo][1];
-            }
-            bool curStereo = stereoLoops[(id-1)/2] | id > noLoops;
-            int targetId = curPreset->loopOrder[targetSlot][0];
-            bool targetStereo = stereoLoops[(targetId-1)/2] | targetId > noLoops;
-
-            if(curStereo || targetStereo) {
-              tmp[loopSlot][0] = curPreset->loopOrder[targetSlot][0];
-              tmp[loopSlot][1] = curPreset->loopOrder[targetSlot][1];
-              tmp[targetSlot][0] = curPreset->loopOrder[loopSlot][0];
-              tmp[targetSlot][1] = curPreset->loopOrder[loopSlot][1];
-            } else {
-              tmp[loopSlot][loopCh] = curPreset->loopOrder[targetSlot][targetCh];
-              tmp[targetSlot][targetCh] = curPreset->loopOrder[loopSlot][loopCh];
-            }
-            loopSlot = targetSlot;
-            loopCh = targetCh;
-            for(int slotNo=0; slotNo < noLoops + noMixers; slotNo++) {
-              curPreset->loopOrder[slotNo][0] = tmp[slotNo][0];
-              curPreset->loopOrder[slotNo][1] = tmp[slotNo][1];
-            }
-          } else if((menuPins[i] == upPin || menuPins[i] == downPin) && !isStereo) {
-            printArray(curPreset->loopOrder, noLoops + noMixers, 2);
-            int syncSlot = 0;
-            uint8_t tmp[noLoops+noMixers + 2][noOuts];
-            for(int tmpNo=0; tmpNo < noLoops+noMixers + 2; tmpNo++) {
-              tmp[tmpNo][0] = 0;
-              tmp[tmpNo][1] = 0;
-            }
-            if(menuPins[i] == upPin) {
-              targetCh++;
-              if(targetCh > 1)
-                break;
-                   
-              tmp[loopSlot][targetCh] = curPreset->loopOrder[loopSlot][loopCh];
-  
-              int readOffset1 = 0;
-              int writeOffset1 = 0;
-              int readOffset2 = 0;
-              int writeOffset2 = 0;
-              int loopCount = 1;
-              for(int slotNo=0; slotNo < noLoops + noMixers + 2; slotNo++) {
-                if(slotNo == loopSlot) {
-                  writeOffset2 = 1;
-                  //readOffset2 = 1;
-                  readOffset1 = 1;
-                }
-  
-                bool stereo = stereoLoops[(curPreset->loopOrder[slotNo + readOffset1][0] - 1)/2] || curPreset->loopOrder[slotNo + readOffset1][0] > noLoops;
-                if(stereo && syncSlot == 0) {
-                  writeOffset1 += 2;
-                  tmp[slotNo + writeOffset2][1] = curPreset->loopOrder[slotNo + readOffset2][1];
-                  readOffset2++;
-                  writeOffset2++;
-                  syncSlot = slotNo + writeOffset1;
-                }
-  
-                if(stereo) {
-                  loopCount++;
-                  if(curPreset->loopOrder[slotNo + readOffset1][0] <= noLoops)
-                    loopCount++;
-                } else {
-                  if(curPreset->loopOrder[slotNo + readOffset1][0] > 0)
-                    loopCount++;
-                  if(curPreset->loopOrder[slotNo + readOffset2][1] > 0)
-                    loopCount++;
-                }
-  
-                tmp[slotNo + writeOffset1][0] = curPreset->loopOrder[slotNo + readOffset1][0];
-                tmp[slotNo + writeOffset2][1] = curPreset->loopOrder[slotNo + readOffset2][1];
-                
-                if(loopCount == noLoops + noMixers)
-                  break;
-              }
-            } else {
-              targetCh--;
-              if(targetCh < 0)
-                break;              
-              tmp[loopSlot][targetCh] = curPreset->loopOrder[loopSlot][loopCh];
-  
-              int readOffset1 = 0;
-              int writeOffset1 = 0;
-              int readOffset2 = 0;
-              int writeOffset2 = 0;
-              int loopCount = 1;
-              for(int slotNo=0; slotNo < noLoops + noMixers + 2; slotNo++) {
-                if(slotNo == loopSlot) {
-                  writeOffset1 = 1;
-                  //readOffset2 = 1;
-                  readOffset2 = 1;
-                }
-  
-                bool stereo = stereoLoops[(curPreset->loopOrder[slotNo + readOffset2][1] - 1)/2] || curPreset->loopOrder[slotNo + readOffset2][1] > noLoops;
-                if(stereo && syncSlot == 0) {
-                  writeOffset2 += 2;
-                  tmp[slotNo + writeOffset1][0] = curPreset->loopOrder[slotNo + readOffset1][0];
-                  readOffset1++;
-                  writeOffset1++;
-                  syncSlot = slotNo + writeOffset2;
-                }
-  
-                if(stereo) {
-                  loopCount++;
-                  if(curPreset->loopOrder[slotNo + readOffset2][1] <= noLoops)
-                    loopCount++;
-                } else {
-                  if(curPreset->loopOrder[slotNo + readOffset2][1] > 0)
-                    loopCount++;
-                  if(curPreset->loopOrder[slotNo + readOffset1][0] > 0)
-                    loopCount++;
-                }
-  
-                tmp[slotNo + writeOffset1][0] = curPreset->loopOrder[slotNo + readOffset1][0];
-                tmp[slotNo + writeOffset2][1] = curPreset->loopOrder[slotNo + readOffset2][1];
-                
-                if(loopCount == noLoops + noMixers)
-                  break;
-              }
-            }
-            printArray(tmp, noLoops + noMixers + 2, 2);
-            // Remove not needed zeros
-            int ch1 = 0;
-            int ch2 = 0;
-            for(int slotNo = loopSlot; slotNo < syncSlot; slotNo++) {
-              if(tmp[slotNo][0] == 0) {
-                ch1++;
-              }
-              if(tmp[slotNo][1] == 0) {
-                ch2++;
-              }
-            }
-            for(int tmpNo=0; tmpNo < noLoops+noMixers; tmpNo++) {
-              curPreset->loopOrder[tmpNo][0] = 0;
-              curPreset->loopOrder[tmpNo][1] = 0;
-            }
-            SerialMuted("SyncSlot: ");
-            SerialMuted(syncSlot);
-            int noZeros1 = ch1 < ch2 ? ch1 : ch2;
-            int noZeros2 = noZeros1;
-            SerialMuted(" ,NoZeros: ");
-            SerialMuted(noZeros1);
-            SerialMuted("\n");
-            int loopCount = 0;
-            int readOffset1 = 0;
-            int readOffset2 = 0;
-            for(int slotNo = 0; slotNo < noLoops + noMixers; slotNo++) {
-
-              if(slotNo >= loopSlot && slotNo < syncSlot + 1) {
-                while(noZeros1 > 0 && tmp[slotNo + readOffset1][0] == 0) {
-                  readOffset1++;
-                  noZeros1--;
-                }
-                while(noZeros2 > 0 && tmp[slotNo + readOffset2][1] == 0) {
-                  readOffset2++;
-                  noZeros2--;
-                }
-              }
-
-              bool stereo = stereoLoops[(tmp[slotNo + readOffset1][0] - 1)/2] || tmp[slotNo + readOffset1][0] > noLoops;
-              if(stereo) {
-                loopCount++;
-                if(tmp[slotNo + readOffset1][0] <= noLoops)
-                  loopCount++;
-              } else {
-                if(tmp[slotNo + readOffset1][0] > 0)
-                  loopCount++;
-                if(tmp[slotNo + readOffset2][1] > 0)
-                  loopCount++;
-              }
-
-              curPreset->loopOrder[slotNo][0] = tmp[slotNo + readOffset1][0];
-              curPreset->loopOrder[slotNo][1] = tmp[slotNo + readOffset2][1];
-              
-              if(loopCount == noLoops + noMixers)
-                break;
-            }
-            printArray(curPreset->loopOrder, noLoops + noMixers, 2);
-            /*for(int slotNo=0; slotNo < noLoops + noMixers; slotNo++) {
-              curPreset->loopOrder[slotNo][0] = tmp[slotNo][0];
-              curPreset->loopOrder[slotNo][1] = tmp[slotNo][1];
-            }*/
-            loopSlot = targetSlot;
-            loopCh = targetCh;
-          }
+          if(menuPins[i] == leftPin)
+            loopOrderCalc(curPreset, true, false, false, false);
+          else if(menuPins[i] == rightPin)
+            loopOrderCalc(curPreset, false, true, false, false);        
+          else if(menuPins[i] == upPin)
+            loopOrderCalc(curPreset, false, false, true, false);
+          else if(menuPins[i] == downPin)
+            loopOrderCalc(curPreset, false, false, false, true);
         }
       }
     }
@@ -3322,6 +3275,127 @@ char * loopOrderTransitions() {
       }
     }
   }
+  return NULL;
+}
+
+void updateForStereo() {
+  for(uint8_t bankNo = 0; bankNo < noBanks; bankNo++) {
+    for(uint8_t presetNo=0; presetNo < noPresets; presetNo++) {
+      preset_t* curPreset = new preset_t;
+      readPresetFncBankNPreset(curPreset, bankNo, presetNo);
+      for(int stereoNo = 0; stereoNo < noLoops/2; stereoNo++) {
+        if(stereoLoops[stereoNo]) {
+          
+        }
+      }
+      uint32_t presetAddr = presetStartAddr + ((bankNo - 1) * noPresets + (presetNo-1)) * sizeof(preset_t);
+      savePresetFnc(curPreset, presetAddr);
+      delete(curPreset);
+    }
+  }
+  clearList(presetList);
+  activatePreset(1, 1);
+}
+
+state stereoLoopsState;
+char stereoLoopsItems[noLoops/2][15];
+char* stereoLoopsItemsState[noLoops/2];
+
+state stereoLoopOnOffState;
+char * stereoLoopOnOffItems[2];
+
+void stereoLoopsActivate() {
+  SerialMuted("Stereo Loops Activate\n");
+  externalDisplayRefresh = true;
+}
+
+void stereoLoopsDeactivate() {
+  SerialMuted("Stereo Loops Deactivate\n");
+}
+
+char * stereoLoopsTransitions() {
+  for(int i = 0; i < noMenuPins; i++) {
+    if(menuNegEdges[i]) {
+      if(menuPins[i] == enterPin) {
+        for(int i=0; i<noLoops/2; i++) {
+          if(strcmp(stereoLoopsState.currentItem, stereoLoopsItemsState[i]) == 0) {
+            strcpy(header, "Stereo - ");
+            stereoLoopOnOffState.menuHeader = strcat(header, stereoLoopsState.currentItem);
+            if(stereoLoops[i]) {
+              stereoLoopOnOffState.currentItem = stereoLoopOnOffItems[1];
+            } else {
+              stereoLoopOnOffState.currentItem = stereoLoopOnOffItems[0];
+            }
+            break;
+          }
+        }
+        return "stereoLoopOnOff";
+      } else if(menuPins[i] == backPin) {
+        return "sysConfig";
+      }
+    }
+  }
+  return NULL;
+}
+
+void stereoLoopsDisplay(int y, char* item) {
+
+  SerialMuted("stereoLoopsDisplay\n");
+  SerialMuted(item);
+  SerialMuted("\n");
+
+  int xOffsetText = 10;
+  int xOffsetStatus = 100;
+  
+  char* stat;
+  for(int i=0; i<noLoops/2; i++) {
+    if(strcmp(item, stereoLoopsItemsState[i]) == 0) {
+      if(stereoLoops[i]) {
+        stat = "On";
+      } else {
+        stat = "Off";
+      }
+      break;
+    }
+  }
+  
+  u8g2.drawStr(xOffsetText, y + 2, item);
+  int statWidth = u8g2.drawStr(xOffsetStatus, y + 2, stat);
+  u8g2.drawFrame(xOffsetStatus - 2, y+1, statWidth+4, 11);
+}
+
+void stereoLoopOnOffActivate() {
+  SerialMuted("Stereo Loop On Off Activate\n");
+  externalDisplayRefresh = true;
+}
+
+void stereoLoopOnOffDeactivate() {
+  SerialMuted("Stereo Loop On Off Deactivate\n");
+  updateForStereo();
+}
+
+char * stereoLoopOnOffTransitions() {
+  for(int i = 0; i < noMenuPins; i++) {
+    if(menuNegEdges[i]) {
+      if(menuPins[i] == enterPin) {
+        for(int i=0; i<noLoops/2; i++) {
+          if(strcmp(stereoLoopsState.currentItem, stereoLoopsItemsState[i]) == 0) {
+            if(strcmp(stereoLoopOnOffState.currentItem, "On") == 0) {
+              stereoLoops[i] = true;
+            } else {
+              stereoLoops[i] = false;
+            }
+            saveStereoLoops();
+            break;
+          }
+        }
+        return "stereoLoops";        
+      } else if(menuPins[i] == backPin) {
+        return "stereoLoops";
+      }
+    }
+  }
+
   return NULL;
 }
 
