@@ -113,6 +113,10 @@ int bank = 1;
 int presetBank = 10;
 int preset = 10;
 
+uint8_t brightness = 50;
+uint8_t brightnessStomp = 50;
+uint8_t brightnessStatus = 50;
+
 uint8_t midiInChannel = 1;
 uint8_t midiBankCtrl = 1;
 bool midiInOn = true;
@@ -145,7 +149,10 @@ const uint32_t midiInChannelAddr = bankAddr + sizeof(bank);
 const uint32_t midiInOnAddr = midiInChannelAddr + sizeof(midiInChannel);
 const uint32_t midiOutOnAddr = midiInOnAddr + sizeof(midiInOn);
 const uint32_t midiThroughOnAddr = midiOutOnAddr + sizeof(midiOutOn);
-const uint32_t midiBankCtrlAddr = midiThroughOnAddr + sizeof(midiOutOn);
+const uint32_t midiBankCtrlAddr = midiThroughOnAddr + sizeof(midiThroughOn);
+const uint32_t brightnessAddr = midiBankCtrlAddr + sizeof(midiBankCtrl);
+const uint32_t brightnessStompAddr = brightnessAddr + sizeof(brightness);
+const uint32_t brightnessStatusAddr = brightnessStompAddr + sizeof(brightnessStomp);
 
 const uint32_t presetStartAddr = 1024;
 
@@ -227,6 +234,67 @@ void saveBank() {
 
 void readBank() {
   fram.read(bankAddr, (uint8_t*)&bank, sizeof(int));
+}
+
+void saveBrightness() {
+  if(brightness > 100)
+    brightness = 100;
+  else if(brightness < 0)
+    brightness = 0;
+  
+  fram.writeEnable(true);
+  fram.write(brightnessAddr, (uint8_t*)&brightness, sizeof(uint8_t));
+  fram.writeEnable(false);
+  analogWrite(REF_BLUE, int((float)brightness/100 * 255));
+}
+
+void readBrightness() {
+  fram.read(brightnessAddr, (uint8_t*)&brightness, sizeof(uint8_t));
+  if(brightness > 100)
+    brightness = 100;
+  else if(brightness < 0)
+    brightness = 0;
+  analogWrite(REF_BLUE, int((float)brightness/100 * 255));
+}
+
+void saveBrightnessStomp() {
+  if(brightnessStomp > 100)
+    brightnessStomp = 100;
+  else if(brightnessStomp < 0)
+    brightnessStomp = 0;
+  fram.writeEnable(true);
+  fram.write(brightnessStompAddr, (uint8_t*)&brightnessStomp, sizeof(uint8_t));
+  fram.writeEnable(false);
+  analogWrite(REF_GREEN, int((float)brightnessStomp/100 * 255));
+}
+
+void readBrightnessStomp() {
+  fram.read(brightnessStompAddr, (uint8_t*)&brightnessStomp, sizeof(uint8_t));
+  if(brightnessStomp > 100)
+    brightnessStomp = 100;
+  else if(brightnessStomp < 0)
+    brightnessStomp = 0;
+  analogWrite(REF_GREEN, int((float)brightnessStomp/100 * 255));
+}
+
+void saveBrightnessStatus() {
+  if(brightnessStatus > 100)
+    brightnessStatus = 100;
+  else if(brightnessStatus < 0)
+    brightnessStatus = 0;
+  fram.writeEnable(true);
+  fram.write(brightnessStatusAddr, (uint8_t*)&brightnessStatus, sizeof(uint8_t));
+  fram.writeEnable(false);
+  analogWrite(REF_STATUS, int((float)brightnessStatus/100 * 255));
+}
+
+void readBrightnessStatus() {
+  fram.read(brightnessStatusAddr, (uint8_t*)&brightnessStatus, sizeof(uint8_t));
+  if(brightnessStatus > 100)
+    brightnessStatus = 100;
+  else if(brightnessStatus < 0)
+    brightnessStatus = 0;
+  analogWrite(REF_STATUS, int((float)brightnessStatus/100 * 255));
 }
 
 bool programm = false;
@@ -737,6 +805,13 @@ void checkTapTempo(bool fromPreset=false) {
 void factoryReset() {
   clearList(presetList);
   
+  brightness = 50;
+  saveBrightness();
+  brightnessStomp = 50;
+  saveBrightnessStomp();
+  brightnessStatus = 50;
+  saveBrightnessStatus();
+  
   bank = 1;
   saveBank();
   midiInChannel = 1;
@@ -1001,7 +1076,7 @@ struct state {
   int configIdx;
 };
 
-const int noStates = 25;
+const int noStates = 27;
 state* states[noStates];
 state* curState;
 int menuStart = 0;
@@ -3533,6 +3608,148 @@ char * stereoLoopOnOffTransitions() {
   return NULL;
 }
 
+state brightnessState;
+char brightnessItems[3][15];
+char* brightnessItemsState[3];
+
+void brightnessActivate() {
+  SerialMuted("Brightness Activate\n");
+  externalDisplayRefresh = true;
+}
+
+void brightnessDeactivate() {
+  SerialMuted("Brightness Deactivate\n");
+}
+
+char * brightnessTransitions() {
+  for(int i = 0; i < noMenuPins; i++) {
+    if(menuNegEdges[i]) {
+      if(menuPins[i] == enterPin) {
+        for(int i=0; i<noLoops/2; i++) {
+          if(strcmp(brightnessState.currentItem, brightnessItemsState[i]) == 0) {
+            strcpy(header, "Brightness - ");
+            /*stereoLoopOnOffState.menuHeader = strcat(header, stereoLoopsState.currentItem);
+            if(stereoLoops[i]) {
+              stereoLoopOnOffState.currentItem = stereoLoopOnOffItems[1];
+            } else {
+              stereoLoopOnOffState.currentItem = stereoLoopOnOffItems[0];
+            }*/
+            break;
+          }
+        }
+        return "brightnessConfig";
+      } else if(menuPins[i] == backPin) {
+        return "sysConfig";
+      }
+    }
+  }
+  return NULL;
+}
+
+state brightnessConfigState;
+
+void brightnessConfigStateChange() {
+  externalDisplayRefresh = true;
+  if(brightnessConfigState.configTitles) {
+    delete brightnessConfigState.configTitles;
+  }
+  brightnessConfigState.configTitles = NULL;
+  if(brightnessConfigState.configValues) {
+    for(int i=0; i<sizeof(brightnessConfigState.configValues)/sizeof(char**); i++) {
+      delete brightnessConfigState.configValues[i];
+    }
+    delete brightnessConfigState.configValues;
+    brightnessConfigState.configValues = NULL;
+  }
+  brightnessConfigState.noConfig = 1;
+  char ** configTitles = new char*[1];
+  configTitles[0] = "Brightness \%";
+  brightnessConfigState.configTitles = configTitles;
+    
+  char ** configValues = new char*[1];
+  brightnessConfigState.configValues = configValues;
+  configValues[0] = new char[6];
+  if(strcmp(brightnessState.currentItem, "Blue") == 0)
+    sprintf(configValues[0], "%d", brightness);
+  else if(strcmp(brightnessState.currentItem, "Green") == 0)
+    sprintf(configValues[0], "%d", brightnessStomp);
+  else
+    sprintf(configValues[0], "%d", brightnessStatus);
+}
+
+void brightnessConfigActivate() {
+  SerialMuted("Brightness Config Activate\n");
+  brightnessConfigStateChange();
+  brightnessConfigState.menuHeader = brightnessState.currentItem;
+  externalDisplayRefresh = true;
+}
+
+void brightnessConfigDeactivate() {
+  SerialMuted("Brightness Config Deactivate\n");
+  brightnessConfigState.configIdx = 0;
+  if(brightnessConfigState.configTitles) {
+    delete brightnessConfigState.configTitles;
+  }
+  brightnessConfigState.configTitles = NULL;
+  if(brightnessConfigState.configValues) {
+    for(int i=0; i<sizeof(brightnessConfigState.configValues)/sizeof(char**); i++) {
+      delete brightnessConfigState.configValues[i];
+    }
+    delete brightnessConfigState.configValues;
+    brightnessConfigState.configValues = NULL;
+  }
+}
+
+void brightnessConfigUpDown(bool up) {
+  uint8_t * val;
+  if(strcmp(brightnessState.currentItem, "Blue") == 0) {
+    val = &brightness;
+  } else if(strcmp(brightnessState.currentItem, "Green") == 0) {
+    val = &brightnessStomp;
+  } else {
+    val = &brightnessStatus;
+  }
+
+  if(up && *val < 100) {
+    *val += 5;
+  } else if(!up && *val > 0) {
+    *val -= 5;
+  }
+  
+  if(strcmp(brightnessState.currentItem, "Blue") == 0) {
+    saveBrightness();
+  } else if(strcmp(brightnessState.currentItem, "Green") == 0) {
+    saveBrightnessStomp();
+  } else {
+    saveBrightnessStatus();
+  }
+  brightnessConfigStateChange();
+}
+
+char* brightnessConfigTransitions() {
+  SerialMuted("Brightness Config Transitions\n");
+  for(int i = 0; i < noMenuPins; i++) {
+    if(menuNegEdges[i]) {
+      if(menuPins[i] == backPin) {
+        return "brightness";
+      } else if(menuPins[i] == enterPin) {
+        return "brightness";
+      } else if(menuPins[i] == upPin) {
+        brightnessConfigUpDown(true);
+      } else if(menuPins[i] == downPin) {
+        brightnessConfigUpDown(false);
+      }
+    } else if(menuClockFast[i]) {
+      if(menuPins[i] == upPin) {
+        brightnessConfigUpDown(true);
+      } else if(menuPins[i] == downPin) {
+        brightnessConfigUpDown(false);
+      }
+    }
+  }
+  return NULL;
+}
+
 void setupFSM() {
 
   loadPresetState.name = "loadPreset";
@@ -3917,6 +4134,35 @@ void setupFSM() {
   loopOrderState.currentItem = NULL;
   loopOrderState.noItems = 0;
   loopOrderState.isConfig = false;
+
+  brightnessItemsState[0] = "Blue";
+  brightnessItemsState[1] = "Green";
+  brightnessItemsState[2] = "Status";
+  
+  brightnessState.name = "brightness";
+  brightnessState.activate = brightnessActivate;
+  brightnessState.deactivate = brightnessDeactivate;
+  brightnessState.transitions = brightnessTransitions;
+  brightnessState.isMenu = true;
+  brightnessState.menuItems = brightnessItemsState;
+  brightnessState.menuDisp = NULL;
+  brightnessState.currentItem = brightnessItemsState[0];
+  brightnessState.noItems = 3;
+  brightnessState.menuHeader = "Brightness";
+  brightnessState.menuDispHeight = 13;
+  brightnessState.menuStart = 0;
+  brightnessState.isConfig = false;
+
+  brightnessConfigState.name = "brightnessConfig";
+  brightnessConfigState.activate = brightnessConfigActivate;
+  brightnessConfigState.deactivate = brightnessConfigDeactivate;
+  brightnessConfigState.transitions = brightnessConfigTransitions;
+  brightnessConfigState.isMenu = false;
+  brightnessConfigState.isConfig = true;
+  brightnessConfigState.noConfig = 0;
+  brightnessConfigState.configTitles = NULL;
+  brightnessConfigState.configValues = NULL;
+  brightnessConfigState.configIdx = 0;
   
   states[0] = &loadPresetState;
   states[1] = &runState;
@@ -3943,6 +4189,8 @@ void setupFSM() {
   states[22] = &midiInChannelState;
   states[23] = &midiBankCtrlState;
   states[24] = &loopOrderState;
+  states[25] = &brightnessState;
+  states[26] = &brightnessConfigState;
   
   curState = &loadPresetState;
 }
@@ -4112,9 +4360,6 @@ void setup() {
   pinMode(REF_BLUE, OUTPUT);
   pinMode(REF_GREEN, OUTPUT);
   pinMode(REF_STATUS, OUTPUT);
-  digitalWrite(REF_BLUE, HIGH);
-  digitalWrite(REF_GREEN, HIGH);
-  digitalWrite(REF_STATUS, HIGH);
 
   pinMode(EN_MATRIX, OUTPUT);
   digitalWrite(EN_MATRIX, LOW);
@@ -4176,6 +4421,9 @@ void setup() {
     SerialMuted(states[i]->name);
     SerialMuted("\n");
   }
+  readBrightness();
+  readBrightnessStomp();
+  readBrightnessStatus();
   printFreeMemory();
 }
 
