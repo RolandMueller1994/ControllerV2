@@ -43,7 +43,7 @@ Adafruit_MCP23X08 mcp_status3;
 #include <Wire.h>
 #endif
 
-bool serialOn = false;
+bool serialOn = true;
 
 MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, midiInst);
 
@@ -1041,28 +1041,52 @@ void loopOrderDisplayFnc(int offset, bool fromRun=false) {
     } else {
       curPreset = (preset_t*) presetList->last->item;
     }
-    
-    int loopOnHeight = 11;
+
     int frameLeft = 1;
     int frameRight = 1;
     int delta = 1;
-    int rowPos = 127 - delta;
+    int totalWidth = 0;
+    int loopCount = 0;
+    for(int i=0; i<noLoops + noMixers; i++) { 
+      int maxWidth = 0;
+      int maxChars = 1;
+      for(int j=0; j<noOuts; j++) {
+        uint8_t id = curPreset->loopOrder[i][j];
+        int width = 0;
+        if(id <= noLoops && id > 0) {
+          char disp[3];
+          sprintf(disp, "%d", id);
+          width = u8g2.getStrWidth(disp);
+          loopCount++;
+          if(id >= 10) {
+            maxChars = 2;
+          }
+        } else if(id > 0) {
+          char disp[2];
+          sprintf(disp, "%c", 'M');
+          width = u8g2.getStrWidth(disp);
+          if(j==0)
+            loopCount++;
+        }
+        maxWidth = width > maxWidth ? width : maxWidth;
+      }
+      totalWidth += maxWidth + frameLeft + frameRight + delta;
+      if(loopCount == noLoops + noMixers)
+        break;
+    }
+    char disp2[2];
+    sprintf(disp2, "%c", 'A');
+    totalWidth += u8g2.getStrWidth(disp2) + frameRight + frameLeft + delta;
+    
+    int loopOnHeight = 11;
+    int rowPos = 127 - ((128 - totalWidth)/2);
     int row = 1;
     int totalHeight = noOuts * (loopOnHeight+1 + delta);
     int yStart = 63 - (64 - offset - totalHeight)/2;
   
-    /*for(int j=0; j<noOuts; j++) {
-      for(int i=0; i<noLoops + noMixers; i++) {
-        
-        SerialMuted(curPreset->loopOrder[i][j]);
-        SerialMuted(" ");
-      }
-      SerialMuted("\n");
-    }*/
-  
     bool allLoops = false;
     bool parallel = false;
-    int loopCount = 0;
+    loopCount = 0;
     bool selected = false;
     uint8_t mixerUsed = 0;
     for(int i=0; i<noLoops + noMixers; i++) { 
@@ -1114,7 +1138,7 @@ void loopOrderDisplayFnc(int offset, bool fromRun=false) {
           if(draw) {
             if(id != 0) {
               if((j == 0 && !stereoLoops[(id-1)/2]) || j != 0 && !stereo) {   
-                if(j == loopCh && i == loopSlot && loopMoveFlag) {
+                if(j == loopCh && i == loopSlot && loopMoveFlag && !fromRun) {
                   u8g2.setDrawColor(1);
                   u8g2.drawBox(rowPos - (maxWidth + frameLeft + frameRight), yStart - (j + 1) * (loopOnHeight+1) - delta, maxWidth + frameLeft + frameRight, loopOnHeight);
                   u8g2.setDrawColor(2);
@@ -1129,7 +1153,7 @@ void loopOrderDisplayFnc(int offset, bool fromRun=false) {
                   selected = true;
                 else if(j==0 && j+1 == loopCh && i == loopSlot)
                   selected = true;
-                if(selected && loopMoveFlag) {
+                if(selected && loopMoveFlag && !fromRun) {
                   u8g2.setDrawColor(1);
                   u8g2.drawBox(rowPos - (maxWidth + frameLeft + frameRight), yStart - noOuts * (loopOnHeight+1) - delta, maxWidth + frameLeft + frameRight, noOuts * loopOnHeight + (noOuts - 1) * delta);
                   u8g2.setDrawColor(2);
@@ -1152,7 +1176,7 @@ void loopOrderDisplayFnc(int offset, bool fromRun=false) {
           //SerialMuted("Print Mixer\n");
           char disp[2];
           sprintf(disp, "%c", 'M');
-          if(i == loopSlot && loopMoveFlag) {
+          if(i == loopSlot && loopMoveFlag && !fromRun) {
             u8g2.setDrawColor(1);
             u8g2.drawBox(rowPos - (maxWidth + frameLeft + frameRight), yStart - (j + 1) * (loopOnHeight+1) - delta, maxWidth + frameLeft + frameRight, noOuts * loopOnHeight + (noOuts - 1) * delta);
             u8g2.setDrawColor(2);
