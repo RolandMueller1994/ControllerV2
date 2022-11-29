@@ -413,6 +413,43 @@ void readPresetFncBankNPreset(struct preset_t* presetVar, uint8_t bank, uint8_t 
   readPresetFnc(presetVar, addr);
 }
 
+void copyPreset(struct preset_t* source, struct preset_t* dest) {
+
+  dest->tunerOn = source->tunerOn;
+  for(int i = 0; i < noOuts; i++) { 
+    dest->outsOn[i] = source->outsOn[i];
+    if(i < noOuts-1) {
+      dest->outPhaseReverse[i] = source->outPhaseReverse[i];
+    }
+  }
+  for(uint8_t j = 0; j<noLoops + noMixers; j++) {
+    dest->loopOrder[j][0] = source->loopOrder[j][0];
+    dest->loopOrder[j][1] = source->loopOrder[j][1];
+  }
+  for(uint8_t i = 0; i < noCtrl; i++) {
+    dest->ctrlOn[i] = source->ctrlOn[i];
+  }
+  for(int i=0; i<noMidiMsg; i++) {
+    dest->midiOn[i] = source->midiOn[i];
+    dest->midiType[i] = source->midiType[i];
+    dest->midiChannel[i] = source->midiChannel[i];
+    dest->midiPC[i] = source->midiPC[i];
+    dest->midiCC[i] = source->midiCC[i];
+    dest->midiCCValue[i][0] = source->midiCCValue[i][0];
+    dest->midiCCValue[i][1] = source->midiCCValue[i][1];
+  }
+  for(int i=0; i<noTapTempo; i++) {
+    dest->tapOn[i] = source->tapOn[i];
+    dest->tapType[i] = source->tapType[i];
+    dest->tapChannel[i] = source->tapChannel[i];
+    dest->tapCC[i] = source->tapCC[i];
+    dest->tapCCOn[i] = source->tapCCOn[i];
+    dest->tapCCOff[i] = source->tapCCOff[i];
+  }
+  dest->stompMode = source->stompMode;
+  dest->mixerUsed = source->mixerUsed;
+}
+
 void saveActivePresets() {
   uint32_t count = 0;
   listItem* iter = presetList->first;
@@ -1076,7 +1113,7 @@ struct state {
   int configIdx;
 };
 
-const int noStates = 27;
+const int noStates = 29;
 state* states[noStates];
 state* curState;
 int menuStart = 0;
@@ -1795,18 +1832,36 @@ void secondaryProgramDeactivate() {
 
 state secondaryProgramState;
 
+preset_t * savePreset = NULL;
+bool skipSave = false;
+
 void saveActivate() {
   SerialMuted("Save Activate\n");
   displayPage = saveDisplay;
-  preset_t* preset = (preset_t*) presetList->last->item;
-  preset_t* oldPreset;
-  readPresetFncBankNPreset(oldPreset, preset->bankNo, preset->presetNo);
-  savePresetFncBankNPreset(preset, preset->bankNo, preset->presetNo);
-  if(oldPreset->stompMode != offStomp && preset->stompMode == offStomp) {
-    preset_t* actPreset = (preset_t*)presetList->last->item;
-    activatePreset(actPreset->bankNo, actPreset->presetNo);
+  if(!skipSave) {
+    if(savePreset) {
+      savePresetFncBankNPreset(savePreset, savePreset->bankNo, savePreset->presetNo);
+      readActivePresets();
+      hardwareActivatePreset();
+      delete savePreset;
+      savePreset = NULL;
+    } else {
+      preset_t* preset = (preset_t*) presetList->last->item;
+      preset_t* oldPreset;
+      readPresetFncBankNPreset(oldPreset, preset->bankNo, preset->presetNo);
+      savePresetFncBankNPreset(preset, preset->bankNo, preset->presetNo);
+      if(oldPreset->stompMode != offStomp && preset->stompMode == offStomp) {
+        preset_t* actPreset = (preset_t*)presetList->last->item;
+        activatePreset(actPreset->bankNo, actPreset->presetNo);
+      }
+      saveActivePresets();
+    }
+  } else {
+    readActivePresets();
+    hardwareActivatePreset();
+    saveActivePresets();
+    skipSave = false;
   }
-  saveActivePresets();
   externalDisplayRefresh = true;
   externalStateChange = true;
 }
@@ -1822,13 +1877,23 @@ void saveDeactivate() {
   return;
 }
 
+
 state saveState;
 
 void discardActivate() {
   SerialMuted("Discard Activate\n");
   displayPage = discardDisplay;
-  preset_t* preset = (preset_t*) presetList->last->item;
-  readPresetFncBankNPreset(preset, preset->bankNo, preset->presetNo);
+  if(!skipSave) {
+    if(savePreset) {
+      delete savePreset;
+      savePreset = NULL; 
+    } else {
+      preset_t* preset = (preset_t*) presetList->last->item;
+      readPresetFncBankNPreset(preset, preset->bankNo, preset->presetNo);
+    }
+  } else {
+    skipSave = false;
+  }
   externalDisplayRefresh = true;
   externalStateChange = true;
 }
@@ -1877,7 +1942,7 @@ void bankSelectDeactivate() {
 state bankSelectState;
 
 state mainMenuState;
-char* mainMenuItems[7];
+char* mainMenuItems[8];
 
 bool mainMenuClearSelect = false;
 
@@ -1903,6 +1968,8 @@ char * mainMenuTransitions() {
           return "tapTempo";
         else if(strcmp(mainMenuState.currentItem, "Copy") == 0)
           return "copyPreset";
+        else if(strcmp(mainMenuState.currentItem, "Copy Bank") == 0)
+          return "copyBank";
         else if(strcmp(mainMenuState.currentItem, "Reset") == 0)
           return "resetPreset";  
         else if(strcmp(mainMenuState.currentItem, "System Config") == 0)
@@ -3750,6 +3817,236 @@ char* brightnessConfigTransitions() {
   return NULL;
 }
 
+state copyConfigState;
+int copyPresetBank = 1;
+int copyPresetPreset = 1;
+
+void copyConfigStateChange() {
+  externalDisplayRefresh = true;
+  if(copyConfigState.configTitles) {
+    delete copyConfigState.configTitles;
+  }
+  copyConfigState.configTitles = NULL;
+  if(copyConfigState.configValues) {
+    for(int i=0; i<sizeof(copyConfigState.configValues)/sizeof(char**); i++) {
+      delete copyConfigState.configValues[i];
+    }
+    delete copyConfigState.configValues;
+    copyConfigState.configValues = NULL;
+  }
+  copyConfigState.noConfig = 2;
+  char ** configTitles = new char*[2];
+  configTitles[0] = "Bank";
+  configTitles[1] = "Preset";
+  copyConfigState.configTitles = configTitles;
+    
+  char ** configValues = new char*[2];
+  copyConfigState.configValues = configValues;
+  configValues[0] = new char[3];
+  intToStr0(copyPresetBank, configValues[0]);
+  configValues[1] = new char[3];
+  intToStr0(copyPresetPreset, configValues[1]);
+}
+
+void copyConfigActivate() {
+  SerialMuted("Copy Preset Activate\n");
+  copyConfigStateChange();
+  copyConfigState.menuHeader = new char[30];
+
+  char bankStr[3];
+  intToStr0(((preset_t*)presetList->last->item)->bankNo, bankStr);
+  char presetStr[3];
+  intToStr0(((preset_t*) presetList->last->item)->presetNo, presetStr);
+  sprintf(copyConfigState.menuHeader, "Cpy Bnk %s Prst %s:", bankStr, presetStr);
+  externalDisplayRefresh = true;
+}
+
+void copyConfigDeactivate() {
+  SerialMuted("Brightness Config Deactivate\n");
+  copyConfigState.configIdx = 0;
+  delete copyConfigState.menuHeader;
+  if(copyConfigState.configTitles) {
+    delete copyConfigState.configTitles;
+  }
+  copyConfigState.configTitles = NULL;
+  if(copyConfigState.configValues) {
+    for(int i=0; i<sizeof(copyConfigState.configValues)/sizeof(char**); i++) {
+      delete copyConfigState.configValues[i];
+    }
+    delete copyConfigState.configValues;
+    copyConfigState.configValues = NULL;
+  }
+}
+
+void copyConfigUpDown(bool up) {
+
+  int increment = up ? 1 : -1;
+
+  if(copyConfigState.configIdx == 0) {
+    copyPresetBank += increment;
+    copyPresetBank = copyPresetBank <= noBanks ? copyPresetBank : noBanks;
+    copyPresetBank = copyPresetBank >= 1 ? copyPresetBank : 1;
+  } else {
+    copyPresetPreset += increment;
+    copyPresetPreset = copyPresetPreset <= noPresets ? copyPresetPreset : noPresets;
+    copyPresetPreset = copyPresetPreset >= 1 ? copyPresetPreset : 1;
+  }
+
+  copyConfigStateChange();
+}
+
+char* copyConfigTransitions() {
+  SerialMuted("Copy Preset Transitions\n");
+  for(int i = 0; i < noMenuPins; i++) {
+    if(menuLongPress[i]) {
+      if(menuPins[i] == enterPin) {
+        savePreset = new preset_t;
+        readPresetFncBankNPreset(savePreset, copyPresetBank, copyPresetPreset);
+        copyPreset((preset_t*) presetList->last->item, savePreset);
+        returnState = "mainMenu";
+        return "save";
+      } else if(menuPins[i] == backPin) {
+        savePreset = new preset_t;
+        readPresetFncBankNPreset(savePreset, copyPresetBank, copyPresetPreset);
+        returnState = "mainMenu";
+        return "discard";
+      }
+    } else if(menuNegEdges[i]) {
+      if(menuPins[i] == upPin) {
+        copyConfigUpDown(true);
+      } else if(menuPins[i] == downPin) {
+        copyConfigUpDown(false);
+      } else if(menuPins[i] == leftPin) {
+        copyConfigState.configIdx = copyConfigState.configIdx > 0 ? copyConfigState.configIdx - 1 : 0;
+        externalDisplayRefresh = true;
+      } else if(menuPins[i] == rightPin) {
+        copyConfigState.configIdx = copyConfigState.configIdx < copyConfigState.noConfig - 1 ? copyConfigState.configIdx + 1 : copyConfigState.noConfig - 1;
+        externalDisplayRefresh = true;
+      }
+    } else if(menuClockFast[i]) {
+      if(menuPins[i] == upPin) {
+        copyConfigUpDown(true);
+      } else if(menuPins[i] == downPin) {
+        copyConfigUpDown(false);
+      }
+    }
+  }
+  return NULL;
+}
+
+state copyBankState;
+int copyBank = 1;
+
+void copyBankStateChange() {
+  externalDisplayRefresh = true;
+  if(copyBankState.configTitles) {
+    delete copyBankState.configTitles;
+  }
+  copyBankState.configTitles = NULL;
+  if(copyBankState.configValues) {
+    for(int i=0; i<sizeof(copyBankState.configValues)/sizeof(char**); i++) {
+      delete copyBankState.configValues[i];
+    }
+    delete copyBankState.configValues;
+    copyBankState.configValues = NULL;
+  }
+  copyBankState.noConfig = 1;
+  char ** configTitles = new char*[1];
+  configTitles[0] = "Bank";
+  copyBankState.configTitles = configTitles;
+    
+  char ** configValues = new char*[1];
+  copyBankState.configValues = configValues;
+  configValues[0] = new char[3];
+  intToStr0(copyBank, configValues[0]);
+}
+
+void copyBankActivate() {
+  SerialMuted("Copy Bank Activate\n");
+  copyBankStateChange();
+  copyBankState.menuHeader = new char[30];
+
+  char bankStr[3];
+  intToStr0(((preset_t*)presetList->last->item)->bankNo, bankStr);
+  sprintf(copyBankState.menuHeader, "Cpy Bank %s:", bankStr);
+  externalDisplayRefresh = true;
+}
+
+void copyBankDeactivate() {
+  SerialMuted("Copy Bank Deactivate\n");
+  copyBankState.configIdx = 0;
+  delete copyBankState.menuHeader;
+  if(copyBankState.configTitles) {
+    delete copyBankState.configTitles;
+  }
+  copyBankState.configTitles = NULL;
+  if(copyBankState.configValues) {
+    for(int i=0; i<sizeof(copyBankState.configValues)/sizeof(char**); i++) {
+      delete copyBankState.configValues[i];
+    }
+    delete copyBankState.configValues;
+    copyBankState.configValues = NULL;
+  }
+}
+
+void copyBankUpDown(bool up) {
+
+  int increment = up ? 1 : -1;
+  
+  copyBank += increment;
+  copyBank = copyBank <= noBanks ? copyBank : noBanks;
+  copyBank = copyBank >= 1 ? copyBank : 1;
+
+  copyBankStateChange();
+}
+
+char* copyBankTransitions() {
+  SerialMuted("Copy Bank Transitions\n");
+  for(int i = 0; i < noMenuPins; i++) {
+    if(menuLongPress[i]) {
+      if(menuPins[i] == enterPin) {
+        int copyBankSrc = ((preset_t*) presetList->last->item)->bankNo;
+        for(int prstNo = 1; prstNo <= noPresets; prstNo++) {
+          preset_t * destPreset = new preset_t;
+          readPresetFncBankNPreset(destPreset, copyBank, prstNo);
+          preset_t * sourcePreset = new preset_t;
+          readPresetFncBankNPreset(sourcePreset, copyBankSrc, prstNo);
+          copyPreset(sourcePreset, destPreset);
+          savePresetFncBankNPreset(destPreset, copyBank, prstNo);
+          delete savePreset;
+          delete sourcePreset;
+        }
+        skipSave = true;
+        returnState = "mainMenu";
+        return "save";
+      } else if(menuPins[i] == backPin) {
+        skipSave = true;
+        returnState = "mainMenu";
+        return "discard";
+      }
+    } else if(menuNegEdges[i]) {
+      if(menuPins[i] == upPin) {
+        copyBankUpDown(true);
+      } else if(menuPins[i] == downPin) {
+        copyBankUpDown(false);
+      } else if(menuPins[i] == leftPin) {
+        copyBankState.configIdx = copyBankState.configIdx > 0 ? copyBankState.configIdx - 1 : 0;
+        externalDisplayRefresh = true;
+      } else if(menuPins[i] == rightPin) {
+        copyBankState.configIdx = copyBankState.configIdx < copyBankState.noConfig - 1 ? copyBankState.configIdx + 1 : copyBankState.noConfig - 1;
+        externalDisplayRefresh = true;
+      }
+    } else if(menuClockFast[i]) {
+      if(menuPins[i] == upPin) {
+        copyBankUpDown(true);
+      } else if(menuPins[i] == downPin) {
+        copyBankUpDown(false);
+      }
+    }
+  }
+  return NULL;
+}
+
 void setupFSM() {
 
   loadPresetState.name = "loadPreset";
@@ -3834,8 +4131,9 @@ void setupFSM() {
   mainMenuItems[2] = "Midi";
   mainMenuItems[3] = "Tap Tempo";
   mainMenuItems[4] = "Copy";
-  mainMenuItems[5] = "Reset";
-  mainMenuItems[6] = "System Config";
+  mainMenuItems[5] = "Copy Bank";
+  mainMenuItems[6] = "Reset";
+  mainMenuItems[7] = "System Config";
 
   mainMenuState.name = "mainMenu";
   mainMenuState.activate = mainMenuActivate;
@@ -3845,7 +4143,7 @@ void setupFSM() {
   mainMenuState.menuItems = mainMenuItems;
   mainMenuState.menuDisp = NULL;
   mainMenuState.currentItem = mainMenuItems[0];
-  mainMenuState.noItems = 7;
+  mainMenuState.noItems = 8;
   mainMenuState.menuHeader = "banknpreset";
   mainMenuState.menuStart = 0;
   mainMenuState.isConfig = false;
@@ -4163,6 +4461,28 @@ void setupFSM() {
   brightnessConfigState.configTitles = NULL;
   brightnessConfigState.configValues = NULL;
   brightnessConfigState.configIdx = 0;
+
+  copyConfigState.name = "copyPreset";
+  copyConfigState.activate = copyConfigActivate;
+  copyConfigState.deactivate = copyConfigDeactivate;
+  copyConfigState.transitions = copyConfigTransitions;
+  copyConfigState.isMenu = false;
+  copyConfigState.isConfig = true;
+  copyConfigState.noConfig = 0;
+  copyConfigState.configTitles = NULL;
+  copyConfigState.configValues = NULL;
+  copyConfigState.configIdx = 0;
+
+  copyBankState.name = "copyBank";
+  copyBankState.activate = copyBankActivate;
+  copyBankState.deactivate = copyBankDeactivate;
+  copyBankState.transitions = copyBankTransitions;
+  copyBankState.isMenu = false;
+  copyBankState.isConfig = true;
+  copyBankState.noConfig = 0;
+  copyBankState.configTitles = NULL;
+  copyBankState.configValues = NULL;
+  copyBankState.configIdx = 0;
   
   states[0] = &loadPresetState;
   states[1] = &runState;
@@ -4191,6 +4511,8 @@ void setupFSM() {
   states[24] = &loopOrderState;
   states[25] = &brightnessState;
   states[26] = &brightnessConfigState;
+  states[27] = &copyConfigState;
+  states[28] = &copyBankState;
   
   curState = &loadPresetState;
 }
