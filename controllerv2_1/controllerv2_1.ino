@@ -498,9 +498,142 @@ void checkExpr(int exprNo) {
 bool checkMidi = false;
 bool checkExprOnLoad = false;
 
+bool findNextLoop(uint8_t loopOrder[][2], uint8_t curLoops[], int * slot, int startSlot, int ch, bool parallel, int * mixerUsed, int * usedMixers, uint8_t usedMixerIds[]) {
+
+  int count = 0;
+
+  for(int slotNo = startSlot; slotNo < noLoops + noMixers; slotNo++) {
+    if(!parallel) {
+      if(loopOrder[slotNo][1] > 0 && loopOrder[slotNo][1] <= noLoops) {
+        *slot = slotNo;
+        return false;
+      } else if(loopOrder[slotNo][0] > noLoops && *mixerUsed > 0) {
+        // Unused Mixer
+        *mixerUsed--;
+      } else if(loopOrder[slotNo][0] > noLoops && *mixerUsed <= 0) {
+        return true;
+      } else if(loopOrder[slotNo][0] > 0) {
+        SerialMuted("Default Loop Add\n");
+        curLoops[count] = loopOrder[slotNo][0];
+        count++;
+      }
+    } else {
+      if(loopOrder[slotNo][ch] > noLoops && * mixerUsed > 0) {
+        curLoops[count] = loopOrder[slotNo][ch];
+        if(ch == 0) {
+          usedMixerIds[*usedMixers] = loopOrder[slotNo][ch];
+          *mixerUsed--;
+          *usedMixers++;
+          *slot = slotNo + 1;
+        }
+        return false;
+      } else if(loopOrder[slotNo][ch] > noLoops && * mixerUsed <=0) {
+        return true;
+      } else if(loopOrder[slotNo][ch] > 0) {
+        curLoops[count] = loopOrder[slotNo][ch];
+        count++;
+      }
+    }
+  }
+  return true;
+}
+
+void writeOneRegVal(uint8_t sourceLoop, uint8_t targetLoop, bool sndCh, bool parallel) {
+  int regAddr = 0;
+  bool offset = false;
+  bool isOut = false;
+  if(targetLoop > 0 && targetLoop <= noLoops) {
+    offset = (targetLoop - 1) % 2 > 0;
+  } else {
+    for(int i=0; i<noMixers; i++) {
+      if(targetLoop == mixerIds[i]) {
+        if(sndCh) {
+          targetLoop = 14 + 2 * i;
+          offset = true;
+        } else {
+          targetLoop = 13 + 2 * i;
+          offset = false;
+        }
+      }
+    }
+    for(int i=0; i<2; i++) {
+      if(targetLoop == outIds[i]) {
+        isOut = true;
+        targetLoop = 11 + i;
+        offset = i % 2 > 0;
+      }
+    }
+  }
+  regAddr = (targetLoop-1)/2;
+
+  if(offset) {
+    regMatrixValues[regAddr] = (regMatrixValues[regAddr] & 0x0F) | ((sourceLoop << 4) & 0xF0);
+  } else {
+    regMatrixValues[regAddr] = (regMatrixValues[regAddr] & 0xF0) | (sourceLoop & 0x0F);
+  }
+
+  if(isOut && !parallel) {
+    targetLoop = 12;
+    offset = true;
+    regAddr = (targetLoop-1)/2;
+    if(offset) {
+      regMatrixValues[regAddr] = (regMatrixValues[regAddr] & 0x0F) | ((sourceLoop << 4) & 0xF0);
+    } else {
+      regMatrixValues[regAddr] = (regMatrixValues[regAddr] & 0xF0) | (sourceLoop & 0x0F);
+    }
+  }
+}
+
+uint8_t writeRegVals(uint8_t curLoops[], bool loopOn[], uint8_t lastLoop, bool isEnd, bool toB, bool regValsSet[], bool parallel, bool mixerPhase[][2]) {
+  bool phase = false;
+  for(int i = 0; i<noLoops + noMixers; i++) {
+    if(curLoops[i] == 0 && isEnd) {
+      writeOneRegVal(lastLoop, outIds[toB ? 1 : 0], toB, parallel);
+      if(toB) {
+        mixerPhase[noMixers][1] = phase;
+      } else {
+        mixerPhase[noMixers][0] = phase;
+      }
+      return 0;
+    } else if(curLoops[i] > noLoops) {
+      writeOneRegVal(lastLoop, curLoops[i], toB, parallel);
+      for(int mixerNo=0; mixerNo < noMixers; mixerNo++) {
+        if(mixerIds[mixerNo] == curLoops[i]) {
+          if(toB) {
+            mixerPhase[mixerNo][1] = phase;
+          } else {
+            mixerPhase[mixerNo][0] = phase;
+          }
+        }
+      }
+      return curLoops[i];
+    } else if(curLoops[i] > 0) {
+      if(loopConnsReturn[curLoops[i] - 1] && loopOn[curLoops[i] - 1]) {
+        SerialMuted("Write single reg val\n");
+        writeOneRegVal(lastLoop, curLoops[i], toB, parallel);
+        regValsSet[curLoops[i] - 1] = true;
+        lastLoop = curLoops[i];
+        if(phaseReverse[curLoops[i] - 1]) {
+          phase = !phase;
+        }
+      }
+    } else {
+      return lastLoop;
+    }
+  }
+}
+
 void hardwareActivatePreset() {
   SerialMuted("Hardware Activate Start\n");
   listItem* iter = presetList->first;
+  bool loopOn[noLoops];
+  bool permanent[noLoops];
+  uint8_t loopOrder[noLoops+noMixers][2];
+  int mixersUsed = 0;
+  for(int i=0; i<noLoops; i++) {
+    loopOn[i] = false;
+    permanent[i] = false;
+  }
   while(iter) {
     preset_t* preset = (preset_t*) iter->item;
     SerialMuted("Bank: ");
@@ -517,19 +650,184 @@ void hardwareActivatePreset() {
       case permanentBankStomp: stompTypeCur = "Permanent Bank\n"; break;
       default: stompTypeCur = "Unset";
     }
+
+    if(preset->stompMode == offStomp) {
+      for(int i=0; i<noLoops + noMixers; i++) {
+        loopOrder[i][0] = preset->loopOrder[i][0];
+        loopOrder[i][1] = preset->loopOrder[i][1];
+        mixersUsed = preset->mixerUsed;
+      }
+    }
+    
     SerialMuted(stompTypeCur);
-    SerialMuted(" Loops:");
+    SerialMuted(" Loops:\n");
     for(int i=0; i<noLoops; i++) {
       SerialMuted(" ");
       if(preset->loopsOn[i]) {
         SerialMuted(1);
+        if(preset->stompMode == permanentStomp || preset->stompMode == permanentBankStomp) {
+          permanent[i] = true;
+        }
+        if(preset->stompMode == toggleStomp) {
+          if(!permanent[i]) {
+            loopOn[i] = !loopOn[i];
+          }
+        } else {
+          loopOn[i] = true;
+        }
       } else {
         SerialMuted(0);
       }
     }
     SerialMuted("\n");
+    for(int j=0; j<2; j++) {
+      for(int i=0; i<noLoops + noMixers; i++) {
+        SerialMuted(" ");
+        SerialMuted(preset->loopOrder[i][j]);
+      }
+      SerialMuted("\n");
+    }
+    SerialMuted("\n");
     iter = (listItem*) iter->next;
   }
+
+  SerialMuted("All loops on: ");
+  for(int i=0; i<noLoops; i++) {
+    SerialMuted(" ");
+    if(loopOn[i]) {
+      SerialMuted(1);
+    } else {
+      SerialMuted(0);
+    }
+  }
+  SerialMuted("\n");
+
+  SerialMuted("Final loop order:\n");
+  for(int j=0; j<2; j++) {
+    for(int i=0; i<noLoops + noMixers; i++) {  
+      SerialMuted(" ");
+      SerialMuted(loopOrder[i][j]);
+    }
+    SerialMuted("\n");
+  }
+  SerialMuted("\n");
+
+  bool parallel = false;
+  int slot = 0;
+  uint8_t lastLoop = 0;
+  uint8_t usedMixerIds[noMixers];
+  for(int i=0; i<noMixers; i++) {
+    usedMixerIds[i] = 0;
+  }
+  bool regValSet[noLoops];
+  for(int i=0; i<noLoops; i++) {
+    regValSet[i] = false;
+  }
+  uint8_t curLoop1[noLoops + noMixers];
+  uint8_t curLoop2[noLoops + noMixers];
+  
+  bool mixerPhase[noMixers + 1][2];
+  bool isEnd = false;
+  int actualUsedMixer = 0;
+
+  for(int i=0; i<10; i++) {
+    regMatrixValues[i] = 0;
+  }
+  
+  while(true) {
+    for(int i=0; i<noLoops + noMixers; i++) {
+      curLoop1[i] = 0;
+      curLoop2[i] = 0;
+    }
+    if(loopOrder[slot][1] > 0) {
+      parallel = true;
+    }
+    int slotSaved = slot;
+    isEnd = findNextLoop(loopOrder, curLoop1, &slot, slot, 0, parallel, &mixersUsed, &actualUsedMixer, usedMixerIds);
+    SerialMuted("Lower Channel Loops:\n");
+    for(int i=0; i< noLoops+noMixers; i++) {
+      SerialMuted(curLoop1[i]);
+      SerialMuted(" ");
+    }
+    SerialMuted(isEnd);
+    SerialMuted("\n");
+    int curLastLoop = writeRegVals(curLoop1, loopOn, lastLoop, isEnd, false, regValSet, parallel, mixerPhase);
+    writeRegVals(curLoop1, loopOn, lastLoop, isEnd, false, regValSet, parallel, mixerPhase);
+    if(parallel) {
+      isEnd = findNextLoop(loopOrder, curLoop2, &slot, slotSaved, 1, parallel, &mixersUsed, &actualUsedMixer, usedMixerIds);
+      if(!isEnd)
+        parallel = false;
+      SerialMuted("Upper Channel Loops:\n");
+      for(int i=0; i< noLoops+noMixers; i++) {
+        SerialMuted(curLoop2[i]);
+        SerialMuted(" ");
+      }
+      SerialMuted(isEnd);
+      SerialMuted("\n");
+      writeRegVals(curLoop2, loopOn, lastLoop, isEnd, true, regValSet, parallel, mixerPhase);
+    }
+    lastLoop = curLastLoop;
+    if(isEnd)
+      break;
+  }
+
+  for(int i=0; i<noLoops; i++) {
+    if(!regValSet[i]) {
+      writeOneRegVal(12, i+1, false, false);
+    }
+  }
+
+  uint8_t mixerConfig = 0b10000000;
+  for(int i=0; i<noMixers; i++) {
+    uint8_t mixId = mixerIds[i];
+    bool found = false;
+    for(int j=0; j<noMixers; j++) {
+      if(usedMixerIds[j] == mixId) {
+        found = true;
+        break;
+      }
+    }
+    if(!found) {
+      // uint8_t sourceLoop, uint8_t targetLoop, bool sndCh, bool parallel
+      writeOneRegVal(12, mixId, false, false);
+      writeOneRegVal(12, mixId, true, false);
+      if(i==0) {
+        mixerConfig = (mixerConfig & 0b11111011) | 0b00000100;
+      } else {
+        mixerConfig = (mixerConfig & 0b11011111) | 0b00100000;
+      }
+    } else {
+      if(i==0) {
+        // Gain 0.5
+        mixerConfig = (mixerConfig & 0b11111110) | 0b00000001;
+        if(mixerPhase[i][0] != mixerPhase[i][1]) {
+          mixerConfig = (mixerConfig & 0b11111001) | 0b00000010;
+        } else {
+          mixerConfig = (mixerConfig & 0b11111001) | 0b00000100;
+        }
+      } else {
+        // Gain 0.5
+        mixerConfig = (mixerConfig & 0b11110111) | 0b00001000;
+        if(mixerPhase[i][0] != mixerPhase[i][1]) {
+          mixerConfig = (mixerConfig & 0b11001111) | 0b00010000;
+        } else {
+          mixerConfig = (mixerConfig & 0b11001111) | 0b00100000;
+        }
+      }
+    }
+  }
+  regMatrixValues[8] = mixerConfig;
+
+  SerialMuted("Register Values: \n");
+  for(int i=9; i>=0; i--) {
+    char hexVal[10];
+    sprintf(hexVal, "%02x ", regMatrixValues[i]);
+    SerialMuted(hexVal);
+  }
+  SerialMuted("\n\n");
+
+  regMatrix.setAll(regMatrixValues);
+  
   if(checkMidi && midiOutOn) {
     checkMidi = false;
     preset_t* preset = (preset_t*) presetList->last->item;
@@ -4696,15 +4994,15 @@ void setup() {
   digitalWrite(I2C_RESET, HIGH);
   digitalWrite(SRCLR_MATRIX, HIGH);
   delay(1);
-  regMatrix.setAll(regMatrixValues);
-  digitalWrite(OE_MATRIX, LOW);
   
   exprCount = 0;
   for(int i = 0; i < noExpr; i++) {
     exprVals[i] = 0;
   }
-  Serial.begin(9600);
-  while (!Serial) delay(10);
+  if(serialOn) {
+    Serial.begin(9600);
+    while (!Serial) delay(10);
+  }
 
   setupMCP();
   readLoopConn();
@@ -4737,6 +5035,7 @@ void setup() {
   readStereoLoops();
   readPhaseReverse();
   readActivePresets();
+  hardwareActivatePreset();
   setupFSM();
   curState->activate();
   for(int i=0; i<noStates; i++) {
@@ -4747,6 +5046,9 @@ void setup() {
   readBrightnessStomp();
   readBrightnessStatus();
   printFreeMemory();
+  digitalWrite(OE_MATRIX, LOW);
+  delay(100);
+  digitalWrite(EN_MATRIX, HIGH);
 }
 
 int loopOrderCount = 0;
