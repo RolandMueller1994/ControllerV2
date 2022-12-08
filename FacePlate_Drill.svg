@@ -8,7 +8,7 @@
    version="1.1"
    id="svg5"
    inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
-   sodipodi:docname="FacePlate_Laser.svg"
+   sodipodi:docname="FacePlate_Drill.svg"
    inkscape:export-filename="FacePlate.pdf"
    inkscape:export-xdpi="300"
    inkscape:export-ydpi="300"
@@ -27,9 +27,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="true"
-     inkscape:zoom="5.6568542"
-     inkscape:cx="126.13017"
-     inkscape:cy="196.04536"
+     inkscape:zoom="2"
+     inkscape:cx="1231.75"
+     inkscape:cy="197"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
      inkscape:window-x="-8"
@@ -101,16 +101,18 @@
        width="422"
        height="112"
        x="26"
-       y="130.5" />
+       y="-242.5"
+       transform="scale(1,-1)" />
     <circle
        style="display:inline;fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-2-0-5-4-2-27"
        cx="56.75"
-       cy="184.25"
-       r="1.75" />
+       cy="-188.75"
+       r="1.75"
+       transform="scale(1,-1)" />
     <g
        id="g1910-0-7-4-1"
-       transform="translate(-60.249999,84.499999)"
+       transform="matrix(1,0,0,-1,-60.249999,288.5)"
        style="display:inline">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -127,417 +129,466 @@
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774"
        cx="52.000004"
-       cy="226.50006"
-       r="6" />
+       cy="-146.49994"
+       r="6"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7"
        cx="67.000008"
-       cy="221.50006"
-       r="1.5" />
+       cy="-151.49994"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7-3"
        cx="67.000008"
-       cy="231.50006"
-       r="1.5" />
+       cy="-141.49994"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-3"
        cx="126.00001"
-       cy="226.50006"
-       r="6" />
+       cy="-146.49994"
+       r="6"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7-35"
        cx="141.00002"
-       cy="221.50006"
-       r="1.5" />
+       cy="-151.49994"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7-3-4"
        cx="141.00002"
-       cy="231.50006"
-       r="1.5" />
+       cy="-141.49994"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-3-9"
        cx="200.00002"
-       cy="226.50006"
-       r="6" />
+       cy="-146.49994"
+       r="6"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7-35-1"
        cx="215.00002"
-       cy="221.50006"
-       r="1.5" />
+       cy="-151.49994"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7-3-4-7"
        cx="215.00002"
-       cy="231.50006"
-       r="1.5" />
+       cy="-141.49994"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-3-9-6"
        cx="274.00003"
-       cy="226.50006"
-       r="6" />
+       cy="-146.49994"
+       r="6"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7-35-1-9"
        cx="289.00003"
-       cy="221.50006"
-       r="1.5" />
+       cy="-151.49994"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7-3-4-7-5"
        cx="289.00003"
-       cy="231.50006"
-       r="1.5" />
+       cy="-141.49994"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-3-9-6-9"
        cx="348.00003"
-       cy="226.50006"
-       r="6" />
+       cy="-146.49994"
+       r="6"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7-35-1-9-2"
        cx="363.00003"
-       cy="221.50006"
-       r="1.5" />
+       cy="-151.49994"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7-3-4-7-5-6"
        cx="363.00003"
-       cy="231.50006"
-       r="1.5" />
+       cy="-141.49994"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-3-9-6-9-4"
        cx="422.00003"
-       cy="226.50006"
-       r="6" />
+       cy="-146.49994"
+       r="6"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7-35-1-9-2-7"
        cx="437.00003"
-       cy="221.50006"
-       r="1.5" />
+       cy="-151.49994"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7-3-4-7-5-6-4"
        cx="437.00003"
-       cy="231.50006"
-       r="1.5" />
+       cy="-141.49994"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-2"
        cx="200"
-       cy="148"
-       r="6" />
+       cy="-225"
+       r="6"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7-0"
        cx="215"
-       cy="143"
-       r="1.5" />
+       cy="-230"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7-3-40"
        cx="215"
-       cy="153"
-       r="1.5" />
+       cy="-220"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-3-1"
        cx="274.00003"
-       cy="148"
-       r="6" />
+       cy="-225"
+       r="6"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7-35-2"
        cx="289.00003"
-       cy="143"
-       r="1.5" />
+       cy="-230"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7-3-4-1"
        cx="289.00003"
-       cy="153"
-       r="1.5" />
+       cy="-220"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-3-9-66"
        cx="348.00003"
-       cy="148"
-       r="6" />
+       cy="-225"
+       r="6"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7-35-1-0"
        cx="363.00003"
-       cy="143"
-       r="1.5" />
+       cy="-230"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7-3-4-7-8"
        cx="363.00003"
-       cy="153"
-       r="1.5" />
+       cy="-220"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-3-9-6-5"
        cx="422.00003"
-       cy="148"
-       r="6" />
+       cy="-225"
+       r="6"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7-35-1-9-5"
        cx="437.00003"
-       cy="143"
-       r="1.5" />
+       cy="-230"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path5774-7-3-4-7-5-1"
        cx="437.00003"
-       cy="153"
-       r="1.5" />
+       cy="-220"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-1-5-4-6-7-9"
        cx="299.00003"
-       cy="190.50005"
-       r="1.5" />
+       cy="-182.49995"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-1-3-0-7-0-6-9"
        cx="299.00003"
-       cy="-182.50005"
-       transform="scale(1,-1)"
+       cy="190.49995"
        r="1.5" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-1-5-4-6-2-7-6"
        cx="291.00003"
-       cy="190.50005"
-       r="1.5" />
+       cy="-182.49995"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-1-3-0-7-0-8-6-1"
        cx="291.00003"
-       cy="-182.50005"
-       transform="scale(1,-1)"
+       cy="190.49995"
        r="1.5" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-1-5-4-6-7-9-1"
        cx="320"
-       cy="190.50005"
-       r="1.5" />
+       cy="-182.49995"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-1-3-0-7-0-6-9-4"
        cx="320"
-       cy="-182.50005"
-       transform="scale(1,-1)"
+       cy="190.49995"
        r="1.5" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-1-5-4-6-2-7-6-6"
        cx="312"
-       cy="190.50005"
-       r="1.5" />
+       cy="-182.49995"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-1-3-0-7-0-8-6-1-6"
        cx="312"
-       cy="-182.50005"
-       transform="scale(1,-1)"
+       cy="190.49995"
        r="1.5" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-1-5-4-6-7-9-1-0"
        cx="341"
-       cy="190.50005"
-       r="1.5" />
+       cy="-182.49995"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-1-3-0-7-0-6-9-4-5"
        cx="341"
-       cy="-182.50005"
-       transform="scale(1,-1)"
+       cy="190.49995"
        r="1.5" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-1-5-4-6-2-7-6-6-5"
        cx="333"
-       cy="190.50005"
-       r="1.5" />
+       cy="-182.49995"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-1-3-0-7-0-8-6-1-6-4"
        cx="333"
-       cy="-182.50005"
-       transform="scale(1,-1)"
+       cy="190.49995"
        r="1.5" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-1-5-4-6-7-9-1-7"
        cx="357"
-       cy="190.50005"
-       r="1.5" />
+       cy="-182.49995"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-1-3-0-7-0-6-9-4-9"
        cx="357"
-       cy="-182.50005"
-       transform="scale(1,-1)"
+       cy="190.49995"
        r="1.5" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-1-5-4-6-7-9-1-7-3"
        cx="365"
-       cy="190.50005"
-       r="1.5" />
+       cy="-182.49995"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-1-3-0-7-0-6-9-4-9-4"
        cx="365"
-       cy="-182.50005"
-       transform="scale(1,-1)"
+       cy="190.49995"
        r="1.5" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-1-5-4-6-2-7-6-6-4"
        cx="349"
-       cy="190.50005"
-       r="1.5" />
+       cy="-182.49995"
+       r="1.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-1-3-0-7-0-8-6-1-6-42"
        cx="349"
-       cy="-182.50005"
-       transform="scale(1,-1)"
+       cy="190.49995"
        r="1.5" />
     <circle
        style="display:inline;fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path15890"
        cx="235.00003"
-       cy="186.50005"
-       r="5.5" />
+       cy="-186.49995"
+       r="5.5"
+       transform="scale(1,-1)" />
     <circle
        style="display:inline;fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path15890-9"
        cx="248.00003"
-       cy="199.50005"
-       r="5.5" />
+       cy="-173.49995"
+       r="5.5"
+       transform="scale(1,-1)" />
     <circle
        style="display:inline;fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path15890-9-9"
        cx="248.00003"
-       cy="173.50005"
-       r="5.5" />
+       cy="-199.49995"
+       r="5.5"
+       transform="scale(1,-1)" />
     <circle
        style="display:inline;fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path15890-6"
        cx="261.00003"
-       cy="186.50005"
-       r="5.5" />
+       cy="-186.49995"
+       r="5.5"
+       transform="scale(1,-1)" />
     <circle
        style="display:inline;fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path15890-9-93"
        cx="274.00003"
-       cy="199.50005"
-       r="5.5" />
+       cy="-173.49995"
+       r="5.5"
+       transform="scale(1,-1)" />
     <circle
        style="display:inline;fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path15890-9-9-3"
        cx="274.00003"
-       cy="173.50005"
-       r="5.5" />
+       cy="-199.49995"
+       r="5.5"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667"
        cx="373.00003"
-       cy="170.50005"
-       r="1.75" />
+       cy="-202.49995"
+       r="1.75"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1"
        cx="373.00003"
-       cy="202.50005"
-       r="1.75" />
+       cy="-170.49995"
+       r="1.75"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-9"
        cx="238.00003"
-       cy="170.50005"
-       r="1.75" />
+       cy="-202.49995"
+       r="1.75"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-2"
        cx="238.00003"
-       cy="202.50005"
-       r="1.75" />
+       cy="-170.49995"
+       r="1.75"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-9-0"
        cx="284.00006"
-       cy="170.50005"
-       r="1.75" />
+       cy="-202.49995"
+       r="1.75"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-2-9"
        cx="284.00006"
-       cy="202.50005"
-       r="1.75" />
+       cy="-170.49995"
+       r="1.75"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-2-0"
        cx="136.00002"
-       cy="199.76848"
-       r="1.75" />
+       cy="-173.23152"
+       r="1.75"
+       transform="scale(1,-1)" />
     <circle
        style="display:inline;fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-2-0-1"
        cx="136.00002"
-       cy="147.76848"
-       r="1.75" />
+       cy="-225.23152"
+       r="1.75"
+       transform="scale(1,-1)" />
     <circle
        style="display:inline;fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-2-0-5"
        cx="45.000015"
-       cy="199.76848"
-       r="1.75" />
+       cy="-173.23152"
+       r="1.75"
+       transform="scale(1,-1)" />
     <circle
        style="fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-2-0-5-4"
        cx="45.000015"
-       cy="147.76848"
-       r="1.75" />
+       cy="-225.23152"
+       r="1.75"
+       transform="scale(1,-1)" />
     <rect
        style="fill:none;fill-opacity:1;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="rect25271"
        width="70"
        height="36.700001"
        x="54.858768"
-       y="149.51149"
-       ry="0" />
+       y="-223.48851"
+       ry="0"
+       transform="scale(1,-1)" />
     <rect
        style="display:inline;fill:none;stroke:#ff0000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
        id="rect11830"
        width="416"
        height="106"
        x="29.000015"
-       y="133.50003"
-       ry="1.0000021" />
+       y="-239.49997"
+       ry="1.0000021"
+       transform="scale(1,-1)" />
     <circle
        id="path5948"
        style="fill:#000000;stroke:#000000;stroke-width:0.264583"
        cx="199.86797"
-       cy="147.98825"
-       r="0.030906903" />
+       cy="-225.01175"
+       r="0.030906903"
+       transform="scale(1,-1)" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -546,7 +597,8 @@
      style="display:inline"
      transform="translate(-7,-30.5)">
     <g
-       id="g1910">
+       id="g1910"
+       transform="matrix(1,0,0,-1,0,173)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 112.75,99.750003 h 8.5"
@@ -561,13 +613,13 @@
     <circle
        style="display:inline;fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-2-0-5-4-2"
-       cx="56.75"
-       cy="151.5"
+       cx="37.75"
+       cy="-121.5"
        r="1.75"
-       transform="translate(-19,-100)" />
+       transform="scale(1,-1)" />
     <g
        id="g1910-0"
-       transform="translate(4.6000026e-6,-52.000001)">
+       transform="matrix(1,0,0,-1,4.6000026e-6,225)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 112.75,99.750003 h 8.5"
@@ -581,7 +633,7 @@
     </g>
     <g
        id="g1910-0-7"
-       transform="translate(-90.999999,-52)">
+       transform="matrix(1,0,0,-1,-90.999999,225)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 112.75,99.750003 h 8.5"
@@ -595,7 +647,7 @@
     </g>
     <g
        id="g1910-0-7-4"
-       transform="translate(-79.249999,-48.250002)"
+       transform="matrix(1,0,0,-1,-79.249999,221.25)"
        style="display:inline">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -612,11 +664,12 @@
        style="display:inline;fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-2-0-5-4-2-7"
        cx="104"
-       cy="51.5"
-       r="1.75" />
+       cy="-121.5"
+       r="1.75"
+       transform="scale(1,-1)" />
     <g
        id="g1910-0-7-4-3"
-       transform="translate(-12.999997,-48.250002)"
+       transform="matrix(1,0,0,-1,-12.999997,221.25)"
        style="display:inline">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -633,11 +686,12 @@
        style="display:inline;fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="path12667-1-2-0-5-4-2-2"
        cx="104"
-       cy="84.25"
-       r="1.75" />
+       cy="-88.75"
+       r="1.75"
+       transform="scale(1,-1)" />
     <g
        id="g1910-0-7-4-2"
-       transform="translate(-12.999997,-15.500001)"
+       transform="matrix(1,0,0,-1,-12.999997,188.5)"
        style="display:inline">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -652,7 +706,7 @@
     </g>
     <g
        id="g1910-0-9"
-       transform="translate(-90.999999)">
+       transform="matrix(1,0,0,-1,-90.999999,173)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 112.75,99.750003 h 8.5"
@@ -665,7 +719,8 @@
          sodipodi:nodetypes="ccc" />
     </g>
     <g
-       id="g2308">
+       id="g2308"
+       transform="matrix(1,0,0,-1,0,173)">
       <g
          id="g1910-0-9-1"
          transform="translate(-68.999998,21.750003)">
@@ -712,7 +767,7 @@
     </g>
     <g
        id="g2308-4"
-       transform="translate(74.000003)">
+       transform="matrix(1,0,0,-1,74.000003,173)">
       <g
          id="g1910-0-9-1-5"
          transform="translate(-68.999998,21.750003)">
@@ -759,7 +814,7 @@
     </g>
     <g
        id="g2308-4-6"
-       transform="translate(148.00001)">
+       transform="matrix(1,0,0,-1,148.00001,173)">
       <g
          id="g1910-0-9-1-5-8"
          transform="translate(-68.999998,21.750003)">
@@ -806,7 +861,7 @@
     </g>
     <g
        id="g2308-4-69"
-       transform="translate(222.00001)">
+       transform="matrix(1,0,0,-1,222.00001,173)">
       <g
          id="g1910-0-9-1-5-7"
          transform="translate(-68.999998,21.750003)">
@@ -853,7 +908,7 @@
     </g>
     <g
        id="g2308-4-2"
-       transform="translate(296.00001)">
+       transform="matrix(1,0,0,-1,296.00001,173)">
       <g
          id="g1910-0-9-1-5-6"
          transform="translate(-68.999998,21.750003)">
@@ -904,11 +959,12 @@
        width="69.750008"
        height="36.250004"
        x="36"
-       y="49.75"
-       ry="0" />
+       y="-123.25"
+       ry="0"
+       transform="scale(1,-1)" />
     <g
        id="g2308-4-1"
-       transform="translate(370.00001)">
+       transform="matrix(1,0,0,-1,370.00001,173)">
       <g
          id="g1910-0-9-1-5-4"
          transform="translate(-68.999998,21.750003)">
@@ -955,7 +1011,7 @@
     </g>
     <g
        id="g2308-4-4"
-       transform="translate(148.00001,-78.500005)">
+       transform="matrix(1,0,0,-1,148.00001,251.50001)">
       <g
          id="g1910-0-9-1-5-76"
          transform="translate(-68.999998,21.750003)">
@@ -1002,7 +1058,7 @@
     </g>
     <g
        id="g2308-4-5"
-       transform="translate(222.00001,-78.500003)">
+       transform="matrix(1,0,0,-1,222.00001,251.5)">
       <g
          id="g1910-0-9-1-5-87"
          transform="translate(-68.999998,21.750003)">
@@ -1049,7 +1105,7 @@
     </g>
     <g
        id="g2308-4-9"
-       transform="translate(296.00001,-78.500003)">
+       transform="matrix(1,0,0,-1,296.00001,251.5)">
       <g
          id="g1910-0-9-1-5-1"
          transform="translate(-68.999998,21.750003)">
@@ -1096,7 +1152,7 @@
     </g>
     <g
        id="g2308-4-56"
-       transform="translate(370.00001,-78.500002)">
+       transform="matrix(1,0,0,-1,370.00001,251.5)">
       <g
          id="g1910-0-9-1-5-73"
          transform="translate(-68.999998,21.750003)">
@@ -1143,7 +1199,7 @@
     </g>
     <g
        id="g1910-0-9-1-5-71"
-       transform="translate(102.00001,2.7500023)">
+       transform="matrix(1,0,0,-1,102.00001,170.25)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 112.75,99.750003 h 8.5"
@@ -1157,7 +1213,7 @@
     </g>
     <g
        id="g1910-0-9-1-1-8-65"
-       transform="translate(102.00001,-29.249999)">
+       transform="matrix(1,0,0,-1,102.00001,202.25)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 112.75,99.750003 h 8.5"
@@ -1171,7 +1227,7 @@
     </g>
     <g
        id="g1910-0-9-1-1-8-65-8"
-       transform="translate(148,-29.250002)"
+       transform="matrix(1,0,0,-1,148,202.25)"
        style="display:inline">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -1186,7 +1242,7 @@
     </g>
     <g
        id="g1910-0-9-1-1-8-65-8-6"
-       transform="translate(148,2.7499983)"
+       transform="matrix(1,0,0,-1,148,170.25)"
        style="display:inline">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -1201,7 +1257,7 @@
     </g>
     <g
        id="g2295-5-3"
-       transform="translate(183.00001,-40)">
+       transform="matrix(1,0,0,-1,183.00001,213)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 109.75,99.750001 h 14.5"
@@ -1217,7 +1273,7 @@
     </g>
     <g
        id="g2295-5-3-6"
-       transform="translate(196.00001,-53.000001)">
+       transform="matrix(1,0,0,-1,196.00001,226)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 109.75,99.750001 h 14.5"
@@ -1233,7 +1289,7 @@
     </g>
     <g
        id="g2295-5-3-1"
-       transform="translate(196.00001,-27)">
+       transform="matrix(1,0,0,-1,196.00001,200)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 109.75,99.750001 h 14.5"
@@ -1249,7 +1305,7 @@
     </g>
     <g
        id="g2295-5-3-64"
-       transform="translate(209.00001,-40)">
+       transform="matrix(1,0,0,-1,209.00001,213)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 109.75,99.750001 h 14.5"
@@ -1265,7 +1321,7 @@
     </g>
     <g
        id="g2295-5-3-6-9"
-       transform="translate(222.00001,-53.000001)">
+       transform="matrix(1,0,0,-1,222.00001,226)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 109.75,99.750001 h 14.5"
@@ -1281,7 +1337,7 @@
     </g>
     <g
        id="g2295-5-3-1-3"
-       transform="translate(222.00001,-27)">
+       transform="matrix(1,0,0,-1,222.00001,200)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 109.75,99.750001 h 14.5"
@@ -1296,7 +1352,8 @@
          transform="translate(-83.999999,26.750002)" />
     </g>
     <g
-       id="g3411">
+       id="g3411"
+       transform="matrix(1,0,0,-1,0,173)">
       <g
          id="g1910-0-9-1-5-71-2"
          transform="translate(155.00001,-9.2500007)">
@@ -1356,7 +1413,7 @@
     </g>
     <g
        id="g3411-7"
-       transform="translate(21.000002)">
+       transform="matrix(1,0,0,-1,21.000002,173)">
       <g
          id="g1910-0-9-1-5-71-2-4"
          transform="translate(155.00001,-9.2500007)">
@@ -1416,7 +1473,7 @@
     </g>
     <g
        id="g3411-0"
-       transform="translate(42.000003)">
+       transform="matrix(1,0,0,-1,42.000003,173)">
       <g
          id="g1910-0-9-1-5-71-2-1"
          transform="translate(155.00001,-9.2500007)">
@@ -1476,7 +1533,7 @@
     </g>
     <g
        id="g3411-07"
-       transform="translate(58.000003)">
+       transform="matrix(1,0,0,-1,58.000003,173)">
       <g
          id="g1910-0-9-1-5-71-2-6"
          transform="translate(155.00001,-9.2500007)">
@@ -1536,7 +1593,7 @@
     </g>
     <g
        id="g1910-0-9-1-5-71-2-5"
-       transform="translate(229.00001,-9.2499977)">
+       transform="matrix(1,0,0,-1,229.00001,182.25)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 112.75,99.750003 h 8.5"
@@ -1550,7 +1607,7 @@
     </g>
     <g
        id="g1910-0-9-1-5-71-0-41"
-       transform="translate(229.00001,-17.249998)">
+       transform="matrix(1,0,0,-1,229.00001,190.25)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 112.75,99.750003 h 8.5"
@@ -1564,7 +1621,7 @@
     </g>
     <g
        id="g1910-0-9-1-5-71-0-41-5"
-       transform="translate(237.00001,-29.250002)">
+       transform="matrix(1,0,0,-1,237.00001,202.25)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 112.75,99.750003 h 8.5"
@@ -1578,7 +1635,7 @@
     </g>
     <g
        id="g1910-0-9-1-5-71-0-41-5-3"
-       transform="translate(237.00001,2.7500023)">
+       transform="matrix(1,0,0,-1,237.00001,170.25)">
       <path
          style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="m 112.75,99.750003 h 8.5"
@@ -1596,639 +1653,695 @@
        width="420"
        height="110"
        x="8"
-       y="31.5"
-       ry="0" />
+       y="-141.5"
+       ry="0"
+       transform="scale(1,-1)" />
     <text
        xml:space="preserve"
        style="font-size:3.52778px;line-height:1.25;font-family:'Frutiger LT Com';-inkscape-font-specification:'Frutiger LT Com, Normal';letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
        x="158.90471"
-       y="75.457664"
-       id="text4671"><tspan
+       y="-97.542336"
+       id="text4671"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan4669"
          style="font-size:3.52778px;stroke-width:0.264583"
          x="158.90471"
-         y="75.457664">Menu Switches 10mm</tspan></text>
+         y="-97.542336">Menu Switches 10mm</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:3.52778px;line-height:1.25;font-family:'Frutiger LT Com';-inkscape-font-specification:'Frutiger LT Com, Normal';letter-spacing:0px;word-spacing:0px;display:inline;stroke-width:0.264583"
        x="158.90471"
-       y="80.457664"
-       id="text4671-4"><tspan
+       y="-92.542336"
+       id="text4671-4"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan4669-4"
          style="font-size:3.52778px;stroke-width:0.264583"
          x="158.90471"
-         y="80.457664">Foot Switches 13mm</tspan></text>
+         y="-92.542336">Foot Switches 13mm</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:3.52778px;line-height:1.25;font-family:'Frutiger LT Com';-inkscape-font-specification:'Frutiger LT Com, Normal';letter-spacing:0px;word-spacing:0px;display:inline;stroke-width:0.264583"
        x="158.56018"
-       y="85.457664"
-       id="text4671-4-1"><tspan
+       y="-87.542336"
+       id="text4671-4-1"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan4669-4-7"
          style="font-size:3.52778px;stroke-width:0.264583"
          x="158.56018"
-         y="85.457664">LEDs 3.5mm</tspan></text>
+         y="-87.542336">LEDs 3.5mm</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:3.52778px;line-height:1.25;font-family:'Frutiger LT Com';-inkscape-font-specification:'Frutiger LT Com, Normal';letter-spacing:0px;word-spacing:0px;display:inline;stroke-width:0.264583"
        x="159.97374"
-       y="90.457664"
-       id="text4671-4-1-5"><tspan
+       y="-82.542336"
+       id="text4671-4-1-5"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan4669-4-7-8"
          style="font-size:3.52778px;stroke-width:0.264583"
          x="159.97374"
-         y="90.457664">Mounting 3.5mm</tspan></text>
+         y="-82.542336">Mounting 3.5mm</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="PCBOutline"
-     style="display:none"
+     style="display:inline"
      transform="translate(-7,-30.5)">
     <circle
        style="display:inline;fill:none;stroke:#0000ff;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="SwitchOutline"
        cx="33.000004"
-       cy="126.50006"
-       r="8" />
+       cy="-46.499939"
+       r="8"
+       transform="scale(1,-1)" />
     <rect
        style="display:inline;fill:none;stroke:#0000ff;stroke-width:0.0988592;stroke-linecap:round;stroke-dasharray:none"
        id="rect11937"
        width="150.00101"
        height="41"
        x="207.99947"
-       y="65.999466" />
+       y="-107.00053"
+       transform="scale(1,-1)" />
     <circle
        style="display:inline;fill:none;stroke:#0000ff;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="SwitchOutline-9"
        cx="107.00001"
-       cy="126.50006"
-       r="8" />
+       cy="-46.499939"
+       r="8"
+       transform="scale(1,-1)" />
     <circle
        style="display:inline;fill:none;stroke:#0000ff;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="SwitchOutline-9-5"
        cx="181.00002"
-       cy="126.50006"
-       r="8" />
+       cy="-46.499939"
+       r="8"
+       transform="scale(1,-1)" />
     <circle
        style="display:inline;fill:none;stroke:#0000ff;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="SwitchOutline-9-5-8"
        cx="255.00002"
-       cy="126.50006"
-       r="8" />
+       cy="-46.499939"
+       r="8"
+       transform="scale(1,-1)" />
     <circle
        style="display:inline;fill:none;stroke:#0000ff;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="SwitchOutline-9-5-8-78"
        cx="329.00003"
-       cy="126.50006"
-       r="8" />
+       cy="-46.499939"
+       r="8"
+       transform="scale(1,-1)" />
     <circle
        style="display:inline;fill:none;stroke:#0000ff;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="SwitchOutline-9-5-8-78-9"
        cx="403.00003"
-       cy="126.50006"
-       r="8" />
+       cy="-46.499939"
+       r="8"
+       transform="scale(1,-1)" />
     <rect
        style="display:inline;fill:none;stroke:#0000ff;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="rect11576"
        width="410"
        height="27.499969"
        x="13.000015"
-       y="112.00006"
-       ry="0" />
+       y="-60.999939"
+       ry="0"
+       transform="scale(1,-1)" />
     <circle
        style="display:inline;fill:none;stroke:#0000ff;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="SwitchOutline-8"
        cx="181"
-       cy="48"
-       r="8" />
+       cy="-125"
+       r="8"
+       transform="scale(1,-1)" />
     <circle
        style="display:inline;fill:none;stroke:#0000ff;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="SwitchOutline-9-6"
        cx="255.00002"
-       cy="48"
-       r="8" />
+       cy="-125"
+       r="8"
+       transform="scale(1,-1)" />
     <circle
        style="display:inline;fill:none;stroke:#0000ff;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="SwitchOutline-9-5-5"
        cx="329.00003"
-       cy="48"
-       r="8" />
+       cy="-125"
+       r="8"
+       transform="scale(1,-1)" />
     <circle
        style="display:inline;fill:none;stroke:#0000ff;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="SwitchOutline-9-5-8-7"
        cx="403.00003"
-       cy="48"
-       r="8" />
+       cy="-125"
+       r="8"
+       transform="scale(1,-1)" />
     <rect
        style="display:inline;fill:none;stroke:#0000ff;stroke-width:0.1;stroke-linecap:round;stroke-dasharray:none"
        id="rect11576-8"
        width="262"
        height="27.499969"
        x="161.00002"
-       y="33.500031"
-       ry="0" />
+       y="-139.49997"
+       ry="0"
+       transform="scale(1,-1)" />
     <rect
        style="display:inline;fill:none;fill-opacity:1;stroke:#0000ff;stroke-width:0.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="rect24090"
        width="99.5"
        height="64"
        x="23.000015"
-       y="42.500031" />
+       y="-130.49997"
+       transform="scale(1,-1)" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer5"
      inkscape:label="Graphics"
-     style="display:none"
+     style="display:inline"
      transform="translate(-7,-30.5)">
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="23.000004"
-       y="128.75006"
-       id="text10531"><tspan
+       y="-44.249939"
+       id="text10531"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="23.000004"
-         y="128.75006">1</tspan></text>
+         y="-44.249939">1</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="97.000008"
-       y="128.75006"
-       id="text10531-1"><tspan
+       y="-44.249939"
+       id="text10531-1"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529-5"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="97.000008"
-         y="128.75006">2</tspan></text>
+         y="-44.249939">2</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="171.00002"
-       y="128.75006"
-       id="text10531-1-3"><tspan
+       y="-44.249939"
+       id="text10531-1-3"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529-5-3"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="171.00002"
-         y="128.75006">3</tspan></text>
+         y="-44.249939">3</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="171.00002"
-       y="122.00006"
-       id="text10531-9-3-0"><tspan
+       y="-50.999939"
+       id="text10531-9-3-0"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529-0-2-2"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="171.00002"
-         y="122.00006">Ctrl 1</tspan></text>
+         y="-50.999939">Ctrl 1</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="245.00002"
-       y="128.75006"
-       id="text10531-1-3-5"><tspan
+       y="-44.249939"
+       id="text10531-1-3-5"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529-5-3-8"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="245.00002"
-         y="128.75006">4</tspan></text>
+         y="-44.249939">4</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="245.00002"
-       y="122.00006"
-       id="text10531-9-3-0-1"><tspan
+       y="-50.999939"
+       id="text10531-9-3-0-1"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529-0-2-2-3"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="245.00002"
-         y="122.00006">Ctrl 2</tspan></text>
+         y="-50.999939">Ctrl 2</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="319.00003"
-       y="128.75006"
-       id="text10531-1-3-5-2"><tspan
+       y="-44.249939"
+       id="text10531-1-3-5-2"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529-5-3-8-00"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="319.00003"
-         y="128.75006">5</tspan></text>
+         y="-44.249939">5</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="319.00003"
-       y="122.00006"
-       id="text10531-9-3-0-1-5"><tspan
+       y="-50.999939"
+       id="text10531-9-3-0-1-5"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529-0-2-2-3-0"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="319.00003"
-         y="122.00006">Ctrl 3</tspan></text>
+         y="-50.999939">Ctrl 3</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="393.00003"
-       y="128.75006"
-       id="text10531-1-3-5-2-0"><tspan
+       y="-44.249939"
+       id="text10531-1-3-5-2-0"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529-5-3-8-00-6"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;text-anchor:end;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="393.00003"
-         y="128.75006">6</tspan></text>
+         y="-44.249939">6</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="393.00003"
-       y="122.00006"
-       id="text10531-9-3-0-1-5-5"><tspan
+       y="-50.999939"
+       id="text10531-9-3-0-1-5-5"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529-0-2-2-3-0-2"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;text-anchor:end;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="393.00003"
-         y="122.00006">Ctrl 4</tspan></text>
+         y="-50.999939">Ctrl 4</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="66.500015"
-       y="116.50003"
-       id="text10531-9-3-0-0"><tspan
+       y="-56.499969"
+       id="text10531-9-3-0-0"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529-0-2-2-9"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="66.500015"
-         y="116.50003">Bank</tspan></text>
+         y="-56.499969">Bank</tspan></text>
     <path
        style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 93.000015,121.00003 h 4 l -2,-3 -2,3"
+       d="m 93.000015,51.99997 h 4 l -2,3 -2,-3"
        id="path17765-7"
        sodipodi:nodetypes="cccc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 95.000015,116.25003 v -2 H 68.005488"
+       d="m 95.000015,56.74997 v 2 H 68.005488"
        id="path18749-5-0"
        sodipodi:nodetypes="ccc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 21.000016,116.25003 v -2 h 26.994531"
+       d="m 21.000016,56.74997 v 2 h 26.994531"
        id="path18749-5-0-4"
        sodipodi:nodetypes="ccc" />
     <path
        style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 19.00002,118.00004 h 4 l -2,3 -2,-3"
+       d="m 19.00002,54.99996 h 4 l -2,-3 -2,3"
        id="path17765-7-5"
        sodipodi:nodetypes="cccc" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="171"
-       y="50.25"
-       id="text10531-2"><tspan
+       y="-122.75"
+       id="text10531-2"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529-9"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="171"
-         y="50.25">7</tspan></text>
+         y="-122.75">7</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="170.25002"
-       y="43.5"
-       id="text10531-9-38"><tspan
+       y="-129.5"
+       id="text10531-9-38"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529-0-3"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="170.25002"
-         y="43.5">Tuner</tspan></text>
+         y="-129.5">Tuner</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;line-height:0.97;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="132.95506"
-       y="84.593567"
-       id="text10531-9-38-7"><tspan
+       y="-88.406433"
+       id="text10531-9-38-7"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529-0-3-2"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="132.95506"
-         y="84.593567">MuRo </tspan><tspan
+         y="-88.406433">MuRo </tspan><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.7px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="132.95506"
-         y="96.912567"
+         y="-76.087433"
          id="tspan34434">Engineering</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="245.00002"
-       y="50.25"
-       id="text10531-1-0"><tspan
+       y="-122.75"
+       id="text10531-1-0"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529-5-37"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="245.00002"
-         y="50.25">8</tspan></text>
+         y="-122.75">8</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="244.00002"
-       y="43.5"
-       id="text10531-9-3-3"><tspan
+       y="-129.5"
+       id="text10531-9-3-3"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529-0-2-7"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="244.00002"
-         y="43.5">Phase</tspan></text>
+         y="-129.5">Phase</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="319.00003"
-       y="50.25"
-       id="text10531-1-3-8"><tspan
+       y="-122.75"
+       id="text10531-1-3-8"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529-5-3-4"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="319.00003"
-         y="50.25">9</tspan></text>
+         y="-122.75">9</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="318.75003"
-       y="43.5"
-       id="text10531-9-3-0-3"><tspan
+       y="-129.5"
+       id="text10531-9-3-0-3"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529-0-2-2-34"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="318.75003"
-         y="43.5">Out 1</tspan></text>
+         y="-129.5">Out 1</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="393.00003"
-       y="50.25"
-       id="text10531-1-3-5-3"><tspan
+       y="-122.75"
+       id="text10531-1-3-5-3"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529-5-3-8-0"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;text-anchor:end;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="393.00003"
-         y="50.25">10</tspan></text>
+         y="-122.75">10</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="393.00003"
-       y="43.5"
-       id="text10531-9-3-0-1-8"><tspan
+       y="-129.5"
+       id="text10531-9-3-0-1-8"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan10529-0-2-2-3-4"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:end;text-anchor:end;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
          x="393.00003"
-         y="43.5">Out 2</tspan></text>
+         y="-129.5">Out 2</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="333.5"
-       y="79.500046"
-       id="text10531-9-3-0-5-7"><tspan
+       y="-93.499954"
+       id="text10531-9-3-0-5-7"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan18720-3"
          x="333.5"
-         y="79.500046">1</tspan></text>
+         y="-93.499954">1</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="301"
-       y="79.500046"
-       id="text10531-9-3-0-5-7-8"><tspan
+       y="-93.499954"
+       id="text10531-9-3-0-5-7-8"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan18720-3-4"
          x="301"
-         y="79.500046">1</tspan></text>
+         y="-93.499954">1</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="293"
-       y="79.500046"
-       id="text10531-9-3-0-5-7-8-8"><tspan
+       y="-93.499954"
+       id="text10531-9-3-0-5-7-8-8"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan18720-3-4-5"
          x="293"
-         y="79.500046">2</tspan></text>
+         y="-93.499954">2</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="326.5"
-       y="79.500046"
-       id="text10531-9-3-0-5-7-6"><tspan
+       y="-93.499954"
+       id="text10531-9-3-0-5-7-6"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan18720-3-1"
          x="326.5"
-         y="79.500046">5</tspan></text>
+         y="-93.499954">5</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 314,80.000041 v -2 h 10.75"
+       d="m 314,92.999959 v 2 h 10.75"
        id="path18749" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 346.00001,80.000041 v -2 h -11.25"
+       d="m 346.00001,92.999959 v 2 h -11.25"
        id="path18749-5"
        sodipodi:nodetypes="ccc" />
     <path
        style="fill:#000000;stroke:#000000;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 332.25001,78.000041 h -4"
+       d="m 332.25001,94.999959 h -4"
        id="path18851"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 299.25001,78.000041 h -4"
+       d="m 299.25001,94.999959 h -4"
        id="path18851-2"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 299.25001,95.000041 h -4"
+       d="m 299.25001,77.999959 h -4"
        id="path18851-2-6"
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="333.50003"
-       y="96.500046"
-       id="text10531-9-3-0-5-7-1"><tspan
+       y="-76.499954"
+       id="text10531-9-3-0-5-7-1"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan18720-3-19"
          x="333.50003"
-         y="96.500046">6</tspan></text>
+         y="-76.499954">6</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="301.00003"
-       y="96.500046"
-       id="text10531-9-3-0-5-7-1-0"><tspan
+       y="-76.499954"
+       id="text10531-9-3-0-5-7-1-0"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan18720-3-19-6"
          x="301.00003"
-         y="96.500046">3</tspan></text>
+         y="-76.499954">3</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="293.00003"
-       y="96.500046"
-       id="text10531-9-3-0-5-7-1-0-2"><tspan
+       y="-76.499954"
+       id="text10531-9-3-0-5-7-1-0-2"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan18720-3-19-6-7"
          x="293.00003"
-         y="96.500046">4</tspan></text>
+         y="-76.499954">4</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="280"
-       y="79.500046"
-       id="text10531-9-3-0-5-7-8-3"><tspan
+       y="-93.499954"
+       id="text10531-9-3-0-5-7-8-3"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan18720-3-4-0"
          x="280"
-         y="79.500046">1</tspan></text>
+         y="-93.499954">1</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="272.00003"
-       y="79.500046"
-       id="text10531-9-3-0-5-7-8-8-7"><tspan
+       y="-93.499954"
+       id="text10531-9-3-0-5-7-8-8-7"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan18720-3-4-5-1"
          x="272.00003"
-         y="79.500046">2</tspan></text>
+         y="-93.499954">2</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="275.75003"
-       y="74.000031"
-       id="text10531-9-3-0-5-7-8-8-7-6"><tspan
+       y="-98.999969"
+       id="text10531-9-3-0-5-7-8-8-7-6"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan18720-3-4-5-1-4"
          x="275.75003"
-         y="74.000031">Out</tspan></text>
+         y="-98.999969">Out</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="296.75"
-       y="74.000031"
-       id="text10531-9-3-0-5-7-8-8-7-6-8"><tspan
+       y="-98.999969"
+       id="text10531-9-3-0-5-7-8-8-7-6-8"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan18720-3-4-5-1-4-8"
          x="296.75"
-         y="74.000031">Ctrl</tspan></text>
+         y="-98.999969">Ctrl</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="330"
-       y="74.000031"
-       id="text10531-9-3-0-5-7-8-8-7-6-8-0"><tspan
+       y="-98.999969"
+       id="text10531-9-3-0-5-7-8-8-7-6-8-0"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan18720-3-4-5-1-4-8-5"
          x="330"
-         y="74.000031">Loops</tspan></text>
+         y="-98.999969">Loops</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 278.25,78.000041 h -4"
+       d="m 278.25,94.999959 h -4"
        id="path18851-2-69"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 278.25,95.000041 h -4"
+       d="m 278.25,77.999959 h -4"
        id="path18851-2-6-9"
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="280.00003"
-       y="96.500046"
-       id="text10531-9-3-0-5-7-1-0-4"><tspan
+       y="-76.499954"
+       id="text10531-9-3-0-5-7-1-0-4"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan18720-3-19-6-6"
          x="280.00003"
-         y="96.500046">P</tspan></text>
+         y="-76.499954">P</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="272.00006"
-       y="96.500046"
-       id="text10531-9-3-0-5-7-1-0-2-4"><tspan
+       y="-76.499954"
+       id="text10531-9-3-0-5-7-1-0-2-4"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan18720-3-19-6-7-0"
          x="272.00006"
-         y="96.500046">T</tspan></text>
+         y="-76.499954">T</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="326.50003"
-       y="96.500046"
-       id="text10531-9-3-0-5-7-6-2"><tspan
+       y="-76.499954"
+       id="text10531-9-3-0-5-7-6-2"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan18720-3-1-8"
          x="326.50003"
-         y="96.500046">10</tspan></text>
+         y="-76.499954">10</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 314,93.000041 v 2 h 9.75001"
+       d="m 314,79.999959 v -2 h 9.75001"
        id="path18749-2"
        sodipodi:nodetypes="ccc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 346.00001,93.000041 v 2 h -10.25"
+       d="m 346.00001,79.999959 v -2 h -10.25"
        id="path18749-5-4"
        sodipodi:nodetypes="ccc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 331.25001,95.000041 h -1.25"
+       d="m 331.25001,77.999959 h -1.25"
        id="path18851-5"
        sodipodi:nodetypes="cc" />
     <path
        style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 227.50003,84.500041 h 3 l -1.5,-2 -1.5,2"
+       d="m 227.50003,88.499959 h 3 l -1.5,2 -1.5,-2"
        id="path17765"
        sodipodi:nodetypes="cccc" />
     <path
        style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 230.50003,88.500041 h -3 l 1.5,2 1.5,-2"
+       d="m 230.50003,84.499959 h -3 l 1.5,-2 1.5,2"
        id="path17765-9"
        sodipodi:nodetypes="cccc" />
     <path
        style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 231.00003,85.000041 v 3 l 2,-1.5 -2,-1.5"
+       d="m 231.00003,87.999959 v -3 l 2,1.5 -2,1.5"
        id="path17765-92"
        sodipodi:nodetypes="cccc" />
     <path
        style="display:inline;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
-       d="m 227.00003,88.000041 v -3 l -2,1.5 2,1.5"
+       d="m 227.00003,84.999959 v 3 l -2,-1.5 2,-1.5"
        id="path17765-9-2"
        sodipodi:nodetypes="cccc" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="255.00002"
-       y="83.250046"
-       id="text10531-9-3-0-5"><tspan
+       y="-89.749954"
+       id="text10531-9-3-0-5"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan18720"
          x="255.00002"
-         y="83.250046">Enter</tspan></text>
+         y="-89.749954">Enter</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93889px;line-height:1.25;font-family:'Bauhaus 93';-inkscape-font-specification:'Bauhaus 93, ';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-dasharray:none;stroke-opacity:1"
        x="255.00002"
-       y="93.000046"
-       id="text10531-9-3-0-5-5"><tspan
+       y="-79.999954"
+       id="text10531-9-3-0-5-5"
+       transform="scale(1,-1)"><tspan
          sodipodi:role="line"
          id="tspan18720-0"
          x="255.00002"
-         y="93.000046">Return</tspan></text>
+         y="-79.999954">Return</tspan></text>
   </g>
 </svg>
