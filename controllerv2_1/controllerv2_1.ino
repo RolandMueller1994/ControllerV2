@@ -784,14 +784,14 @@ void hardwareActivatePreset() {
     if(isEnd)
       break;
   }
-
+  
   for(int i=0; i<noLoops; i++) {
     if(!regValSet[i]) {
       writeOneRegVal(12, i+1, false, false);
     }
   }
 
-  for(int i=0; i<noLoops; i++) {
+  for(int i=0; i<2; i++) {
     if(!outOn[i]) {
       writeOneRegVal(12, outIds[i], false, false);
     }
@@ -840,6 +840,7 @@ void hardwareActivatePreset() {
       }
     }
   }
+  
   regMatrixValues[8] = mixerConfig;
   //regMatrixValues[9] = 0x20;
 
@@ -852,7 +853,8 @@ void hardwareActivatePreset() {
   SerialMuted("\n\n");
 
   regMatrix.setAll(regMatrixValues);
-  
+
+  SerialMuted("\n");
   if(checkMidi && midiOutOn) {
     checkMidi = false;
     preset_t* preset = (preset_t*) presetList->last->item;
@@ -5060,29 +5062,8 @@ void setup() {
   readStereoLoops();
   readPhaseReverse();
   readActivePresets();
-  SerialMuted("Menu flags:\n");
-  for(int i = 0; i < noMenuPins; i++) {
-    SerialMuted(menuEdges[i]);  
-    SerialMuted(" ");
-  }
-  SerialMuted("\n");
-  hardwareActivatePreset();
-  for(int i = 0; i < noMenuPins; i++) {
-    SerialMuted(menuEdges[i]);  
-    SerialMuted(" ");
-  }
-  SerialMuted("\n");
   setupFSM();
   curState->activate();
-  for(int i=0; i<noStates; i++) {
-    SerialMuted(states[i]->name);
-    SerialMuted("\n");
-  }
-  for(int i = 0; i < noMenuPins; i++) {
-    SerialMuted(menuEdges[i]);  
-    SerialMuted(" ");
-  }
-  SerialMuted("\n");
   readBrightness();
   readBrightnessStomp();
   readBrightnessStatus();
@@ -5097,8 +5078,6 @@ void setup() {
 
 int loopOrderCount = 0;
 
-bool first = true;
-
 void loop() {
   display();
   if(!digitalRead(INT_STATUS)) {
@@ -5107,24 +5086,12 @@ void loop() {
       menuMcpVals[i] = mcp_status3.digitalRead(menuPins[i]);
     }
   }
-  if(!digitalRead(INT_MATRIX))
+  if(!digitalRead(INT_MATRIX)) {
     readLoopConn();
-  bool pressDetect = false;
-  if(first) {
-    for(int i = 0; i < noMenuPins; i++) {
-      SerialMuted(menuEdges[i]);  
-      SerialMuted(" ");
-    }
-    for(int i = 0; i < noMenuPins; i++) {
-      SerialMuted(menuNegEdges[i]);  
-      SerialMuted(" ");
-    }
-    for(int i = 0; i < noMenuPins; i++) {
-      SerialMuted(menuMcpVals[i]);  
-      SerialMuted(" ");
-    }
-    
+    SerialMuted("Read Loop Conn\n");
   }
+
+  bool pressDetect = false;
   detectMenuEdges();
   for(int i = 0; i < noMenuPins; i++) {
     if(menuEdges[i]) {
@@ -5259,9 +5226,5 @@ void loop() {
     loopMoveFlag = true; 
   }
 
-  if(first) {
-    SerialMuted("End of first\n");
-    first = false;
-  }
   delay(loopDelay);
 }
