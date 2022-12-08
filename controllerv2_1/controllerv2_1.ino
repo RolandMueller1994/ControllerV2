@@ -628,6 +628,8 @@ void hardwareActivatePreset() {
   listItem* iter = presetList->first;
   bool loopOn[noLoops];
   bool permanent[noLoops];
+  bool outOn[2];
+  bool outPermanent[2];
   uint8_t loopOrder[noLoops+noMixers][2];
   int mixersUsed = 0;
   for(int i=0; i<noLoops; i++) {
@@ -677,6 +679,18 @@ void hardwareActivatePreset() {
         }
       } else {
         SerialMuted(0);
+      }
+    }
+    for(int i=0; i<2; i++) {
+      if((preset->stompMode == permanentStomp || preset->stompMode == permanentBankStomp) && preset->outsOn[i]) {
+        outPermanent[i] = true;
+      }
+      if(preset->outsOn[i]) {
+        if(preset->stompMode == toggleStomp && !outPermanent[i]) {
+          outOn[i] = !outOn[i];
+        } else {
+          outOn[i] = true;
+        }
       }
     }
     SerialMuted("\n");
@@ -777,6 +791,12 @@ void hardwareActivatePreset() {
     }
   }
 
+  for(int i=0; i<noLoops; i++) {
+    if(!outOn[i]) {
+      writeOneRegVal(12, outIds[i], false, false);
+    }
+  }
+
   uint8_t mixerConfig = 0b10000000;
   for(int i=0; i<noMixers; i++) {
     uint8_t mixId = mixerIds[i];
@@ -801,22 +821,27 @@ void hardwareActivatePreset() {
         // Gain 0.5
         mixerConfig = (mixerConfig & 0b11111110) | 0b00000001;
         if(mixerPhase[i][0] != mixerPhase[i][1]) {
-          mixerConfig = (mixerConfig & 0b11111001) | 0b00000010;
-        } else {
+          SerialMuted("Mixer 1 Phase Difference\n");
           mixerConfig = (mixerConfig & 0b11111001) | 0b00000100;
+        } else {
+          SerialMuted("Mixer 1 No Phase Difference\n");
+          mixerConfig = (mixerConfig & 0b11111001) | 0b00000010;
         }
       } else {
         // Gain 0.5
         mixerConfig = (mixerConfig & 0b11110111) | 0b00001000;
         if(mixerPhase[i][0] != mixerPhase[i][1]) {
-          mixerConfig = (mixerConfig & 0b11001111) | 0b00010000;
-        } else {
+          SerialMuted("Mixer 2 Phase Difference\n");
           mixerConfig = (mixerConfig & 0b11001111) | 0b00100000;
+        } else {
+          SerialMuted("Mixer 2 No Phase Difference\n");
+          mixerConfig = (mixerConfig & 0b11001111) | 0b00010000;
         }
       }
     }
   }
   regMatrixValues[8] = mixerConfig;
+  //regMatrixValues[9] = 0x20;
 
   SerialMuted("Register Values: \n");
   for(int i=9; i>=0; i--) {
@@ -4993,7 +5018,7 @@ void setup() {
   delay(1000);
   digitalWrite(I2C_RESET, HIGH);
   digitalWrite(SRCLR_MATRIX, HIGH);
-  delay(1);
+  delay(100);
   
   exprCount = 0;
   for(int i = 0; i < noExpr; i++) {
@@ -5035,13 +5060,29 @@ void setup() {
   readStereoLoops();
   readPhaseReverse();
   readActivePresets();
+  SerialMuted("Menu flags:\n");
+  for(int i = 0; i < noMenuPins; i++) {
+    SerialMuted(menuEdges[i]);  
+    SerialMuted(" ");
+  }
+  SerialMuted("\n");
   hardwareActivatePreset();
+  for(int i = 0; i < noMenuPins; i++) {
+    SerialMuted(menuEdges[i]);  
+    SerialMuted(" ");
+  }
+  SerialMuted("\n");
   setupFSM();
   curState->activate();
   for(int i=0; i<noStates; i++) {
     SerialMuted(states[i]->name);
     SerialMuted("\n");
   }
+  for(int i = 0; i < noMenuPins; i++) {
+    SerialMuted(menuEdges[i]);  
+    SerialMuted(" ");
+  }
+  SerialMuted("\n");
   readBrightness();
   readBrightnessStomp();
   readBrightnessStatus();
@@ -5049,9 +5090,14 @@ void setup() {
   digitalWrite(OE_MATRIX, LOW);
   delay(100);
   digitalWrite(EN_MATRIX, HIGH);
+  for(int i = 0; i < noMenuPins; i++) {
+    menuMcpVals[i] = mcp_status3.digitalRead(menuPins[i]);
+  }
 }
 
 int loopOrderCount = 0;
+
+bool first = true;
 
 void loop() {
   display();
@@ -5064,6 +5110,21 @@ void loop() {
   if(!digitalRead(INT_MATRIX))
     readLoopConn();
   bool pressDetect = false;
+  if(first) {
+    for(int i = 0; i < noMenuPins; i++) {
+      SerialMuted(menuEdges[i]);  
+      SerialMuted(" ");
+    }
+    for(int i = 0; i < noMenuPins; i++) {
+      SerialMuted(menuNegEdges[i]);  
+      SerialMuted(" ");
+    }
+    for(int i = 0; i < noMenuPins; i++) {
+      SerialMuted(menuMcpVals[i]);  
+      SerialMuted(" ");
+    }
+    
+  }
   detectMenuEdges();
   for(int i = 0; i < noMenuPins; i++) {
     if(menuEdges[i]) {
@@ -5197,6 +5258,10 @@ void loop() {
       externalDisplayRefresh = true;
     loopMoveFlag = true; 
   }
-  
+
+  if(first) {
+    SerialMuted("End of first\n");
+    first = false;
+  }
   delay(loopDelay);
 }

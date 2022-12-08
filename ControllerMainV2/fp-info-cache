@@ -1,4 +1,4 @@
-20229997533818460
+20245031499505191
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -56511,6 +56511,13 @@ APEM_SPDT_8436
 3
 3
 KiCad_Libs
+CLIFF_FC7106
+
+
+0
+6
+6
+KiCad_Libs
 LED_D3.0mm
 LED, diameter 3.0mm, 2 pins
 LED diameter 3.0mm 2 pins
@@ -56524,6 +56531,13 @@ LehleSwitch
 0
 1
 1
+KiCad_Libs
+MountingHole_4mm
+Mounting Hole 3.2mm, no annular, M3
+mounting hole 3.2mm no annular m3
+0
+0
+0
 LED_SMD
 LED-APA102-2020
 http://www.led-color.com/upload/201604/APA102-2020%20SMD%20LED.pdf
@@ -78708,6 +78722,20 @@ Connector
 9
 9
 SamacSys_Parts
+17343272
+1734327-2-2
+Connector
+0
+9
+9
+SamacSys_Parts
+ABX00028
+ABX00028
+Integrated Circuit
+0
+34
+34
+SamacSys_Parts
 ACJSIH
 ACJS-IH-1_1
 Connector
@@ -78742,6 +78770,13 @@ Capacitor Polarised
 0
 2
 2
+SamacSys_Parts
+FC68148S_2
+FC68148S_2
+Connector
+0
+4
+4
 SamacSys_Parts
 GDH10STR04
 GDH10STR04-2
@@ -78784,6 +78819,13 @@ Power Supply
 0
 10
 10
+SamacSys_Parts
+RV16A0
+RV16AF-41-17K-A100K-1
+Variable Resistor
+0
+6
+6
 SamacSys_Parts
 RV16AF
 RV16AF-20-15K-A10K-3LA-2
@@ -78834,6 +78876,13 @@ Integrated Circuit
 16
 16
 SamacSys_Parts
+SOIC127P1030X265-18N
+18-Lead 7.50 mm Body SOIC
+Integrated Circuit
+0
+18
+18
+SamacSys_Parts
 SOIC127P1030X265-28N
 MUX506IDWR-1
 Integrated Circuit
@@ -78849,18 +78898,25 @@ Integrated Circuit
 14
 SamacSys_Parts
 SOP65P640X120-16N
-PW
+TMUX6112PWR
 Integrated Circuit
 0
 16
 16
 SamacSys_Parts
 SOP65P640X120-28N
-PW(R-PDSO-G28)
-Integrated Circuit
+PW(R-PDSO-G28
+Relay or Contactor
 0
 28
 28
+SamacSys_Parts
+SOP65P780X200-20N
+(SS)20-lead(SSOP)
+Integrated Circuit
+0
+20
+20
 SamacSys_Parts
 SOP254P1016X460-8N
 6N138S
@@ -78931,6 +78987,13 @@ Connector
 0
 6
 6
+SamacSys_Parts
+USB206605RBHM15STB0001A
+USB2066-05-RBHM-15-STB-00-01-A-2
+Connector
+0
+9
+9
 Sensor
 Aosong_DHT11_5.5x12.0_P2.54mm
 Temperature and humidity module, http://akizukidenshi.com/download/ds/aosong/DHT11.pdf
