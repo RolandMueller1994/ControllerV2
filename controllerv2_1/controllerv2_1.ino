@@ -3,7 +3,7 @@
 #include "Adafruit_FRAM_SPI.h"
 #include <MIDI.h>
 
-#include <Adafruit_MCP23X08.h>
+#include "Adafruit_MCP23X08.h"
 
 #include <ShiftRegister74HC595.h>
 
@@ -20,9 +20,27 @@
 #define SRCLR_MATRIX 37
 #define RCLK_MATRIX 38
 
+#define OE_LOWER 13
+#define SER_LOWER 31
+#define SRCLK_LOWER 30
+#define SRCLR_LOWER 29
+#define RCLK_LOWER 28
+
+#define OE_UPPER 43
+#define SER_UPPER 47
+#define SRCLK_UPPER 46
+#define SRCLR_UPPER 45
+#define RCLK_UPPER 44
+
 
 ShiftRegister74HC595<10> regMatrix(SER_MATRIX, SRCLK_MATRIX, RCLK_MATRIX);
 uint8_t regMatrixValues[10];
+
+ShiftRegister74HC595<2> regLower(SER_LOWER, SRCLK_LOWER, RCLK_LOWER);
+uint8_t regLowerValues[2];
+
+ShiftRegister74HC595<2> regUpper(SER_UPPER, SRCLK_UPPER, RCLK_UPPER);
+uint8_t regUpperValues[2];
 
 Adafruit_MCP23X08 mcp_matrix1;
 Adafruit_MCP23X08 mcp_matrix2;
@@ -236,6 +254,10 @@ void readBank() {
   fram.read(bankAddr, (uint8_t*)&bank, sizeof(int));
 }
 
+int calculateBrightness(int percent) {
+  return (int) (pow(((float)percent * 0.85 + 15)/100, 3) * 255);
+}
+
 void saveBrightness() {
   if(brightness > 100)
     brightness = 100;
@@ -245,7 +267,7 @@ void saveBrightness() {
   fram.writeEnable(true);
   fram.write(brightnessAddr, (uint8_t*)&brightness, sizeof(uint8_t));
   fram.writeEnable(false);
-  analogWrite(REF_BLUE, int((float)brightness/100 * 255));
+  analogWrite(REF_BLUE, calculateBrightness(brightness));
 }
 
 void readBrightness() {
@@ -254,7 +276,7 @@ void readBrightness() {
     brightness = 100;
   else if(brightness < 0)
     brightness = 0;
-  analogWrite(REF_BLUE, int((float)brightness/100 * 255));
+  analogWrite(REF_BLUE, calculateBrightness(brightness));
 }
 
 void saveBrightnessStomp() {
@@ -265,7 +287,7 @@ void saveBrightnessStomp() {
   fram.writeEnable(true);
   fram.write(brightnessStompAddr, (uint8_t*)&brightnessStomp, sizeof(uint8_t));
   fram.writeEnable(false);
-  analogWrite(REF_GREEN, int((float)brightnessStomp/100 * 255));
+  analogWrite(REF_GREEN, calculateBrightness(brightnessStomp));
 }
 
 void readBrightnessStomp() {
@@ -274,7 +296,7 @@ void readBrightnessStomp() {
     brightnessStomp = 100;
   else if(brightnessStomp < 0)
     brightnessStomp = 0;
-  analogWrite(REF_GREEN, int((float)brightnessStomp/100 * 255));
+  analogWrite(REF_GREEN, calculateBrightness(brightnessStomp));
 }
 
 void saveBrightnessStatus() {
@@ -285,7 +307,7 @@ void saveBrightnessStatus() {
   fram.writeEnable(true);
   fram.write(brightnessStatusAddr, (uint8_t*)&brightnessStatus, sizeof(uint8_t));
   fram.writeEnable(false);
-  analogWrite(REF_STATUS, int((float)brightnessStatus/100 * 255));
+  analogWrite(REF_STATUS, calculateBrightness(brightnessStatus));
 }
 
 void readBrightnessStatus() {
@@ -294,7 +316,7 @@ void readBrightnessStatus() {
     brightnessStatus = 100;
   else if(brightnessStatus < 0)
     brightnessStatus = 0;
-  analogWrite(REF_STATUS, int((float)brightnessStatus/100 * 255));
+  analogWrite(REF_STATUS, calculateBrightness(brightnessStatus));
 }
 
 bool programm = false;
@@ -630,11 +652,25 @@ void hardwareActivatePreset() {
   bool permanent[noLoops];
   bool outOn[2];
   bool outPermanent[2];
+  bool ctrlOn[noCtrl];
+  bool ctrlPermanent[noCtrl];
+  bool tunerOn = false;
+  bool tunerPermanent = false;
+  bool phase = false;
+  bool phasePermanent = false;
   uint8_t loopOrder[noLoops+noMixers][2];
   int mixersUsed = 0;
   for(int i=0; i<noLoops; i++) {
     loopOn[i] = false;
     permanent[i] = false;
+  }
+  for(int i=0; i<2; i++) {
+    outOn[i] = false;
+    outPermanent[i] = false;
+  }
+  for(int i=0; i<noCtrl; i++) {
+    ctrlOn[i] = false;
+    ctrlPermanent[i] = false;
   }
   while(iter) {
     preset_t* preset = (preset_t*) iter->item;
@@ -693,7 +729,40 @@ void hardwareActivatePreset() {
         }
       }
     }
+    for(int i=0; i<noCtrl; i++) {
+      if((preset->stompMode == permanentStomp || preset->stompMode == permanentBankStomp) && preset->ctrlOn[i]) {
+        ctrlPermanent[i] = true;
+      }
+      if(preset->ctrlOn[i]) {
+        if(preset->stompMode == toggleStomp && !ctrlPermanent[i]) {
+          ctrlOn[i] = !ctrlOn[i];
+        } else {
+          ctrlOn[i] = true;
+        }
+      }
+    }
     SerialMuted("\n");
+    if((preset->stompMode == permanentStomp || preset->stompMode == permanentBankStomp) && preset->tunerOn) {
+      tunerPermanent = true;
+    }
+    if(preset->tunerOn) {
+      if(preset->stompMode == toggleStomp && !tunerPermanent) {
+        tunerOn != tunerOn;
+      } else {
+        tunerOn = true;
+      }
+    }
+    if((preset->stompMode == permanentStomp || preset->stompMode == permanentBankStomp) && preset->outPhaseReverse[0]) {
+      phasePermanent = true;
+    }
+    if(preset->outPhaseReverse[0]) {
+      if(preset->stompMode == toggleStomp && !tunerPermanent) {
+        phase != phase;
+      } else {
+        phase = true;
+      }
+    }
+    
     for(int j=0; j<2; j++) {
       for(int i=0; i<noLoops + noMixers; i++) {
         SerialMuted(" ");
@@ -885,8 +954,113 @@ void hardwareActivatePreset() {
       checkExpr(i);
     }
   }
+
+  iter = presetList->first;
+
+  uint8_t * regVals;
+
+  for(int i=0; i<2; i++) {
+    regLowerValues[i] = 0;
+    regUpperValues[i] = 0;
+  }
+  
+  while(iter) {
+    preset_t * curPreset = (preset_t*) iter->item;
+    int presetNo = 0;
+    if(curPreset->presetNo >= 6) {
+      // upper
+      presetNo = curPreset->presetNo - 6;
+      regVals = regUpperValues;
+    } else {
+      // lower
+      regVals = regLowerValues;
+      presetNo = curPreset->presetNo;
+    }
+
+    if(presetNo == 1) {
+      regVals[0] |= 0x01;
+    } else if(presetNo == 2) {
+      regVals[0] |= 0x04;
+    } else if(presetNo == 3) {
+      regVals[0] |= 0x10;
+    } else if(presetNo == 4) {
+      regVals[1] |= 0x02;
+    } else if(presetNo == 5) {
+      regVals[1] |= 0x08;
+    } else if(presetNo == 6) {
+      regVals[1] |= 0x20;
+    }
+    
+    iter = (listItem*) iter->next;
+
+
+  }
+
+  for(int i=0; i<2; i++) {
+    SerialMuted(regLowerValues[i]);
+    SerialMuted(" ");
+  }
+  SerialMuted("\n");
+  for(int i=0; i<2; i++) {
+    SerialMuted(regUpperValues[i]);
+    SerialMuted(" ");
+  }
+  SerialMuted("\n");
+
+  regLower.setAll(regLowerValues);
+  regUpper.setAll(regUpperValues);
+  
   SerialMuted("Hardware Activate End\n");
   printFreeMemory();
+
+  uint8_t statusMcpVals[3];
+
+  for(int i=0; i<3; i++) {
+    statusMcpVals[i] = 0x00;
+  }
+
+  Adafruit_MCP23X08* curMcp;
+
+  for(int i=0; i<noLoops; i++) {
+    if(loopOn[i]) {
+      if(i > 4) {
+        statusMcpVals[i > 8 ? 1 : 0] |= 0x01 << ((2*(i-5))%8);  
+      } else {
+        statusMcpVals[i >= 4 ? 1 : 0] |= 0x01 << ((2*i + 1)%8);  
+      }
+      
+    }
+  }
+  SerialMuted("Ctrls: ");
+  uint8_t ctrlShift[] = {3, 4, 2, 5};
+  for(int i=0; i<noCtrl; i++) {
+    SerialMuted(ctrlOn[i]);
+    SerialMuted(" ");
+    if(ctrlOn[i]) {
+      statusMcpVals[ctrlShift[i]/8 + 1] |= 0x01 << (ctrlShift[i] % 8); 
+    }
+  }
+  SerialMuted("\n");
+
+  uint8_t outShift[] = {7, 9};
+  for(int i=0; i<2; i++) {
+    if(outOn[i]) {
+      statusMcpVals[outShift[i]/8 + 1] |= 0x01 << (outShift[i] % 8); 
+    }
+  }
+
+  if(tunerOn) {
+    SerialMuted("Tuner On\n");
+    statusMcpVals[2] |= 0x01;
+  }
+  if(phase) {
+    statusMcpVals[1] |= 0x1 << 6;
+  }
+
+  mcp_status1.writeGPIO(statusMcpVals[0]);
+  mcp_status2.writeGPIO(statusMcpVals[1]);  
+  mcp_status3.writeGPIO(statusMcpVals[2]);
+  
 }
 
 bool keepLast = false;
@@ -5002,6 +5176,11 @@ void setup() {
     regMatrixValues[i] = 0xCC;
   regMatrixValues[8] = 0b01011011;
   regMatrixValues[9] = 0x10;
+
+  for(uint8_t i=0; i<2; i++) {
+    regLowerValues[i] = 0;
+    regUpperValues[i] = 0;
+  }
   
   // ToDO: Replace with PWM
   pinMode(REF_BLUE, OUTPUT);
@@ -5015,11 +5194,23 @@ void setup() {
   pinMode(SRCLR_MATRIX, OUTPUT);
   digitalWrite(SRCLR_MATRIX, LOW);
 
+  pinMode(OE_LOWER, OUTPUT);
+  digitalWrite(OE_LOWER, HIGH);
+  pinMode(SRCLR_LOWER, OUTPUT);
+  digitalWrite(SRCLR_LOWER, LOW);
+
+  pinMode(OE_UPPER, OUTPUT);
+  digitalWrite(OE_UPPER, HIGH);
+  pinMode(SRCLR_UPPER, OUTPUT);
+  digitalWrite(SRCLR_UPPER, LOW);
+
   pinMode(I2C_RESET, OUTPUT);
   digitalWrite(I2C_RESET, LOW);
   delay(1000);
   digitalWrite(I2C_RESET, HIGH);
   digitalWrite(SRCLR_MATRIX, HIGH);
+  digitalWrite(SRCLR_LOWER, HIGH);
+  digitalWrite(SRCLR_UPPER, HIGH);
   delay(100);
   
   exprCount = 0;
@@ -5069,6 +5260,8 @@ void setup() {
   readBrightnessStatus();
   printFreeMemory();
   digitalWrite(OE_MATRIX, LOW);
+  digitalWrite(OE_LOWER, LOW);
+  digitalWrite(OE_UPPER, LOW);
   delay(100);
   digitalWrite(EN_MATRIX, HIGH);
   for(int i = 0; i < noMenuPins; i++) {
