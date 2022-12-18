@@ -1,4 +1,4 @@
-20251643280849285
+20253364523019620
 Arduino
 Arduino_101_Shield
 https://store.arduino.cc/genuino-101
@@ -78940,8 +78940,8 @@ Integrated Circuit
 16
 SamacSys_Parts
 SOP65P640X120-28N
-PW(R-PDSO-G28)
-Integrated Circuit
+PW(R-PDSO-G28
+Relay or Contactor
 0
 28
 28
@@ -79022,6 +79022,13 @@ Connector
 0
 6
 6
+SamacSys_Parts
+USB206605RBHM15STB0001A
+USB2066-05-RBHM-15-STB-00-01-A-2
+Connector
+0
+9
+9
 Sensor
 Aosong_DHT11_5.5x12.0_P2.54mm
 Temperature and humidity module, http://akizukidenshi.com/download/ds/aosong/DHT11.pdf
