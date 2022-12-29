@@ -1,0 +1,303 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP NE555DR
+D Single Precision Timer
+K
+F http://www.ti.com/lit/ds/symlink/ne555.pdf
+$ENDCMP
+#
+$CMP MUX506IPWR
+D MUX50x 36V, Low-Capacitance, Low-Charge-Injection, Precision, Analog Multiplexer
+K
+F http://www.ti.com/lit/gpn/mux506
+$ENDCMP
+#
+$CMP NHD-C12864A1Z-FSB-FBW-HTT
+D LCD Graphic Display Modules & Accessories COG FSTN(+) 128x64 Blue w/Heater
+K
+F http://www.newhavendisplay.com/specs/NHD-C12864A1Z-FSB-FBW-HTT.pdf
+$ENDCMP
+#
+$CMP NTA0512MC
+D Murata Power Solutions 1W Isolated DC-DC Converter, Vin 4.5  5.5 V dc, Vout +/-12V dc, I/O isolation 1kV dc
+K
+F https://power.murata.com/datasheet?/data/power/ncl/kdc_nta.pdf
+$ENDCMP
+#
+$CMP NMJ6HCD2
+D Phone Connectors STEREO CHROME NOSE
+K
+F https://datasheet.datasheetarchive.com/originals/distributors/Datasheets_SAMA/6c9b7fca576d4a7f5249f84b97d77b86.pdf
+$ENDCMP
+#
+$CMP RV16AF-20-15K-A10K-3LA
+D Potentiometers Audio Knurled 10K PC Mount
+K
+F https://componentsearchengine.com/Datasheets/1/RV16AF-20-15K-A10K-3LA.pdf
+$ENDCMP
+#
+$CMP ACJS-IH
+D Phone Connectors 1/4"HOR CHASIS CONN MNT
+K
+F https://www.mouser.com/datasheet/2/18/55010567000112_acjx-ih-771267.pdf
+$ENDCMP
+#
+$CMP 5246AB
+D Toggle Switches Pln bushing togle DP ON - ON
+K
+F https://componentsearchengine.com/Datasheets/1/5246AB.pdf
+$ENDCMP
+#
+$CMP RV16AF-41-17K-A100K
+D Potentiometers Audio Knurled 100K PC Mount
+K
+F http://www.taydaelectronics.com/datasheets/files/A-2417.pdf
+$ENDCMP
+#
+$CMP MUX506IDWR
+D MUX50x 36V, Low-Capacitance, Low-Charge-Injection, Precision, Analog Multiplexer
+K
+F http://www.ti.com/lit/gpn/mux506
+$ENDCMP
+#
+$CMP TMUX6136PWR
+D +/-16.5-V, low capacitance, low-leakage-current, precision, dual SPDT switch
+K
+F http://www.ti.com/lit/ds/symlink/tmux6136.pdf
+$ENDCMP
+#
+$CMP TMUX6119DCNR
+D Analog Switch ICs Precision Analog Multiplexer
+K
+F http://www.ti.com/document-viewer/TMUX6119/datasheet?keyMatch=tmux6119&tisearch=Search-EN-Everything
+$ENDCMP
+#
+$CMP ACJS-MV-3S
+D Phone Connectors 1/4"VERT CHASIS CONN MNT Needle CONT
+K
+F https://componentsearchengine.com/Datasheets/2/ACJS-MV-3S.pdf
+$ENDCMP
+#
+$CMP ACJS-MV-5
+D Phone Connectors 1/4"VERT CHASIS CONN PLSTC
+K
+F http://www.amphenolaudio.com/wp-content/uploads/2015/07/55010228000152_acjx-mv-x.pdf
+$ENDCMP
+#
+$CMP GDH10STR04
+D DIP Switches / SIP Switches SPST RCKER 10POS SMD SWITCH DIP
+K
+F https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Customer+Drawing%7F1571983%7FC6%7Fpdf%7FEnglish%7FENG_CD_1571983_C6.pdf%7F1-1571983-4
+$ENDCMP
+#
+$CMP 1462039-4
+D General Purpose Relays IM13GR=IM RELAY 100MW 5V
+K
+F https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Data+Sheet%7F108-98001%7FZ%7Fpdf%7FEnglish%7FENG_DS_108-98001_Z.pdf%7F1462039-4
+$ENDCMP
+#
+$CMP TL072CD
+D OP Amp Dual , +/-18V SOIC8 STMicroelectronics TL072CD Dual Operational Amplifier, 4MHz, 8-Pin SO
+K
+F http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/CD00000490.pdf
+$ENDCMP
+#
+$CMP TL071CD
+D Low-Noise JFET-Input General-Purpose Operational Amplifier
+K
+F http://www.ti.com/lit/ds/symlink/tl071.pdf
+$ENDCMP
+#
+$CMP TL074IYDT
+D JFET Op amp,quad,+/-15V,low noise,SOIC14 STMicroelectronics TL074IYDT Quad Operational Amplifier High Speed, 3MHz Swing, 6  36 V, 14-Pin SOIC
+K
+F http://www.st.com/web/en/resource/technical/document/datasheet/CD00000489.pdf
+$ENDCMP
+#
+$CMP CD74HC595M
+D 8-Bit Shift Registers With 3-State Output Registers
+K
+F http://www.ti.com/lit/gpn/cd74hc595
+$ENDCMP
+#
+$CMP SJ-3524-SMT-TR
+D Phone Connectors Audio Jacks
+K
+F https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-DGA1/151896.pdf
+$ENDCMP
+#
+$CMP TXU0104PWR
+D Translation - Voltage Levels Four channel unidirectional level shifter
+K
+F https://www.ti.com/lit/ds/symlink/txu0104.pdf?ts=1625451640473&ref_url=https%253A%252F%252Fwww.ti.com%252Fsitesearch%252Fdocs%252Funiversalsearch.tsp%253FlangPref%253Den-US%2526searchTerm%253DTXU0104PWR%2526nr%253D4
+$ENDCMP
+#
+$CMP MIC3490-3.0YM5-TR
+D LDO Voltage Regulators High Vin, Low Iq Regulator
+K
+F https://mouser.componentsearchengine.com/Datasheets/1/MIC3490-3.0YM5-TR.pdf
+$ENDCMP
+#
+$CMP TRS_2-0923
+D 2 Watt DC/DC converter, industrial, 2:1 input, regulated, compact design, 1600 VDC isolation, encapsulated, SMD package
+K
+F https://tracopower.com/trs2-datasheet/
+$ENDCMP
+#
+$CMP TRN_1-0510
+D 1 Watt DC/DC converter, industrial, 2:1 input, regulated, compact design, 1600 VDC isolation, encapsulated, SIP package
+K
+F https://tracopower.com/trn1-datasheet/
+$ENDCMP
+#
+$CMP TRS_2-0911
+D 2 Watt DC/DC converter, industrial, 2:1 input, regulated, compact design, 1600 VDC isolation, encapsulated, SMD package
+K
+F https://tracopower.com/trs2-datasheet/
+$ENDCMP
+#
+$CMP 10104110-0001LF
+D Amphenol FCI B 2.0 Micro USB Connector Receptacle, Right Angle
+K
+F https://componentsearchengine.com/Datasheets/1/10104110-0001LF.pdf
+$ENDCMP
+#
+$CMP USB1046-GF-0190-L-B-A
+D USB Connectors USB A Skt, Top Mount, SMT, R/A, GF, Black, With 1.9mm shell stake, T&R
+K
+F https://gct.co/files/drawings/usb1046.pdf?v=ccb5d20d-0631-4297-aa3c-9c34fccf9fbc
+$ENDCMP
+#
+$CMP USB1061-GF-L-A
+D USB Connectors USB A Plug, SMT, R/A, GF, With Kinked shell stakes and posts, T&R
+K
+F https://gct.co/connector/usb1061
+$ENDCMP
+#
+$CMP 1734327-1
+D AMP - TE CONNECTIVITY - 1734327-1 - MINI USB, 2.0 TYPE A, RECEPTACLE, SMT
+K
+F http://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=1734327&DocType=Customer+Drawing&DocLang=English&DocFormat=pdf&PartCntxt=1734327-1
+$ENDCMP
+#
+$CMP 6N138S
+D High Speed Optocouplers Darlington 100KBd Transistor Output
+K
+F https://media.digikey.com/pdf/Data%20Sheets/Lite-On%20PDFs/6N138-39%20Series.pdf
+$ENDCMP
+#
+$CMP EEE-HC1V221P
+D PANASONIC ELECTRONIC COMPONENTS - EEE-HC1V221P - ALUMINUM ELECTROLYTIC CAPACITOR, 220UF,
+K
+F http://industrial.panasonic.com/cdbs/www-data/pdf/RDE0000/ABA0000C1160.pdf
+$ENDCMP
+#
+$CMP LMO78_05-0.5
+D DC DC CONVERTER 5V 4W
+K
+F https://gaptec-electronic.com/datenblaetter/LMO78_0.5.pdf
+$ENDCMP
+#
+$CMP TCK-151
+D Fixed Inductors Inductor 4.7uH 1.2A 140mOhm
+K
+F https://altium.componentsearchengine.com/Datasheets/1/TCK-151.pdf
+$ENDCMP
+#
+$CMP TCK-146
+D Fixed Inductors Inductor 10uH 1A 350mOhm
+K
+F https://www.tracopower.com/products/tck146.pdf
+$ENDCMP
+#
+$CMP ACJS-MHOP
+D 1/4" PHONE TRS OFFSET HORZ PCB P
+K
+F https://www.mouser.dk/datasheet/2/18/55010542000111_acjx-xhop-771297.pdf
+$ENDCMP
+#
+$CMP 1734327-2
+D USB Connectors Mini A R/A Rcpt SMT
+K
+F https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=1734327&DocType=Customer+Drawing&DocLang=English&DocFormat=pdf&PartCntxt=1734327-2
+$ENDCMP
+#
+$CMP FC68148S
+D CLIFF ELECTRONIC COMPONENTS - FC68148S - DC  SOCKET, SMD, DC-10AS, 2.1MM PIN
+K
+F http://www.cliffuk.co.uk/products/dcconnectors/FC68148S.pdf
+$ENDCMP
+#
+$CMP MCP23009-E_SS
+D Microchip MCP23009-E/SS, 8-channel 8bit I/O Expander 3.4MHz, I2C, 20-Pin SSOP
+K
+F http://ww1.microchip.com/downloads/en/DeviceDoc/20002121C.pdf
+$ENDCMP
+#
+$CMP MCP23009-E_SO
+D 8-bit Input/Output Expander, I2C
+K
+F http://ww1.microchip.com/downloads/en/DeviceDoc/20002121C.pdf
+$ENDCMP
+#
+$CMP TMUX6112PWR
+D Analog Switch ICs 36-V, Low Capacitance, Low-Leakage-Current, Precision, Quad SPST Switches (Normally Open) 16-TSSOP -40 to 125
+K
+F http://www.ti.com/lit/ds/symlink/tmux6112.pdf
+$ENDCMP
+#
+$CMP ABX00028
+D Development Boards & Kits - AVR Arduino Nano Every
+K
+F https://store.arduino.cc/arduino-nano-every
+$ENDCMP
+#
+$CMP MCP23008T-E_SS
+D I2C Interface 1700kHz 5.5V 20-Pin SSOP T/R
+K
+F http://www.microchip.com/mymicrochip/filehandler.aspx?ddocname=en021920
+$ENDCMP
+#
+$CMP USB2066-05-RBHM-15-STB-00-01-A
+D GCT (GLOBAL CONNECTOR TECHNOLOGY) - USB2066-05-RBHM-15-STB-00-01-A - MINI USB CONN, 2.0 TYPE B, RCPT, 5POS
+K
+F https://gct.co/connector/usb2066
+$ENDCMP
+#
+$CMP MUX506IPW
+D MUX50x 36V, Low-Capacitance, Low-Charge-Injection, Precision, Analog Multiplexer
+K
+F http://www.ti.com/lit/ds/symlink/mux506.pdf
+$ENDCMP
+#
+$CMP AD75019JPZ
+D AD75019JPZ, Crosspoint Switch, 16 x 16, 44-Pin PLCC, PLCC
+K
+F https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-SFU1/DSASFU10003434.pdf
+$ENDCMP
+#
+$CMP PESD2ETH100-TR
+D PESD2ETH100-T - ESD protection for In-vehicle networks
+K
+F https://assets.nexperia.com/documents/data-sheet/PESD2ETH100-T.pdf
+$ENDCMP
+#
+$CMP SZESD7205DT5G
+D Low Capacitance ESD Protection Diodes for High Speed Data Lines
+K
+F http://www.onsemi.com/pub/Collateral/ESD7205-D.PDF
+$ENDCMP
+#
+$CMP EL817S1_A__TU_-F
+D TransistorOptocouplers 1 5000Vrms SMD-4 Optocouplers RoHS
+K
+F https://www.digikey.in/product-detail/en/everlight-electronics-co-ltd/EL817S1-A-TU-V/EL817S1-A-TU-V-ND/2693314
+$ENDCMP
+#
+$CMP TBA_1-0310
+D 1 Watt DC/DC converter, industrial, +/-10% input, short circuit protection, unregulated, encapsulated, SIP-4
+K
+F https://tracopower.com/tba1-datasheet/
+$ENDCMP
+#
+#End Doc Library

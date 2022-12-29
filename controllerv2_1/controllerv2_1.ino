@@ -967,7 +967,7 @@ void hardwareActivatePreset() {
   while(iter) {
     preset_t * curPreset = (preset_t*) iter->item;
     int presetNo = 0;
-    if(curPreset->presetNo >= 6) {
+    if(curPreset->presetNo > 6) {
       // upper
       presetNo = curPreset->presetNo - 6;
       regVals = regUpperValues;
@@ -996,16 +996,54 @@ void hardwareActivatePreset() {
 
   }
 
+  for(int i=0; i < noPresets; i++) {
+    
+  }
+  
+  SerialMuted("Reg Lower\n");
   for(int i=0; i<2; i++) {
     SerialMuted(regLowerValues[i]);
     SerialMuted(" ");
   }
   SerialMuted("\n");
+  SerialMuted("Reg Upper\n");
   for(int i=0; i<2; i++) {
     SerialMuted(regUpperValues[i]);
     SerialMuted(" ");
   }
   SerialMuted("\n");
+  
+  for(uint8_t presetNo1=0; presetNo1 < noPresets; presetNo1++) {
+    preset_t* curPreset = new preset_t;
+    readPresetFncBankNPreset(curPreset, bank, presetNo1);
+    int presetNo = 0;
+    if(curPreset->presetNo > 6) {
+      // upper
+      presetNo = curPreset->presetNo - 6;
+      regVals = regUpperValues;
+    } else {
+      // lower
+      regVals = regLowerValues;
+      presetNo = curPreset->presetNo;
+    }
+
+    if(curPreset->stompMode != offStomp) {
+      if(presetNo == 1) {
+        regVals[0] |= 0x02;
+      } else if(presetNo == 2) {
+        regVals[0] |= 0x08;
+      } else if(presetNo == 3) {
+        regVals[1] |= 0x01;
+      } else if(presetNo == 4) {
+        regVals[1] |= 0x04;
+      } else if(presetNo == 5) {
+        regVals[1] |= 0x10;
+      } else if(presetNo == 6) {
+        regVals[1] |= 0x40;
+      }
+    }
+    delete curPreset;
+  }
 
   regLower.setAll(regLowerValues);
   regUpper.setAll(regUpperValues);
