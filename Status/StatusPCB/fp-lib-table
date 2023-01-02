@@ -1,4 +1,4 @@
 (fp_lib_table
-  (lib (name "KiCad_Libs")(type "KiCad")(uri "D:/Privat/Circuit_Design/KiCad_Libs.pretty")(options "")(descr ""))
-  (lib (name "SamcSys")(type "KiCad")(uri "D:/Privat/Circuit_Design/KiCad_Libs/SamacSys_Parts.pretty")(options "")(descr ""))
+  (lib (name "KiCad_Libs")(type "KiCad")(uri "/home/roland/Projects/ControllerV2/Libs/KiCad_Libs.pretty")(options "")(descr ""))
+  (lib (name "SamcSys")(type "KiCad")(uri "/home/roland/Projects/ControllerV2/Libs/SamacSys_Parts.pretty")(options "")(descr ""))
 )

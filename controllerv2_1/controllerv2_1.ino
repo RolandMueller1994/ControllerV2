@@ -61,7 +61,7 @@ Adafruit_MCP23X08 mcp_status3;
 #include <Wire.h>
 #endif
 
-bool serialOn = true;
+bool serialOn = false;
 
 MIDI_CREATE_INSTANCE(HardwareSerial, Serial1, midiInst);
 
