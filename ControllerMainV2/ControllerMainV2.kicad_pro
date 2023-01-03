@@ -428,6 +428,7 @@
         "microvia_drill": 0.1,
         "name": "Power",
         "nets": [
+          "/VDD_15V0",
           "/VDD_3V3",
           "/VDD_5V0",
           "/VSS_15V0",

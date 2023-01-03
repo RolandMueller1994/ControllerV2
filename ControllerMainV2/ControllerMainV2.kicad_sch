@@ -540,7 +540,6 @@
     )
   )
 
-
   (junction (at 76.2 67.31) (diameter 0) (color 0 0 0 0)
     (uuid 07e10b55-01c7-48ec-acf9-643c7bd6c521)
   )
@@ -606,8 +605,8 @@
   )
 
   (no_connect (at 281.94 58.42) (uuid 0d20728f-03e4-4db3-806b-2e8a868bb5cb))
-  (no_connect (at 281.94 60.96) (uuid 0d20728f-03e4-4db3-806b-2e8a868bb5cb))
-  (no_connect (at 281.94 55.88) (uuid 0d20728f-03e4-4db3-806b-2e8a868bb5cb))
+  (no_connect (at 281.94 60.96) (uuid 0d20728f-03e4-4db3-806b-2e8a868bb5cc))
+  (no_connect (at 281.94 55.88) (uuid 0d20728f-03e4-4db3-806b-2e8a868bb5cd))
   (no_connect (at 386.08 55.245) (uuid 1b11c33a-c509-4779-874d-914064addfef))
   (no_connect (at 386.08 57.785) (uuid 1b11c33a-c509-4779-874d-914064addff0))
   (no_connect (at 349.25 57.785) (uuid 3048c0eb-9aaa-47d5-ae03-8e85a46153ba))
@@ -3111,9 +3110,6 @@
     (path "/00000000-0000-0000-0000-000061b51d02/bd207818-80ca-4110-a5c8-1694c232598f"
       (reference "#PWR01") (unit 1) (value "GND") (footprint "")
     )
-    (path "/00000000-0000-0000-0000-0000618cd10b/00000000-0000-0000-0000-0000618e69e2"
-      (reference "#PWR02") (unit 1) (value "GND") (footprint "")
-    )
     (path "/00000000-0000-0000-0000-0000618c6d5c/0d4de5b0-adbc-4ba9-9eab-1dd9b8b51ef6"
       (reference "#PWR03") (unit 1) (value "GND") (footprint "")
     )
@@ -3242,9 +3238,6 @@
     )
     (path "/00000000-0000-0000-0000-000061b51d02/505b70ba-3281-4801-97ae-eb3766c3aebd"
       (reference "#PWR047") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/00000000-0000-0000-0000-0000618c6d5c/60ad1ea3-1501-4275-912d-d48248ce6e00"
-      (reference "#PWR048") (unit 1) (value "GND") (footprint "")
     )
     (path "/00000000-0000-0000-0000-000061b51d02/bf987850-af1e-41c3-a024-88373882614a"
       (reference "#PWR049") (unit 1) (value "GND") (footprint "")
@@ -3387,12 +3380,6 @@
     (path "/00000000-0000-0000-0000-0000618cd10b/20a3e83d-fee7-400a-bba7-b659abbc0df3"
       (reference "#PWR0127") (unit 1) (value "GND") (footprint "")
     )
-    (path "/00000000-0000-0000-0000-0000618cd10b/00000000-0000-0000-0000-0000618e69d6"
-      (reference "C1") (unit 1) (value "100n") (footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder")
-    )
-    (path "/00000000-0000-0000-0000-0000618cd10b/00000000-0000-0000-0000-0000618e69dc"
-      (reference "C2") (unit 1) (value "100n") (footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder")
-    )
     (path "/00000000-0000-0000-0000-0000618cd10b/00000000-0000-0000-0000-0000618ddbe1"
       (reference "C3") (unit 1) (value "100n") (footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder")
     )
@@ -3465,9 +3452,6 @@
     (path "/00000000-0000-0000-0000-0000618c6d5c/cdc91b0b-8d42-46cf-be35-3e45587b8b87"
       (reference "C26") (unit 1) (value "100n") (footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder")
     )
-    (path "/00000000-0000-0000-0000-0000618c6d5c/73a746da-e518-4c7b-b771-28de908f72e2"
-      (reference "C28") (unit 1) (value "100n") (footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder")
-    )
     (path "/00000000-0000-0000-0000-0000618c6d5c/38181ccd-3158-4ca1-af6f-3417bebeee2b"
       (reference "C30") (unit 1) (value "100n") (footprint "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder")
     )
@@ -3523,10 +3507,10 @@
       (reference "D6") (unit 1) (value "1N4148") (footprint "Diode_SMD:D_SOD-123")
     )
     (path "/00000000-0000-0000-0000-0000618c6d5c/0416a1c4-2568-486e-bcf3-364bb0169f3e"
-      (reference "D7") (unit 1) (value "1N5818") (footprint "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal")
+      (reference "D7") (unit 1) (value "1N5818") (footprint "Diode_SMD:D_SOD-123")
     )
     (path "/00000000-0000-0000-0000-0000618c6d5c/f4dc3af7-bcfe-4948-bf4f-9cd6bfb0703d"
-      (reference "D8") (unit 1) (value "1N5818") (footprint "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal")
+      (reference "D8") (unit 1) (value "1N5818") (footprint "Diode_SMD:D_SOD-123")
     )
     (path "/d7335a40-39b2-470c-8efe-04c325566c0a"
       (reference "H1") (unit 1) (value "MountingHole") (footprint "MountingHole:MountingHole_3.2mm_M3")
