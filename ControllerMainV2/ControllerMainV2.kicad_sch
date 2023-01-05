@@ -3461,6 +3461,12 @@
     (path "/134117c2-0801-4158-9991-b3bdf5095872"
       (reference "J2") (unit 1) (value "Conn_01x10") (footprint "Connector_JST:JST_PH_B10B-PH-K_1x10_P2.00mm_Vertical")
     )
+    (path "/00000000-0000-0000-0000-0000618c6d5c/e09f33ba-34b0-484c-95e3-9188ba459404"
+      (reference "J3") (unit 1) (value "Conn_02x08_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x08_P1.27mm_Vertical_SMD")
+    )
+    (path "/00000000-0000-0000-0000-0000618c6d5c/957a1472-61af-47d8-a233-8539a5d13d5f"
+      (reference "J4") (unit 1) (value "Conn_02x08_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x08_P1.27mm_Vertical_SMD")
+    )
     (path "/2b30f0e6-367c-4784-a8f8-1e47807d1c67/eef5fba0-4fda-40f3-a9c8-da7c3630538c"
       (reference "J24") (unit 1) (value "Conn_01x02") (footprint "Connector_PinSocket_2.54mm:PinSocket_1x02_P2.54mm_Vertical")
     )
