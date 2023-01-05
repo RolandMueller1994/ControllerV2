@@ -4983,7 +4983,7 @@
   (gr_text "MuRo \nEngineering" (at 137.85 88.75) (layer "B.SilkS") (tstamp ca612e7f-70bb-4a39-ae8b-2405e9ae0d30)
     (effects (font (size 4 4) (thickness 1)) (justify left mirror))
   )
-  (gr_text "Controller PSU&CPU Rev. 1.0" (at 114.5 98.05) (layer "B.SilkS") (tstamp f9df802d-5bc6-48dc-a26f-e62e51c1d97c)
+  (gr_text "Controller PSU&CPU Rev. 2.0" (at 114.5 98.05) (layer "B.SilkS") (tstamp f9df802d-5bc6-48dc-a26f-e62e51c1d97c)
     (effects (font (size 2 2) (thickness 0.5)) (justify mirror))
   )
   (gr_text "9V0" (at 57.45 71.4 90) (layer "F.SilkS") (tstamp 18cfc8f1-4ecf-4076-bca3-32b667c93df2)
