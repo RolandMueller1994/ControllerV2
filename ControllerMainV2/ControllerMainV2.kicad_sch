@@ -540,7 +540,6 @@
     )
   )
 
-
   (junction (at 76.2 67.31) (diameter 0) (color 0 0 0 0)
     (uuid 07e10b55-01c7-48ec-acf9-643c7bd6c521)
   )
@@ -3423,7 +3422,7 @@
       (reference "IC2") (unit 1) (value "TXU0104PWR") (footprint "SamacSys_Parts:SOP65P640X120-14N")
     )
     (path "/00000000-0000-0000-0000-0000618c6d5c/6a6db874-6d5b-4c27-8062-0e5dfa4c71b8"
-      (reference "IC3") (unit 1) (value "AD75019JPZ") (footprint "Package_LCC:PLCC-44_SMD-Socket")
+      (reference "IC3") (unit 1) (value "AD75019JPZ") (footprint "SamacSys_Parts:69802144LF")
     )
     (path "/00000000-0000-0000-0000-0000618cd10b/96f3c660-2eae-42bb-8905-5709ced34915"
       (reference "IC17") (unit 1) (value "TMUX6112PWR") (footprint "SamacSys_Parts:SOP65P640X120-16N")
@@ -3466,9 +3465,6 @@
     )
     (path "/00000000-0000-0000-0000-0000618c6d5c/957a1472-61af-47d8-a233-8539a5d13d5f"
       (reference "J4") (unit 1) (value "Conn_02x08_Odd_Even") (footprint "Connector_PinHeader_1.27mm:PinHeader_2x08_P1.27mm_Vertical_SMD")
-    )
-    (path "/2b30f0e6-367c-4784-a8f8-1e47807d1c67/eef5fba0-4fda-40f3-a9c8-da7c3630538c"
-      (reference "J24") (unit 1) (value "Conn_01x02") (footprint "Connector_PinSocket_2.54mm:PinSocket_1x02_P2.54mm_Vertical")
     )
     (path "/2b30f0e6-367c-4784-a8f8-1e47807d1c67/2fa13572-cfef-4806-878f-78080000a124"
       (reference "J_1") (unit 1) (value "ACJS-MV-5") (footprint "SamacSys_Parts:ACJSMV5")

@@ -45,7 +45,7 @@
   (pad "7" smd rect (at 8.4 4.45 90) (size 2 2.5) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp 4a7328d6-233f-4d99-83c2-c2ca85313a13))
   (pad "8" smd rect (at 2.9 -4.45 90) (size 2 2.5) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp 0f10d5a1-5025-4832-93a5-3645f2d57973))
   (pad "9" smd rect (at 2.9 4.45 90) (size 2 2.5) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp fcf78a50-e57a-428c-829e-6881d9c40535))
-  (model "D:\\Privat\\Circuit_Design\\KiCad_Libs\\SamacSys_Parts.3dshapes\\1734327-2.stp"
+  (model "/home/roland/Projects/ControllerV2/Libs/SamacSys_Parts.3dshapes/1734327-2.stp"
     (offset (xyz -0.05999999776 -0.02999999888 1.99999997))
     (scale (xyz 1 1 1))
     (rotate (xyz -90 0 90))

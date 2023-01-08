@@ -126,4 +126,9 @@
   (pad "SCL1" thru_hole oval (at 18.796 -4.4 180) (size 1.7272 1.7272) (drill 1.016) (layers *.Cu *.Mask) (tstamp 71c1b4b1-fe29-4ef4-89f5-de4386e105a9))
   (pad "SDA1" thru_hole oval (at 21.336 -4.4 180) (size 1.7272 1.7272) (drill 1.016) (layers *.Cu *.Mask) (tstamp 39549a53-fe72-4509-a12d-de170bbf0433))
   (pad "VIN" thru_hole oval (at 45.72 -52.66 180) (size 1.7272 1.7272) (drill 1.016) (layers *.Cu *.Mask) (tstamp c40d36bb-2efa-4bc3-859b-223faaa66f3e))
+  (model "/home/roland/Projects/ArduinoDue/Due3D.step"
+    (offset (xyz -97.7 -76.45 10))
+    (scale (xyz 1 1 1))
+    (rotate (xyz -180 0 0))
+  )
 )

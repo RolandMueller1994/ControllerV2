@@ -1,4 +1,4 @@
-20996093015874906
+20997797684275890
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -1972,7 +1972,7 @@ MEC 5G single pole normally-open tactile switch https://cdn.sos.sk/productdata/8
 switch normally-open pushbutton push-button
 0
 4
-2
+4
 Button_Switch_THT
 SW_NKK_BB15AH
 https://www.nkkswitches.com/pdf/Bpushbuttons-1.pdf
@@ -80499,6 +80499,13 @@ Connector
 0
 9
 9
+SamacSys_Parts
+69802144LF
+69802-144LF-4
+Connector
+0
+44
+44
 SamacSys_Parts
 ABX00028
 ABX00028

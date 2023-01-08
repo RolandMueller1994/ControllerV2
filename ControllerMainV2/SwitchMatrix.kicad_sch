@@ -1006,7 +1006,6 @@
     )
   )
 
-
   (junction (at 62.357 76.454) (diameter 0) (color 0 0 0 0)
     (uuid 07e84a53-5370-49ae-b69f-03985b9f6790)
   )
@@ -2500,7 +2499,7 @@
     (uuid 6a6db874-6d5b-4c27-8062-0e5dfa4c71b8)
     (property "Reference" "IC3" (id 0) (at 183.2472 117.4835 0))
     (property "Value" "AD75019JPZ" (id 1) (at 183.2472 120.0204 0))
-    (property "Footprint" "Package_LCC:PLCC-44_SMD-Socket" (id 2) (at 177.8 113.03 0)
+    (property "Footprint" "SamacSys_Parts:69802144LF" (id 2) (at 177.8 113.03 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
     (property "Datasheet" "https://datasheet.datasheetarchive.com/originals/distributors/Datasheets-SFU1/DSASFU10003434.pdf" (id 3) (at 177.8 115.57 0)

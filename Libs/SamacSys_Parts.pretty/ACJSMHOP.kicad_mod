@@ -40,4 +40,9 @@
   (pad "SN1" thru_hole circle (at -4.25 -1.4) (size 2.25 2.25) (drill 1.5) (layers *.Cu *.Mask) (tstamp 911aa946-11a4-4082-a79a-bc4f1c265350))
   (pad "T1" thru_hole circle (at -16.95 -12.83) (size 2.25 2.25) (drill 1.5) (layers *.Cu *.Mask) (tstamp 3154fe1e-b45f-4d3b-8bab-828e398110b6))
   (pad "TN1" thru_hole circle (at -16.95 -1.4) (size 2.25 2.25) (drill 1.5) (layers *.Cu *.Mask) (tstamp 971da4aa-7a1c-47f1-a56d-06807cbf9be9))
+  (model "/home/roland/Projects/ControllerV2/3DModels/ACJS-HHOP.stp"
+    (offset (xyz 0 5.5 6.5))
+    (scale (xyz 1 1 1))
+    (rotate (xyz -90 0 -90))
+  )
 )

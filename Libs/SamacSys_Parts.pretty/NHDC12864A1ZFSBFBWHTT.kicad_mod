@@ -54,7 +54,7 @@
   (pad "10" thru_hole circle (at 27.3 26.05) (size 1.217143 1.217143) (drill 0.71) (layers *.Cu *.Mask) (tstamp d44434d4-c1f8-471f-a56c-968bc998e12d))
   (pad "11" thru_hole circle (at 29.84 26.05) (size 1.217143 1.217143) (drill 0.71) (layers *.Cu *.Mask) (tstamp 3c3b259e-e305-4ca4-908c-9c935f2f49df))
   (pad "12" thru_hole circle (at 32.38 26.05) (size 1.217143 1.217143) (drill 0.71) (layers *.Cu *.Mask) (tstamp d9bb414f-fbeb-46c8-9353-c9fa8b664f6b))
-  (model "D:\\Privat\\Circuit_Design\\KiCad_Libs\\SamacSys_Parts.3dshapes\\NHD-C12864A1Z-FSB-FBW-HTT.stp"
+  (model "/home/roland/Projects/ControllerV2/Libs/SamacSys_Parts.3dshapes/NHD-C12864A1Z-FSB-FBW-HTT.stp"
     (offset (xyz 0 0 0))
     (scale (xyz 1 1 1))
     (rotate (xyz 0 0 0))
