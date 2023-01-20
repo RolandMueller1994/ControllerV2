@@ -48,9 +48,9 @@
   (pad "MP2" smd rect (at -4.45 1.75) (size 2 2.5) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp 4473cffa-c746-45f3-87f2-49a2d50366e9))
   (pad "MP3" smd rect (at 4.45 1.75) (size 2 2.5) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp c23d70ac-87cf-47b0-88a4-7664baa7f099))
   (pad "MP4" smd rect (at 4.45 -3.75) (size 2 2.5) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp de52d37c-9a4f-4374-967f-87c71d69baa6))
-  (model "/home/roland/Projects/ControllerV2/Libs/SamacSys_Parts.3dshapes/USB2066-05-RBHM-15-STB-00-01-A.stp"
+  (model "/home/roland/Projects/ControllerV2/Libs/SamacSys_Parts.3dshapes/USB2066-05-RBHM-15-STB-00-00-A--3DModel-STEP-56544.STEP"
     (offset (xyz 0 0 0))
     (scale (xyz 1 1 1))
-    (rotate (xyz 0 0 0))
+    (rotate (xyz -90 0 0))
   )
 )
