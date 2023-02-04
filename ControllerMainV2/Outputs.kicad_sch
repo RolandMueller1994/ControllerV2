@@ -2185,7 +2185,7 @@
     (in_bom yes) (on_board yes)
     (uuid 55b5438d-a88e-4550-9c9f-96f3a751d21c)
     (property "Reference" "R67" (id 0) (at 218.2622 54.356 90))
-    (property "Value" "100k" (id 1) (at 220.5736 54.356 90))
+    (property "Value" "10k" (id 1) (at 220.5736 54.356 90))
     (property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" (id 2) (at 221.742 54.356 90)
       (effects (font (size 1.27 1.27)) hide)
     )
