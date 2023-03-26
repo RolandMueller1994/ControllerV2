@@ -2597,7 +2597,7 @@
     (property "Value" "QS4A_0303S1.5UP" (id 1) (at 246.38 31.1149 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Footprint" "QS4A_1.5UP" (id 2) (at 232.41 22.225 0)
+    (property "Footprint" "SamacSys_Parts:QS4A_1.5UP" (id 2) (at 232.41 22.225 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
     (property "Datasheet" "https://gaptec-electronic.com/datenblaetter/QS4A_1.5UP.pdf" (id 3) (at 234.95 22.225 0)
