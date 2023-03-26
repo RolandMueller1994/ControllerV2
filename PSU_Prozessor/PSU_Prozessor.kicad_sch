@@ -5066,7 +5066,7 @@
     (property "Value" "1N4148" (id 1) (at 217.932 112.1922 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal" (id 2) (at 211.455 110.49 0)
+    (property "Footprint" "Diode_SMD:D_SOD-123" (id 2) (at 211.455 110.49 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" (id 3) (at 215.9 110.49 0)
@@ -8220,7 +8220,7 @@
       (reference "D1") (unit 1) (value "1N4001") (footprint "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal")
     )
     (path "/03766177-b5de-46e5-80e8-ad9d0fb1ea03"
-      (reference "D2") (unit 1) (value "1N4148") (footprint "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal")
+      (reference "D2") (unit 1) (value "1N4148") (footprint "Diode_SMD:D_SOD-123")
     )
     (path "/9c3666ff-48f7-42fc-87ea-b19fd9bff60f"
       (reference "H1") (unit 1) (value "MountingHole") (footprint "KiCad_Libs:MountingHole_4mm")
