@@ -1,4 +1,25 @@
-20989405112059638
+20997944914559356
+AlphaPotetionmeter
+RV16A0_Stereo
+RV16AF-41-17K-A100K-1
+Variable Resistor
+0
+6
+6
+AlphaPotetionmeter
+RV16AF_Mono
+RV16AF-41-17K-A100K-1
+Variable Resistor
+0
+3
+3
+AudioJacks
+ACJS_MHOM
+NRJ6HM-1-1
+Connector
+0
+6
+5
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -1972,7 +1993,7 @@ MEC 5G single pole normally-open tactile switch https://cdn.sos.sk/productdata/8
 switch normally-open pushbutton push-button
 0
 4
-2
+4
 Button_Switch_THT
 SW_NKK_BB15AH
 https://www.nkkswitches.com/pdf/Bpushbuttons-1.pdf
@@ -80569,6 +80590,20 @@ Integrated Circuit
 0
 44
 44
+SamacSys_Parts
+QS4A_1.5UP
+QS4A_1.5UP
+Power Supply
+0
+4
+4
+SamacSys_Parts
+RS30512D
+21.8 x 9.2 x 11.1mm
+Power Supply
+0
+7
+7
 SamacSys_Parts
 RV16A0
 RV16AF-41-17K-A100K-1
