@@ -353,7 +353,7 @@
     "classes": [
       {
         "bus_width": 12.0,
-        "clearance": 0.2,
+        "clearance": 0.15,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
@@ -363,7 +363,7 @@
         "name": "Default",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.25,
+        "track_width": 0.2,
         "via_diameter": 0.8,
         "via_drill": 0.4,
         "wire_width": 6.0
@@ -383,7 +383,8 @@
           "/VDD3V3",
           "/VDD9V0",
           "/VSS15V0",
-          "GND"
+          "GND",
+          "Net-(C2-Pad1)"
         ],
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
@@ -403,6 +404,7 @@
         "microvia_drill": 0.1,
         "name": "Supply2",
         "nets": [
+          "/DualSupply_In",
           "/VDD5V0"
         ],
         "pcb_color": "rgba(0, 0, 0, 0.000)",
@@ -422,13 +424,7 @@
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
         "name": "USB",
-        "nets": [
-          "/USB1",
-          "/USB2",
-          "/USB3",
-          "/USB4",
-          "/USB5"
-        ],
+        "nets": [],
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.2,

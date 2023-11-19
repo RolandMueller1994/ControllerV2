@@ -1,4 +1,18 @@
-21006160048617149
+21014692811979576
+AlphaPotetionmeter
+RV16A0_Stereo
+RV16AF-41-17K-A100K-1
+Variable Resistor
+0
+6
+6
+AlphaPotetionmeter
+RV16AF_Mono
+RV16AF-41-17K-A100K-1
+Variable Resistor
+0
+3
+3
 Arduino
 Arduino_101_Shield
 https://store.arduino.cc/genuino-101
@@ -62,6 +76,13 @@ https://store.arduino.cc/genuino-zero
 0
 38
 38
+AudioJacks
+ACJS_MHOM
+NRJ6HM-1-1
+Connector
+0
+6
+5
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -80639,6 +80660,20 @@ Integrated Circuit
 0
 44
 44
+SamacSys_Parts
+QS4A_1.5UP
+QS4A_1.5UP
+Power Supply
+0
+4
+4
+SamacSys_Parts
+RS30512D
+21.8 x 9.2 x 11.1mm
+Power Supply
+0
+7
+7
 SamacSys_Parts
 RV16A0
 RV16AF-41-17K-A100K-1

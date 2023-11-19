@@ -1,4 +1,25 @@
-20999474880586912
+20999641681435381
+AlphaPotetionmeter
+RV16A0_Stereo
+RV16AF-41-17K-A100K-1
+Variable Resistor
+0
+6
+6
+AlphaPotetionmeter
+RV16AF_Mono
+RV16AF-41-17K-A100K-1
+Variable Resistor
+0
+3
+3
+AudioJacks
+ACJS_MHOM
+NRJ6HM-1-1
+Connector
+0
+6
+5
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -76544,34 +76565,6 @@ TO-264-5 Vertical RM 3.81mm
 0
 5
 5
-Panelization
-mouse-bite-1mm-slot
-
-
-0
-0
-0
-Panelization
-mouse-bite-2.54mm-slot
-
-
-0
-0
-0
-Panelization
-mouse-bite-2mm-slot
-
-
-0
-0
-0
-Panelization
-mouse-bite-5mm-slot
-
-
-0
-0
-0
 Potentiometer_SMD
 Potentiometer_ACP_CA6-VSMD_Vertical
 Potentiometer, vertical, ACP CA6-VSMD, http://www.acptechnologies.com/wp-content/uploads/2017/06/01-ACP-CA6.pdf
@@ -80611,6 +80604,13 @@ Power Supply
 0
 4
 4
+SamacSys_Parts
+RS30512D
+21.8 x 9.2 x 11.1mm
+Power Supply
+0
+7
+7
 SamacSys_Parts
 RV16A0
 RV16AF-41-17K-A100K-1

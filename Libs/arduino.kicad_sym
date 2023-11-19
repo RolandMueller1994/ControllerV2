@@ -3657,11 +3657,11 @@
       )
     )
     (symbol "Arduino_Nano_Socket_1_1"
-      (pin power_in line (at -33.02 -17.78 0) (length 7.62)
+      (pin power_out line (at -33.02 -17.78 0) (length 7.62)
         (name "3.3V" (effects (font (size 1.27 1.27))))
         (number "3V3" (effects (font (size 1.27 1.27))))
       )
-      (pin power_in line (at -33.02 -20.32 0) (length 7.62)
+      (pin power_out line (at -33.02 -20.32 0) (length 7.62)
         (name "5V" (effects (font (size 1.27 1.27))))
         (number "5V" (effects (font (size 1.27 1.27))))
       )
